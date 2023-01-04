@@ -1,0 +1,14 @@
+{
+  "name": "beewatch",
+  "version": "1.0.0",
+  "description": "application de gestion de ruches et ruchers",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
