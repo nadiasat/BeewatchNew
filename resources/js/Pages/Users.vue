@@ -49,6 +49,9 @@ export default {
         //UserDisabled,
         BreezeValidationErrors
     },
-    props: ['users']
+    props: ['users'],
+    mounted() {
+        console.log(this.users);
+    }
 }
 </script>

@@ -20,8 +20,6 @@ class UserController extends Controller
         $unsortedUsers = User::join('model_has_roles', 'model_has_roles.model_id', '=', 'users.id')
         ->join('roles', 'roles.id', '=', 'model_has_roles.role_id')
         ->select('users.*', 'roles.name as role')
-        ->where('roles.name', 'user')
-        ->orWhere('roles.name', 'admin')
         ->orderBy('activation_state', 'asc')
         ->get();
     
@@ -47,17 +45,25 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
+        //print $request
+        print_r($request->all());
+
         $request->validate([
             'email' => 'required|string|email|max:255|unique:users',
         ]);
 
+
+
         $password = Str::random(12);
         $user = User::create([
+            'firstname' => $request->firstname,
+            'lastname' => $request->lastname,
             'email' => $request->email,
             'password' => Hash::make($password),
+            'activation_state' => User::ACTIVATION_STATE_AWAITING_ACTIVATION,
         ]);
 
-        $user->assignRole('user');
+        $user->assignRole($request->role);
         $user->notify(new UserCreated($password));
 
         return redirect()->route('users');
