@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Models\User;
 
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,31 +20,41 @@ use App\Models\User;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
+Route::middleware(['auth', 'user.activation_state:' . User::ACTIVATION_STATE_ACTIVATED])->group(function () {
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth'])->name('dashboard');
+    Route::get('/', function () {
+        return Inertia::render('dashboard', [
+        ]);
+    });
 
-Route::get('/users', [UserController::class, 'index'])
-        ->middleware(['auth','can:manage users'])
+    Route::get('/dashboard', function () {
+        return Inertia::render('Dashboard');
+    })->name('dashboard');
+
+    Route::get('/users', [UserController::class, 'index'])
+        ->middleware(['can:manage users'])
         ->name('users');
 
-Route::delete('/users/{user}', [UserController::class, 'destroy'])
-        ->middleware(['auth','can:manage users'])
+    Route::delete('/users/{user}', [UserController::class, 'destroy'])
+        ->middleware(['can:manage users'])
         ->name('users.destroy');
 
-Route::middleware(['auth'])->group(function () {
+    Route::post('/users', [UserController::class, 'store'])
+        ->middleware(['can:manage users'])
+        ->name('users.store');
+
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+Route::get('/account-activation', [UserController::class, 'showAccountActivationForm'])
+    ->middleware(['auth', 'user.activation_state:' . User::ACTIVATION_STATE_AWAITING_ACTIVATION])
+    ->name('users.account_activation');
+
+Route::post('/activate-account', [UserController::class, 'activateAccount'])
+    ->middleware(['auth', 'user.activation_state:' . User::ACTIVATION_STATE_AWAITING_ACTIVATION])
+    ->name('users.activate_account');
+
+require __DIR__ . '/auth.php';

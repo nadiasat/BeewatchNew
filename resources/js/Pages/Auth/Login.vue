@@ -1,90 +1,88 @@
-<script setup>
-import Checkbox from '@/Components/Checkbox.vue';
-import GuestLayout from '@/Layouts/GuestLayout.vue';
-import InputError from '@/Components/InputError.vue';
-import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
-import { Head, Link, useForm } from '@inertiajs/inertia-vue3';
-
-defineProps({
-    canResetPassword: Boolean,
-    status: String,
-});
-
-const form = useForm({
-    email: '',
-    password: '',
-    remember: false,
-});
-
-const submit = () => {
-    form.post(route('login'), {
-        onFinish: () => form.reset('password'),
-    });
-};
-</script>
-
 <template>
-    <GuestLayout>
-        <Head title="Log in" />
+    <Head title="Connexion" />
 
-        <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
-            {{ status }}
+    <div v-if="status" class="mb-4 font-medium text-sm text-center text-green-600">
+        {{ status }}
+    </div>
+
+    <form @submit.prevent="submit">
+
+        <h2 class="text-center text-2xl mb-8 mt-5 text-black-1">Connexion à l'intranet</h2>
+
+        <BreezeValidationErrors class="mb-4" />
+
+        <div>
+            <BreezeLabel for="email" value="Email" />
+            <BreezeInput id="email" type="email" class="mt-1 block w-full" v-model="form.email" required autofocus autocomplete="username" />
         </div>
 
-        <form @submit.prevent="submit">
-            <div>
-                <InputLabel for="email" value="Email" />
+        <div class="mt-4">
+            <BreezeLabel for="password" value="Mot de passe" />
+            <BreezeInput id="password" type="password" class="mt-1 block w-full" v-model="form.password" required autocomplete="current-password" />
+        </div>
 
-                <TextInput
-                    id="email"
-                    type="email"
-                    class="mt-1 block w-full"
-                    v-model="form.email"
-                    required
-                    autofocus
-                    autocomplete="username"
-                />
+        <!-- <div class="block mt-4">
+            <label class="flex items-center">
+                <BreezeCheckbox name="remember" v-model:checked="form.remember" />
+                <span class="ml-2 text-sm text-gray-600">Remember me</span>
+            </label>
+        </div> -->
 
-                <InputError class="mt-2" :message="form.errors.email" />
-            </div>
+        <div class="block mt-4">
+            <Link class="underline hover:text-green-1" :href="route('password.request')">Mot de passe oublié ? Changez-le ici</Link>
+        </div>
 
-            <div class="mt-4">
-                <InputLabel for="password" value="Password" />
-
-                <TextInput
-                    id="password"
-                    type="password"
-                    class="mt-1 block w-full"
-                    v-model="form.password"
-                    required
-                    autocomplete="current-password"
-                />
-
-                <InputError class="mt-2" :message="form.errors.password" />
-            </div>
-
-            <div class="block mt-4">
-                <label class="flex items-center">
-                    <Checkbox name="remember" v-model:checked="form.remember" />
-                    <span class="ml-2 text-sm text-gray-600">Remember me</span>
-                </label>
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <Link
-                    v-if="canResetPassword"
-                    :href="route('password.request')"
-                    class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                >
-                    Forgot your password?
-                </Link>
-
-                <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Log in
-                </PrimaryButton>
-            </div>
-        </form>
-    </GuestLayout>
+        <div class="flex items-center justify-end mt-4">
+            <BreezeButton class="w-full" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                Connexion au portail
+            </BreezeButton>
+        </div>
+    </form>
 </template>
+
+<script>
+import BreezeButton from '@/Components/PrimaryButton.vue'
+import BreezeCheckbox from '@/Components/Checkbox.vue'
+import BreezeGuestLayout from '@/Layouts/GuestLayout.vue'
+import BreezeInput from '@/Components/TextInput.vue'
+import BreezeLabel from '@/Components/InputLabel.vue'
+import BreezeValidationErrors from '@/Components/ValidationErrors.vue'
+import { Head, Link } from '@inertiajs/inertia-vue3';
+
+export default {
+    layout: BreezeGuestLayout,
+
+    components: {
+        BreezeButton,
+        BreezeCheckbox,
+        BreezeInput,
+        BreezeLabel,
+        BreezeValidationErrors,
+        Head,
+        Link,
+    },
+
+    props: {
+        canResetPassword: Boolean,
+        status: String,
+    },
+
+    data() {
+        return {
+            form: this.$inertia.form({
+                email: '',
+                password: '',
+                remember: false
+            })
+        }
+    },
+
+    methods: {
+        submit() {
+            this.form.post(this.route('login'), {
+                onFinish: () => this.form.reset('password'),
+            })
+        }
+    }
+}
+</script>
