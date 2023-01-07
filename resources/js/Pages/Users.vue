@@ -2,11 +2,11 @@
     <Head title="Utilisateurs" />
 
     <BreezeAuthenticatedLayout>
-        <!--<div class="container mx-auto p-4">
+        <div class="container mx-auto p-4">
 
             <div>
                 <div class="flex justify-between flex-wrap my-5 items-center">
-                    <h2 class="text-3xl font-bold mr-6 mb-5">Utilisateurs</h2>
+                    <h2 class="text-3xl font-bold mr-6 mb-5">Gestion des membres</h2>
                     <user-create></user-create>
                 </div>
             </div>
@@ -23,7 +23,7 @@
                 <UserActivated :users-activated="users.activated"></UserActivated>
             </div>
 
-        </div>-->
+        </div>
     </BreezeAuthenticatedLayout>
 </template>
 
@@ -32,10 +32,10 @@ import BreezeAuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue'
 import {Head} from '@inertiajs/inertia-vue3';
 import BreezeButton from '@/Components/PrimaryButton.vue'
 import {Link} from "@inertiajs/inertia-vue3";
-import UserAwaitingActivation from "@/Components/User/UserAwaitingActivation";
-import UserActivated from "@/Components/User/UserActivated";
-import UserCreate from "@/Components/User/UserCreate";
-import BreezeValidationErrors from "@/Components/ValidationErrors"
+import UserAwaitingActivation from "@/Components/User/UserAwaitingActivation.vue";
+import UserActivated from "@/Components/User/UserActivated.vue";
+import UserCreate from "@/Components/User/UserCreate.vue"
+import BreezeValidationErrors from "@/Components/ValidationErrors.vue"
 
 export default {
     components: {
@@ -46,7 +46,7 @@ export default {
         Link,
         UserAwaitingActivation,
         UserActivated,
-        UserDisabled,
+        //UserDisabled,
         BreezeValidationErrors
     },
     props: ['users']

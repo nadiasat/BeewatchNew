@@ -6,10 +6,16 @@ import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import { Link } from '@inertiajs/inertia-vue3';
+import { usePage } from '@inertiajs/inertia-vue3'
+import { computed } from 'vue'
 
 const showingNavigationDropdown = ref(false);
 
-console.log($page.props.auth.user);
+
+const user = computed(() => usePage().props.value.auth.user)
+
+console.log(user.value.permissions.includes('manage users'));
+
 </script>
 
 <template>
@@ -34,7 +40,7 @@ console.log($page.props.auth.user);
                                 <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
                                     Dashboard
                                 </NavLink>
-                                <NavLink :v-if="$page.props.auth.user.permissions.includes('manage users')" :href="route('users') " :active="route().current('users')">
+                                <NavLink v-if="$page.props.auth.user.permissions.includes('manage users')" :href="route('users') " :active="route().current('users')">
                                     Membres
                                 </NavLink>
                             </div>
@@ -119,6 +125,9 @@ console.log($page.props.auth.user);
                     <div class="pt-2 pb-3 space-y-1">
                         <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
                             Dashboard
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink :href="route('users')" :active="route().current('users')">
+                            Membres
                         </ResponsiveNavLink>
                     </div>
 

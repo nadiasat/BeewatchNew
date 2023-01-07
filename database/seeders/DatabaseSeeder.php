@@ -46,15 +46,23 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
 
         User::create([
-            'firstname' => 'Admin',
+            'firstname' => 'Superadmin',
             'lastname' => 'Tester',
-            'email' => 'admin@beewatch.ch',
+            'email' => 'superadmin@beewatch.ch',
             'password' => Hash::make('WatchB33'),
             'activation_state' => true
         ])->assignRole('superadmin');
 
         User::create([
-            'firstname' => 'User',
+            'firstname' => 'Admin',
+            'lastname' => 'Tester',
+            'email' => 'admin@beewatch.ch',
+            'password' => Hash::make('WatchB33'),
+            'activation_state' => false
+        ])->assignRole('admin');
+
+        User::create([
+            'firstname' => 'temp',
             'lastname' => 'Tester',
             'email' => 'user@beewatch.ch',
             'password' => Hash::make('WatchB33'),

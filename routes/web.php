@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -30,11 +31,13 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-Route::get('/users', function () {
-    return Inertia::render('Users', [
-        'users' => User::all()
-    ]);
-})->middleware(['auth'])->name('users');
+Route::get('/users', [UserController::class, 'index'])
+        ->middleware(['auth','can:manage users'])
+        ->name('users');
+
+Route::delete('/users/{user}', [UserController::class, 'destroy'])
+        ->middleware(['auth','can:manage users'])
+        ->name('users.destroy');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -15,10 +15,16 @@ class UserController extends Controller
 {
     public function index()
     {
-        $unsortedUsers = User::whereHas('roles', function ($query) {
-            return $query->where('name', 'user');
-        })->get();
+        //join user role table and sort by activation state take only admins and users
 
+        $unsortedUsers = User::join('model_has_roles', 'model_has_roles.model_id', '=', 'users.id')
+        ->join('roles', 'roles.id', '=', 'model_has_roles.role_id')
+        ->select('users.*', 'roles.name as role')
+        ->where('roles.name', 'user')
+        ->orWhere('roles.name', 'admin')
+        ->orderBy('activation_state', 'asc')
+        ->get();
+    
         $users = [
             'awaiting_activation' => [],
             'activated' => []
