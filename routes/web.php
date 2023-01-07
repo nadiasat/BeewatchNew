@@ -23,7 +23,7 @@ use App\Models\User;
 Route::middleware(['auth', 'user.activation_state:' . User::ACTIVATION_STATE_ACTIVATED])->group(function () {
 
     Route::get('/', function () {
-        return Inertia::render('dashboard', [
+        return Inertia::render('Dashboard', [
         ]);
     });
 
