@@ -1,9 +1,12 @@
 <template>
 
 
-    <button @click="modalCreateUser = true"
-        class="mb-4 bg-amber-400 border-amber-400 text-black border-4 py-2 font-semibold w-72 mr-5 hover:bg-amber-300 hover:border-amber-2 hover:text-white">
+    <button @click="modalCreateUser = true" class="flex justify-center items-center mb-4 border-zinc-900 bg-white text-zinc-900 border-2 rounded-xl py-2 font-semibold w-72 mr-5 hover:bg-zinc-900 hover:text-white">
+        <svg class="fill-zinc-900 mr-4" width="16" height="16" viewBox="0 0 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 6H6M12 6H6M6 6V0M6 6V12" stroke="#181818"/>
+        </svg>
         Ajouter un membre
+
     </button>
 
 
@@ -28,7 +31,7 @@
                     class="mt-1 block w-full" required autocomplete="email" />
 
                 <BreezeLabel for="role" value="Rôle" />
-                <select v-model="createUserForm.role" id="role" class="mt-1 block w-full">
+                <select v-model="createUserForm.role" id="role" class="mt-1 block w-full" required>
                     <option value="superadmin">Super administrateur</option>
                     <option value="admin">Administrateur</option>
                     <option value="user">Utilisateur</option>
