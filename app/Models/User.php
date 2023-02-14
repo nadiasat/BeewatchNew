@@ -47,4 +47,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function apiaries()
+    {
+        return $this->belongsToMany(Apiary::class, 'apiary_user', 'user_id', 'apiary_id');
+    }
 }

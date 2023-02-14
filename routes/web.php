@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ApiaryController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -35,6 +36,7 @@ Route::middleware(['auth', 'user.activation_state:' . User::ACTIVATION_STATE_ACT
         ->middleware(['can:manage users'])
         ->name('users');
 
+
     Route::delete('/users/{user}', [UserController::class, 'destroy'])
         ->middleware(['can:manage users'])
         ->name('users.destroy');
@@ -43,6 +45,13 @@ Route::middleware(['auth', 'user.activation_state:' . User::ACTIVATION_STATE_ACT
         ->middleware(['can:manage users'])
         ->name('users.store');
 
+    // Apiaries
+    Route::get('/apiary', function() {
+        return Inertia::render('Apiary');
+    })->name('apiary');
+
+    Route::post('/apiary', [ApiaryController::class, 'store'])
+        ->name('apiary.store');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

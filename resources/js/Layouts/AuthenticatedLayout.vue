@@ -43,6 +43,9 @@ console.log(user.value.permissions.includes('manage users'));
                                 <NavLink v-if="$page.props.auth.user.permissions.includes('manage users')" :href="route('users') " :active="route().current('users')">
                                     Membres
                                 </NavLink>
+                                <NavLink :href="route('apiary') " :active="route().current('apiary')">
+                                    Ruchers
+                                </NavLink>
                             </div>
                         </div>
 
@@ -128,6 +131,9 @@ console.log(user.value.permissions.includes('manage users'));
                         </ResponsiveNavLink>
                         <ResponsiveNavLink :href="route('users')" :active="route().current('users')">
                             Membres
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink :href="route('apiary')" :active="route().current('apiary')">
+                            Ruchers
                         </ResponsiveNavLink>
                     </div>
 
