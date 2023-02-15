@@ -12,8 +12,8 @@
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 text-gray-900">Voici vos ruchers</div>
+                <div class=" overflow-hidden shadow-sm sm:rounded-lg flex">
+                    <apiary-card></apiary-card>
                 </div>
 
             </div>
@@ -22,9 +22,7 @@
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div></div>
-                <div></div>
-                <div></div>
+                
             </div>
         </div>
     </div>
@@ -45,11 +43,13 @@ import {Link} from "@inertiajs/inertia-vue3";
 import UserAwaitingActivation from "@/Components/User/UserAwaitingActivation.vue";
 import UserActivated from "@/Components/User/UserActivated.vue";
 import ApiaryCreate from "@/Components/Apiary/ApiaryCreate.vue"
+import ApiaryCard from "@/Components/Apiary/ApiaryCard.vue"
 import BreezeValidationErrors from "@/Components/ValidationErrors.vue"
 
 export default {
     components: {
         ApiaryCreate,
+        ApiaryCard,
         BreezeAuthenticatedLayout,
         Head,
         BreezeButton,
@@ -59,9 +59,9 @@ export default {
         //UserDisabled,
         BreezeValidationErrors
     },
-    props: ['users'],
+    props: ['apiaries'],
     mounted() {
-        console.log(this.users);
+        console.log(this.apiaries);
     }
 }
 </script>

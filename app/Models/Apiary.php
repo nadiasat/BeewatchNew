@@ -18,4 +18,11 @@ class Apiary extends Model
     {
         return $this->belongsToMany(User::class, 'apiary_user', 'apiary_id', 'user_id');
     }
+
+    public function hives()
+    {
+        return $this->hasMany(Hive::class, 'apiary_id');
+    }
+
+
 }

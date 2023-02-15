@@ -11,18 +11,34 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules;
 
 
+
 class ApiaryController extends Controller
 {
     public function index()
     {
-        //return view('apiary');
-        // show apiaries for current user
+       
         $apiaries = Auth::user()->apiaries()->get();
+
+        $apiaries_hives = [];
+    
+        // Link inactive and active hives to apiaries
+        foreach ($apiaries as $apiary) {
+            $apiaries_hives[] = [
+                'id' => $apiary->id,
+                'name' => $apiary->name,
+                'address' => $apiary->address,
+                'nb_active_hives' => $apiary->hives()->where('active', true)->count(),
+                'nb_inactive_hives' => $apiary->hives()->where('active', false)->count(),
+            ];
+        }
+        
+
         return Inertia::render('Apiary', [
-            'apiaries' => $apiaries
+            'apiaries' => $apiaries_hives
         ]);
 
-        
+
+
     }
 
     public function store(Request $request)
