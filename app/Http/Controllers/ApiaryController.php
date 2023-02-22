@@ -17,7 +17,7 @@ class ApiaryController extends Controller
     public function index()
     {
        
-        $apiaries = Auth::user()->apiaries()->get();
+        $apiaries = Auth::user()->apiaries->get();
 
         $apiaries_hives = [];
     

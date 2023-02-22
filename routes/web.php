@@ -53,6 +53,14 @@ Route::middleware(['auth', 'user.activation_state:' . User::ACTIVATION_STATE_ACT
     Route::post('/apiary', [ApiaryController::class, 'store'])
         ->name('apiary.store');
 
+    // Hives
+    Route::get('/hive', function() {
+        return Inertia::render('Hive');
+    })->name('hive');
+
+    Route::post('/hive', [HiveController::class, 'store'])
+        ->name('hive.store');
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
