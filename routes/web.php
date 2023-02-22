@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ApiaryController;
+use App\Http\Controllers\HiveController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -46,17 +47,15 @@ Route::middleware(['auth', 'user.activation_state:' . User::ACTIVATION_STATE_ACT
         ->name('users.store');
 
     // Apiaries
-    Route::get('/apiary', function() {
-        return Inertia::render('Apiary');
-    })->name('apiary');
+    Route::get('/apiary', [ApiaryController::class, 'index'])
+    ->name('apiary');
 
     Route::post('/apiary', [ApiaryController::class, 'store'])
         ->name('apiary.store');
 
     // Hives
-    Route::get('/hive', function() {
-        return Inertia::render('Hive');
-    })->name('hive');
+    Route::get('/hive', [HiveController::class, 'index'])
+    ->name('hive');
 
     Route::post('/hive', [HiveController::class, 'store'])
         ->name('hive.store');

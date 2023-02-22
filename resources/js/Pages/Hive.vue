@@ -14,6 +14,7 @@
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class=" overflow-hidden shadow-sm sm:rounded-lg flex">
                     <hive-card></hive-card>
+                    <hive-card v-for="hive in hives" :apiary="hive"></hive-card>
                 </div>
 
             </div>

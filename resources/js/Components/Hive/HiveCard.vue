@@ -20,9 +20,41 @@
         <p class="btn-edit-hive-text font-medium text-black text-center text-sm">Modifier la ruche</p>
       </div>
     </div>
-  </template>
 
-    
+
+    <div class="hive-card bg-white p-4 flex flex-col items-start rounded-xl ">
+      <div class="top-text mb-2 flex flex-col items-start self-stretch">
+        <p class="name text-base font-semibold text-black self-stretch flex items-center mb-1">Nom ruche</p>
+        <p class="date-queen font-medium text-amber-400 self-stretch flex items-center mb-2 text-sm">Date reine : 06.04.2021</p>
+      </div>
+      <div class="rise-section mb-2 flex flex-col items-start self-stretch pb-1 border-b-4">
+        <p class="title-hausse flex items-center mb-1 font-medium">Hausse</p>
+      </div>
+      <div class="top-text mb-2 flex flex-col items-start self-stretch">
+        <p class="title-frames flex items-center mb-1">Nombre de rayons</p>
+        <div class="nb-frames mb-2 flex items-start self-stretch">
+          <p class="text-nb-frames text-base font-medium text-amber-400 self-stretch flex items-center">6</p>
+          <div class="frames-indicator">
+            <div class="frame"></div>
+          </div>
+        </div>
+      </div>
+      <div class="top-text mb-2 flex flex-col items-start self-stretch">
+        <p class="title-nb-varoas">Nombre de varoas</p>
+        <p class="nb-varoas">10</p>
+      </div>
+      <div class="btn-new-intervention">
+        <p class="btn-new-intervention-text">
+          Nouvelle intervention
+        </p>
+      </div>
+      <div class="btn-hive-details">
+        <p class="btn-new-intervention-text">
+          Détails de la ruche
+        </p>
+      </div>
+    </div>
+  </template>
     <script>
 
     import Swal from "sweetalert2";

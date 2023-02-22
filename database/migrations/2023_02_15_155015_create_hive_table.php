@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('hive', function (Blueprint $table) {
+        Schema::create('hives', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->date('date_queen')->nullable();
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('hive');
+        Schema::dropIfExists('hives');
     }
 };

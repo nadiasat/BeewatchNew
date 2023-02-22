@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Apiary;
 use App\Models\Hive;
 use Inertia\Inertia;
 use Illuminate\Support\Str;
@@ -13,11 +14,10 @@ use Illuminate\Validation\Rules;
 class HiveController extends Controller
 {
     
-
-    public function index()
+    //index function show hives of given appiary
+    public function index(Apiary $apiary)
     {
-        $hives = Auth::user()->hives->get();
-
+        $hives = $apiary->hives()->get();
         $hives = $hives->map(function ($hive) {
             return [
                 'id' => $hive->id,
@@ -32,6 +32,24 @@ class HiveController extends Controller
             'hives' => $hives
         ]);
     }
+    // public function index()
+    // {
+    //     $hives = Auth::user()->hives->get();
+
+    //     $hives = $hives->map(function ($hive) {
+    //         return [
+    //             'id' => $hive->id,
+    //             'name' => $hive->name,
+    //             'active' => $hive->active,
+    //             'apiary_id' => $hive->apiary_id,
+    //             'apiary_name' => $hive->apiary->name,
+    //         ];
+    //     });
+
+    //     return Inertia::render('Hive', [
+    //         'hives' => $hives
+    //     ]);
+    // }
 
 
     public function store(Request $request)

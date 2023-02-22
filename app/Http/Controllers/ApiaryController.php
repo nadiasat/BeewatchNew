@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Apiary;
+use App\Models\User;
 use Inertia\Inertia;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +18,7 @@ class ApiaryController extends Controller
     public function index()
     {
        
-        $apiaries = Auth::user()->apiaries->get();
+        $apiaries = User::find(Auth::user()->id)->apiaries()->get();
 
         $apiaries_hives = [];
     
@@ -27,8 +28,8 @@ class ApiaryController extends Controller
                 'id' => $apiary->id,
                 'name' => $apiary->name,
                 'address' => $apiary->address,
-                'nb_active_hives' => $apiary->hives()->where('active', true)->count(),
-                'nb_inactive_hives' => $apiary->hives()->where('active', false)->count(),
+                'nb_active_hives' => $apiary->hives()->where('is_active', true)->count(),
+                'nb_inactive_hives' => $apiary->hives()->where('is_active', false)->count(),
             ];
         }
         

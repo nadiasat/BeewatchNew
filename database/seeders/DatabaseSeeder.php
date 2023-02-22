@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Apiary;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role as SpatieRole;
@@ -68,5 +70,10 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('WatchB33'),
             'activation_state' => true
         ])->assignRole('user');
+
+        Apiary::create([
+            'name' => 'Test Apiary',
+            'address' => 'Test Address',
+        ])->users()->attach(1);
     }
 }
