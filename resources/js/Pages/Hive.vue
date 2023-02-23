@@ -5,7 +5,8 @@
         <div class="container mx-auto p-4">
         <div>
                 <div class="flex justify-between flex-wrap my-5 items-center">
-                    <h2 class="text-3xl font-bold mr-6 mb-5">Gestion des ruches</h2>
+                    <back-button></back-button>
+                    <h2 class="text-3xl font-bold mr-6 mb-5 grow ">Gestion des ruches</h2>
                     <hive-create></hive-create>
                 </div>
             </div>
@@ -13,10 +14,7 @@
         <div class="py-12 px-4 mx-auto h-full ">
             <div class="flex flex-wrap gap-4 justify-center">
                 <hive-card></hive-card>
-                <hive-card></hive-card>
-                <hive-card></hive-card>
-                <hive-card></hive-card>
-                <hive-card v-for="hive in hives" :apiary="hive"></hive-card>
+                <hive-card v-for="hive in hives" :hive="hive"></hive-card>
             </div>
         </div>
 
@@ -41,8 +39,7 @@ import BreezeAuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue'
 import {Head} from '@inertiajs/inertia-vue3';
 import BreezeButton from '@/Components/PrimaryButton.vue'
 import {Link} from "@inertiajs/inertia-vue3";
-import UserAwaitingActivation from "@/Components/User/UserAwaitingActivation.vue";
-import UserActivated from "@/Components/User/UserActivated.vue";
+import BackButton from "@/Components/BackButton.vue";
 import HiveCreate from "@/Components/Hive/HiveCreate.vue"
 import HiveCard from "@/Components/Hive/HiveCard.vue"
 import BreezeValidationErrors from "@/Components/ValidationErrors.vue"
@@ -55,8 +52,7 @@ export default {
         Head,
         BreezeButton,
         Link,
-        UserAwaitingActivation,
-        UserActivated,
+        BackButton,
         //UserDisabled,
         BreezeValidationErrors
     },

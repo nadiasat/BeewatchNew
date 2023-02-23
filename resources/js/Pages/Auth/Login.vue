@@ -29,11 +29,11 @@
         </div> -->
 
         <div class="block mt-4">
-            <Link class="underline hover:text-green-1" :href="route('password.request')">Mot de passe oublié ? Changez-le ici</Link>
+            <Link class="underline hover:text-amber-800" :href="route('password.request')">Mot de passe oublié ? Changez-le ici</Link>
         </div>
 
         <div class="flex items-center justify-end mt-4">
-            <BreezeButton class="w-full" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+            <BreezeButton class="w-full py-4 bg-amber-400 text-black hover:bg-amber-200" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                 Connexion au portail
             </BreezeButton>
         </div>

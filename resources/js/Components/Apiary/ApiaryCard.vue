@@ -6,16 +6,16 @@
       <p class="value-nb-active-hives text-base font-medium text-amber-400 self-stretch flex items-center mb-2">{{ apiary.nb_active_hives }}</p>
       <p class="title-nb-active-hives text-sm font-medium text-black self-stretch flex items-center mb-2">Ruches inactives</p>
       <p class="value-nb-inactive-hives text-base font-medium text-zinc-400 self-stretch flex items-center mb-2">{{ apiary.nb_inactive_hives }}</p>
-      <div @click="showHives()" class="btn-show-hives bg-amber-400 mb-2 rounded-md flex items-center justify-center h-3 self-stretch px-12 py-4 cursor-pointer">
+      <div @click="showHives()" class="btn-show-hives bg-amber-400 hover:bg-amber-200 mb-2 rounded-md flex items-center justify-center h-3 self-stretch px-12 py-5 cursor-pointer">
         <p class="btn-show-hives-text font-medium text-black text-center text-sm">
           Consulter les ruches
         </p>
       </div>
 
-      <div class="btn-edit-hive rounded-md flex items-center justify-center self-stretch px-12 py-4 border-solid border-black border-2">
+      <div class="btn-edit-hive rounded-md flex items-center justify-center self-stretch px-12 py-2 border-solid border-black border-2">
         <img
           alt=""
-          class="edit-icon"
+          class="edit-icon w-4 h-4 mr-2"
           src="https://static.overlay-tech.com/assets/7d7cec2a-72c6-4360-b376-ef7e694a0092.svg"
         />
         <p class="btn-edit-hive-text font-medium text-black text-center text-sm">Modifier le rucher</p>

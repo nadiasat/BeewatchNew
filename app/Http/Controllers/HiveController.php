@@ -18,13 +18,17 @@ class HiveController extends Controller
     public function index(Apiary $apiary)
     {
         $hives = $apiary->hives()->get();
+
         $hives = $hives->map(function ($hive) {
             return [
                 'id' => $hive->id,
                 'name' => $hive->name,
-                'active' => $hive->active,
+                'date_queen' => $hive->date_queen,
+                'rise' => $hive->rise,
+                'nb_frames' => $hive->nb_frames,
+                'nb_varroa' => $hive->nb_varroa,
+                'active' => $hive->is_active,
                 'apiary_id' => $hive->apiary_id,
-                'apiary_name' => $hive->apiary->name,
             ];
         });
 
