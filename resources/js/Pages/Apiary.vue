@@ -10,13 +10,9 @@
                 </div>
             </div>
 
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class=" overflow-hidden shadow-sm sm:rounded-lg flex space-x-4">
-                    
-                    <apiary-card v-for="apiary in apiaries" :apiary="apiary"></apiary-card>
-                </div>
-
+        <div class="py-12 px-4 mx-auto h-full ">
+            <div class="flex flex-wrap gap-4 justify-center">
+                <apiary-card v-for="apiary in apiaries" :apiary="apiary"></apiary-card>
             </div>
         </div>
 

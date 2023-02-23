@@ -1,10 +1,10 @@
 <template>
-    <div class="apiary-card bg-white p-4 flex flex-col items-start rounded-xl ">
+    <div class="apiary-card bg-white p-4 flex flex-col items-start rounded-xl max-w-md">
       <p class="name text-base font-semibold text-black self-stretch flex items-center mb-2">{{ apiary.name }}</p>
       <p class="adresse font-medium text-amber-400 self-stretch flex items-center mb-2 text-sm">{{ apiary.address }}</p>
-      <p class="title-nb-active-hives text-xs font-medium text-black self-stretch flex items-center mb-2">Ruches actives</p>
+      <p class="title-nb-active-hives text-sm font-medium text-black self-stretch flex items-center mb-2">Ruches actives</p>
       <p class="value-nb-active-hives text-base font-medium text-amber-400 self-stretch flex items-center mb-2">{{ apiary.nb_active_hives }}</p>
-      <p class="title-nb-active-hives text-xs font-medium text-black self-stretch flex items-center mb-2">Ruches inactives</p>
+      <p class="title-nb-active-hives text-sm font-medium text-black self-stretch flex items-center mb-2">Ruches inactives</p>
       <p class="value-nb-inactive-hives text-base font-medium text-zinc-400 self-stretch flex items-center mb-2">{{ apiary.nb_inactive_hives }}</p>
       <div @click="showHives()" class="btn-show-hives bg-amber-400 mb-2 rounded-md flex items-center justify-center h-3 self-stretch px-12 py-4 cursor-pointer">
         <p class="btn-show-hives-text font-medium text-black text-center text-sm">
