@@ -72,7 +72,11 @@
         },
         //Redirect to hives page
         showHives() {
-          this.$inertia.get("hive", { apiary: this.apiary });
+          //redirect to hives page using route
+          //Inertia.get(route('hive', this.apiary));
+
+          location.href = '/apiary/' + this.apiary.id + '/hive';
+          //this.$inertia.get("hive", { apiary: this.apiary });
         },
       },
       mounted() {

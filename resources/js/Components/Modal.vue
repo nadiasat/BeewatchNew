@@ -1,7 +1,7 @@
 <template>
     <transition name="fade">
       <div class="w-full h-screen fixed left-0 top-0 z-20">
-        <div class="bg-black-1 z-30 bg-opacity-60 overflow-hidden h-screen"
+        <div class="bg-black-400 z-30 bg-opacity-60 overflow-hidden h-screen"
              @click="close"></div>
         <div class="w-full max-w-xl overflow-y-auto max-h-full py-10 absolute z-40 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
           <div class="bg-gray-50 mx-3 relative rounded-lg" style="min-height: 150px">

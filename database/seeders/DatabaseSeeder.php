@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Apiary;
+Use App\Models\Hive;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role as SpatieRole;
@@ -75,5 +76,26 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test Apiary',
             'address' => 'Test Address',
         ])->users()->attach(1);
+
+        Hive::create([
+            'name' => 'Test Hive',
+            'date_queen' => '2021-01-01',
+            'rise' => true,
+            'nb_frames' => 10,
+            'nb_varroa' => 0,
+            'is_active' => true,
+            'apiary_id' => 1,
+        ])->apiary()->associate(1);
+        
+        Hive::create([
+            'name' => 'Test Inactive Hive',
+            'date_queen' => null,
+            'rise' => false,
+            'nb_frames' => 10,
+            'nb_varroa' => 0,
+            'is_active' => false,
+            'apiary_id' => 1,
+        ])->apiary()->associate(1);
+
     }
 }

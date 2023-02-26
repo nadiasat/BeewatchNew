@@ -7,13 +7,12 @@
                 <div class="flex justify-between flex-wrap my-5 items-center">
                     <back-button></back-button>
                     <h2 class="text-3xl font-bold mr-6 mb-5 grow ">Gestion des ruches</h2>
-                    <hive-create></hive-create>
+                    <hive-create :apiary_id="apiary_id"></hive-create>
                 </div>
             </div>
 
         <div class="py-12 px-4 mx-auto h-full ">
             <div class="flex flex-wrap gap-4 justify-center">
-                <hive-card></hive-card>
                 <hive-card v-for="hive in hives" :hive="hive"></hive-card>
             </div>
         </div>
@@ -56,9 +55,10 @@ export default {
         //UserDisabled,
         BreezeValidationErrors
     },
-    props: ['hives'],
+    props: ['hives', 'apiary_id'],
     mounted() {
-        console.log(this.hives);
+        //console.log(this.hives)
+        //console.log segment of url
     }
 }
 </script>

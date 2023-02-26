@@ -15,9 +15,11 @@ class HiveController extends Controller
 {
     
     //index function show hives of given appiary
-    public function index(Apiary $apiary)
-    {
-        $hives = $apiary->hives()->get();
+    public function index(string $apiary_id)
+    {   
+
+        //$hives = $apiary->hives()->get();
+        $hives = Hive::where('apiary_id', $apiary_id)->get();
 
         $hives = $hives->map(function ($hive) {
             return [
@@ -27,33 +29,16 @@ class HiveController extends Controller
                 'rise' => $hive->rise,
                 'nb_frames' => $hive->nb_frames,
                 'nb_varroa' => $hive->nb_varroa,
-                'active' => $hive->is_active,
+                'is_active' => $hive->is_active,
                 'apiary_id' => $hive->apiary_id,
             ];
         });
 
         return Inertia::render('Hive', [
-            'hives' => $hives
+            'hives' => $hives,
+            'apiary_id' => $apiary_id,
         ]);
     }
-    // public function index()
-    // {
-    //     $hives = Auth::user()->hives->get();
-
-    //     $hives = $hives->map(function ($hive) {
-    //         return [
-    //             'id' => $hive->id,
-    //             'name' => $hive->name,
-    //             'active' => $hive->active,
-    //             'apiary_id' => $hive->apiary_id,
-    //             'apiary_name' => $hive->apiary->name,
-    //         ];
-    //     });
-
-    //     return Inertia::render('Hive', [
-    //         'hives' => $hives
-    //     ]);
-    // }
 
 
     public function store(Request $request)
@@ -63,29 +48,32 @@ class HiveController extends Controller
 
         $request->validate([
             'name' => 'required|string|max:255',
-            'date_queen' => 'required|date',
-            'rise' => 'required|numeric',
-            'nb_frames' => 'required|numeric',
-            'nb_varroa' => 'required|numeric',
-            'active' => 'required|boolean',
-            'apiary_id' => 'required|numeric',
+            //date not obligatory
+            'date_queen' => 'nullable|date',
+            //rise boolean default false
+            'rise' => 'nullable|boolean',
+            //nb_frames and nb_varroa numeric not obligatory
+            'nb_frames' => 'nullable|numeric',
+            'nb_varroa' => 'nullable|numeric',
         ]);
 
         $hive = Hive::create([
             'name' => $request->name,
             'date_queen' => $request->date_queen,
             'rise' => $request->rise,
-            'nb_frames' => $request->nb_frames,
-            'nb_varroa' => $request->nb_varroa,
-            'active' => $request->active,
-            'apiary_id' => $request->apiary_id,
+            'nb_frames' => $request->nb_frames == null ? 0 : $request->nb_frames,
+            'nb_varroa' => $request->nb_varroa == null ? 0 : $request->nb_varroa,
+            //if date is not null, hive is active
+            'is_active' => $request->date_queen == null ? false : true,
+            'apiary_id' => $request->apiary,
         ]);
 
-        $hive->users()->attach(Auth::user()->id);
+        $hive->apiary()->associate($request->apiary);
 
         $hive->save();
 
-        return redirect()->route('hive');
+        $apiary = Apiary::find($request->apiary);
+        return redirect()->route('hive', ['apiary' => $apiary]);
     }
 
     public function destroy(Hive $hive)

@@ -54,8 +54,12 @@ Route::middleware(['auth', 'user.activation_state:' . User::ACTIVATION_STATE_ACT
         ->name('apiary.store');
 
     // Hives
-    Route::get('/hive', [HiveController::class, 'index'])
+    //Route is appiray/apiary_id/hive
+    Route::get('/apiary/{apiary}/hive', [HiveController::class, 'index'])
     ->name('hive');
+
+    // Route::get('/hive', [HiveController::class, 'index'])
+    // ->name('hive');
 
     Route::post('/hive', [HiveController::class, 'store'])
         ->name('hive.store');
