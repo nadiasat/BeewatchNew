@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Apiary;
 use App\Models\User;
 use App\Notifications\UserCreated;
 use Inertia\Inertia;
@@ -10,12 +11,18 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Hash;
+use LDAP\Result;
 
 class UserController extends Controller
 {
     public function index()
     {
-        //join user role table and sort by activation state take only admins and users
+        //join user role table and sort by activation state take only admins and users also join apiaries ids
+        $unsortedUsers = User::join('model_has_roles', 'model_has_roles.model_id', '=', 'users.id')
+            ->join('roles', 'roles.id', '=', 'model_has_roles.role_id')
+            ->select('users.*', 'roles.name as role')
+            ->orderBy('activation_state', 'asc')
+            ->get();
 
         $unsortedUsers = User::join('model_has_roles', 'model_has_roles.model_id', '=', 'users.id')
         ->join('roles', 'roles.id', '=', 'model_has_roles.role_id')
@@ -88,6 +95,21 @@ class UserController extends Controller
         return redirect()->route('dashboard');
     }
 
+
+    public function updateUser(Request $request, User $user)
+    {
+        $user->apiaries()->toggle($request->apiaries);
+        $user->syncRoles($request->role);
+
+        return redirect()->route('users');
+    }
+
+    public function getCurrentApiaries(User $user)
+    {
+        //return apiaries ids of current user
+        return $user->apiaries()->pluck('apiaries.id');
+
+    }
 
     public function destroy(User $user)
     {

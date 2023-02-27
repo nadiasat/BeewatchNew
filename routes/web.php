@@ -33,10 +33,10 @@ Route::middleware(['auth', 'user.activation_state:' . User::ACTIVATION_STATE_ACT
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
+    // Users
     Route::get('/users', [UserController::class, 'index'])
         ->middleware(['can:manage users'])
         ->name('users');
-
 
     Route::delete('/users/{user}', [UserController::class, 'destroy'])
         ->middleware(['can:manage users'])
@@ -45,6 +45,10 @@ Route::middleware(['auth', 'user.activation_state:' . User::ACTIVATION_STATE_ACT
     Route::post('/users', [UserController::class, 'store'])
         ->middleware(['can:manage users'])
         ->name('users.store');
+
+    Route::post('/users/{user}/updateUser', [UserController::class, 'updateUser'])
+        ->middleware(['can:manage users'])
+        ->name('users.updateUser');
 
     // Apiaries
     Route::get('/apiary', [ApiaryController::class, 'index'])
