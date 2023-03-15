@@ -20,7 +20,7 @@
             </div>
 
             <div class="mt-8">
-                <UserActivated :users-activated="users.activated"></UserActivated>
+                <UserActivated :users-activated="users.activated" :apiaries="apiaries"></UserActivated>
             </div>
 
         </div>
@@ -28,6 +28,7 @@
 </template>
 
 <script>
+
 import BreezeAuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue'
 import {Head} from '@inertiajs/inertia-vue3';
 import BreezeButton from '@/Components/PrimaryButton.vue'
@@ -47,9 +48,9 @@ export default {
         UserAwaitingActivation,
         UserActivated,
         //UserDisabled,
-        BreezeValidationErrors
+        BreezeValidationErrors,
     },
-    props: ['users'],
+    props: ['users', 'apiaries'],
     mounted() {
         console.log(this.users);
     }

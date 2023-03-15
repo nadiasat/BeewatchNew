@@ -46,9 +46,9 @@ Route::middleware(['auth', 'user.activation_state:' . User::ACTIVATION_STATE_ACT
         ->middleware(['can:manage users'])
         ->name('users.store');
 
-    Route::post('/users/{user}/updateUser', [UserController::class, 'updateUser'])
+    Route::put('/users/{user}/updateUser', [UserController::class, 'updateUser'])
         ->middleware(['can:manage users'])
-        ->name('users.updateUser');
+        ->name('users.update');
 
     // Apiaries
     Route::get('/apiary', [ApiaryController::class, 'index'])

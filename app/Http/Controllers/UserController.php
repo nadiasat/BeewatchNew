@@ -17,25 +17,29 @@ class UserController extends Controller
 {
     public function index()
     {
-        //join user role table and sort by activation state take only admins and users also join apiaries ids
-        $unsortedUsers = User::join('model_has_roles', 'model_has_roles.model_id', '=', 'users.id')
-            ->join('roles', 'roles.id', '=', 'model_has_roles.role_id')
-            ->select('users.*', 'roles.name as role')
-            ->orderBy('activation_state', 'asc')
-            ->get();
-
+        //join user role table and sort by activation state take only 
+        //admins and users also join apiaries ids
         $unsortedUsers = User::join('model_has_roles', 'model_has_roles.model_id', '=', 'users.id')
         ->join('roles', 'roles.id', '=', 'model_has_roles.role_id')
         ->select('users.*', 'roles.name as role')
         ->orderBy('activation_state', 'asc')
         ->get();
-    
+
         $users = [
             'awaiting_activation' => [],
             'activated' => []
         ];
 
         foreach ($unsortedUsers as $user) {
+            $userApiaries = Apiary::join('apiary_user', 'apiary_user.apiary_id', '=', 'apiaries.id')
+            ->select('apiaries.id', 'apiaries.name')
+            ->where('apiary_user.user_id', $user->id)
+            ->get();
+
+            #store apiaries in user object
+            $user->apiaries = $userApiaries;
+
+            
             if ($user->activation_state == User::ACTIVATION_STATE_AWAITING_ACTIVATION) {
                 $users['awaiting_activation'][] = $user;
             }
@@ -45,8 +49,13 @@ class UserController extends Controller
             }
         }
 
+        #Get appiaries linked to users
+        $apiaries = Apiary::all();
+
+
         return Inertia::render('Users', [
             'users' => $users,
+            'apiaries' => $apiaries,
         ]);
     }
 
@@ -98,18 +107,17 @@ class UserController extends Controller
 
     public function updateUser(Request $request, User $user)
     {
-        $user->apiaries()->toggle($request->apiaries);
+        //get only ids from apiaries
+        $request->apiaries = array_map(function ($apiary) {
+            return $apiary['id'];
+        }, $request->apiaries);
+        //SYNC APIARIES ids WITH USER
+        $user->apiaries()->sync($request->apiaries);
         $user->syncRoles($request->role);
 
         return redirect()->route('users');
     }
 
-    public function getCurrentApiaries(User $user)
-    {
-        //return apiaries ids of current user
-        return $user->apiaries()->pluck('apiaries.id');
-
-    }
 
     public function destroy(User $user)
     {
