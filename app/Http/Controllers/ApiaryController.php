@@ -64,5 +64,32 @@ class ApiaryController extends Controller
         return redirect()->route('apiary');
     }
 
+    public function updateApiary(Request $request, Apiary $apiary)
+    {
+        
+        // validate resquest values
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
+        ]);
+
+        // find the apiary by id
+        $apiary = Apiary::find($apiary->id);
+
+        //modify the apiary name and address with the request values
+        $apiary->name = $request->name;
+        $apiary->address = $request->address;
+
+        //save the apiary
+        $apiary->save();
+
+
+        return redirect()->route('apiary');
+
+
+
+    }
+
+    
 
 }

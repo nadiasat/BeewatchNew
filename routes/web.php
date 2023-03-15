@@ -33,7 +33,7 @@ Route::middleware(['auth', 'user.activation_state:' . User::ACTIVATION_STATE_ACT
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
-    // Users
+    // Users --------------------------------------------------------------------------------------------------------------------
     Route::get('/users', [UserController::class, 'index'])
         ->middleware(['can:manage users'])
         ->name('users');
@@ -50,14 +50,18 @@ Route::middleware(['auth', 'user.activation_state:' . User::ACTIVATION_STATE_ACT
         ->middleware(['can:manage users'])
         ->name('users.update');
 
-    // Apiaries
+    // Apiaries -----------------------------------------------------------------------------------------------------------------
     Route::get('/apiary', [ApiaryController::class, 'index'])
     ->name('apiary');
 
     Route::post('/apiary', [ApiaryController::class, 'store'])
         ->name('apiary.store');
 
-    // Hives
+    Route::put('/apiary/{apiary}/updateApiary', [ApiaryController::class, 'updateApiary'])
+        ->name('apiary.update');
+
+
+    // Hives --------------------------------------------------------------------------------------------------------------------
     //Route is appiray/apiary_id/hive
     Route::get('/apiary/{apiary}/hive', [HiveController::class, 'index'])
     ->name('hive');
@@ -67,6 +71,7 @@ Route::middleware(['auth', 'user.activation_state:' . User::ACTIVATION_STATE_ACT
 
     Route::post('/hive', [HiveController::class, 'store'])
         ->name('hive.store');
+
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
