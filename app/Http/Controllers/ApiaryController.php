@@ -73,9 +73,6 @@ class ApiaryController extends Controller
             'address' => 'required|string|max:255',
         ]);
 
-        // find the apiary by id
-        $apiary = Apiary::find($apiary->id);
-
         //modify the apiary name and address with the request values
         $apiary->name = $request->name;
         $apiary->address = $request->address;

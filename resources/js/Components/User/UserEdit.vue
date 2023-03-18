@@ -8,7 +8,7 @@
 
     <Modal v-show="modalUpdateUser" @close="modalUpdateUser = false">
         <div class="container">
-            <form @submit.prevent="updateUserForm.put(route('users.update', user))" class="mx-8">
+            <form @submit.prevent="updateUser(user)" class="mx-8">
                 <h4 class="mb-5 text-center text-2xl font-semibold">Nouveau membre</h4>
 
                 <BreezeLabel for="role" value="Rôle" />
@@ -80,7 +80,7 @@ export default {
         };
     },
     methods: {
-        updateUser() {
+        updateUser(user) {
             console.log("UPDATE USER");
             this.updateUserForm.put(route('users.update', user), {
                 preserveState: false,

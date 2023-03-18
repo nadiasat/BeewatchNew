@@ -58,6 +58,7 @@ Route::middleware(['auth', 'user.activation_state:' . User::ACTIVATION_STATE_ACT
         ->name('apiary.store');
 
     Route::put('/apiary/{apiary}/updateApiary', [ApiaryController::class, 'updateApiary'])
+        ->middleware(['can:manage apiaries'])
         ->name('apiary.update');
 
 

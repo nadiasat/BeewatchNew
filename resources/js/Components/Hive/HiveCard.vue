@@ -20,11 +20,12 @@
         <p class="title-nb-varoas h-3 self-stretch flex items-center mb-1 text-sm">Nombre de varoas</p>
         <p class="nb-varoas text-base font-semibold" :class="{'text-[#AFAC99]' : !hive.is_active}">{{ hive.nb_varroa }}</p>
       </div>
-      <div class="btn-new-intervention bg-amber-400 hover:bg-amber-200 mb-2 rounded-md flex items-center justify-center h-3 self-stretch px-10 py-5 cursor-pointer" :class="[!hive.is_active ? 'bg-[#AFAC99] hover:bg-[#E0DDCE]' : '']">
+      <!-- <div class="btn-new-intervention bg-amber-400 hover:bg-amber-200 mb-2 rounded-md flex items-center justify-center h-3 self-stretch px-10 py-5 cursor-pointer" :class="[!hive.is_active ? 'bg-[#AFAC99] hover:bg-[#E0DDCE]' : '']">
         <p class="btn-new-intervention-text font-medium text-black text-center text-sm">
           Nouvelle intervention
         </p>
-      </div>
+      </div> -->
+      <ButtonNewIntervention :hive="hive" ></ButtonNewIntervention>
       <div class="btn-hive-details rounded-md flex items-center justify-center self-stretch px-10 py-2 border-solid border-black border-2 cursor-pointer">
         <p class="btn-new-intervention-text font-medium text-black text-center text-sm">
           Détails de la ruche
@@ -36,6 +37,7 @@
 
     import Swal from "sweetalert2";
     import { useForm } from "@inertiajs/inertia-vue3";
+    import ButtonNewIntervention from "./ButtonNewIntervention.vue";
 
     export default {
       name: "HiveCard",
@@ -44,6 +46,9 @@
         return {
           hive_id: null,
         };
+      },
+      components: {
+        ButtonNewIntervention,
       },
       methods: {
         deleteHive() {

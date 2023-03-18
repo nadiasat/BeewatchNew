@@ -11,16 +11,16 @@
 
     <Modal v-show="modalUpdateApiary" @close="modalUpdateApiary = false">
         <div class="container">
-            <form @submit.prevent="updateApiaryForm.put(route('apiary.update', apiary))" class="mx-8">
+            <form @submit.prevent="updateApiary(apiary)" class="mx-8">
                 <h4 class="mb-5 text-center text-2xl font-semibold">Modification rucher</h4>
 
-                <BreezeLabel for="apiaries" value="Nom" />
+                <BreezeLabel for="name" value="Nom" />
                 <!-- create a textbox with apiary value -->
-                <BreezeInput id="name" type="text" v-model="updateApiaryForm.name" required autofocus />
+                <BreezeInput class="mt-1 block full" id="name" type="text" v-model="updateApiaryForm.name" required autofocus />
 
-                <BreezeLabel for="apiaries" value="Adresse" />
+                <BreezeLabel for="address" value="Adresse" />
                 <!-- create a textbox with apiary value -->
-                <BreezeInput id="address" type="text" v-model="updateApiaryForm.address" required autofocus />
+                <BreezeInput class="mt-1 block full" id="address" type="text" v-model="updateApiaryForm.address" required autofocus />
 
                 <button type="submit" :class="{ 'opacity-25': updateApiaryForm.processing }"
                     :disabled="updateApiaryForm.processing" 
@@ -60,10 +60,9 @@ export default {
         }
     },
     methods: {
-        updateApiary() {
-
+        updateApiary(apiary) {
             console.log("UPDATE APIARY");
-            updateApiaryForm.put(route('apiary.update', apiary), {
+            this.updateApiaryForm.put(route('apiary.update', apiary), {
                 preserveState: false,
                 onSuccess: () => {
                     console.log('success');
