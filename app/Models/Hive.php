@@ -23,4 +23,9 @@ class Hive extends Model
     {
         return $this->belongsTo(Apiary::class);
     }
+
+    public function interventions()
+    {
+        return $this->hasMany(Interventions::class);
+    }
 }

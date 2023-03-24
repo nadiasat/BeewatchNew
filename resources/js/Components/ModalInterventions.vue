@@ -107,12 +107,12 @@
                     <div class="flex items-center gap-4">
                         <label for="yes">
                             <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
-                            v-model="createMaterialForm.rise" type="radio" id="yes" name="rise" value="true">
+                            v-model="createMaterialForm.rise" type="radio" id="yes" name="rise" value="true" :checked="createMaterialForm.rise === 1">
                             Oui
                         </label>
                         <label for="no">
                             <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
-                            v-model="createMaterialForm.rise" type="radio" id="no" name="rise" value="false">
+                            v-model="createMaterialForm.rise" type="radio" id="no" name="rise" value="false" :checked="createMaterialForm.rise === 0">
                             Non
                         </label>
                     </div>
