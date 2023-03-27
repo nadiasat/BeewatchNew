@@ -30,8 +30,5 @@ export default {
         BreezeLabel,
         BreezeInput,
     },
-    mounted() {
-        console.log(this.hive);
-    }
 }
 </script>

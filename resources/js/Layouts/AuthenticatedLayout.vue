@@ -23,12 +23,12 @@ console.log(user.value.permissions.includes('manage users'));
         <div class="min-h-screen bg-[#F6F5F1]">
             <nav class="bg-white border-b border-gray-100">
                 <!-- Primary Navigation Menu -->
-                <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="container px-6">
                     <div class="flex justify-between h-16">
                         <div class="flex">
                             <!-- Logo -->
                             <div class="shrink-0 flex items-center">
-                                <Link :href="route('dashboard')">
+                                <Link :href="route('events')">
                                     <ApplicationLogo
                                         class="block h-6 w-auto fill-current text-gray-800"
                                     />
@@ -37,52 +37,15 @@ console.log(user.value.permissions.includes('manage users'));
 
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 md:-my-px md:ml-10 md:flex">
-                                <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                                    Dashboard
-                                </NavLink>
                                 <NavLink v-if="$page.props.auth.user.permissions.includes('manage users')" :href="route('users') " :active="route().current('users')">
                                     Membres
                                 </NavLink>
                                 <NavLink :href="route('apiary') " :active="route().current('apiary')">
                                     Ruchers
                                 </NavLink>
-                            </div>
-                        </div>
-
-                        <div class="hidden md:flex md:items-center md:ml-6">
-                            <!-- Settings Dropdown -->
-                            <div class="ml-3 relative">
-                                <Dropdown align="right" width="48">
-                                    <template #trigger>
-                                        <span class="inline-flex rounded-md">
-                                            <button
-                                                type="button"
-                                                class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
-                                            >
-                                                {{ $page.props.auth.user.lastname }}
-
-                                                <svg
-                                                    class="ml-2 -mr-0.5 h-4 w-4"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 0 20 20"
-                                                    fill="currentColor"
-                                                >
-                                                    <path
-                                                        fill-rule="evenodd"
-                                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                        clip-rule="evenodd"
-                                                    />
-                                                </svg>
-                                            </button>
-                                        </span>
-                                    </template>
-
-                                    <template #content>
-                                        <DropdownLink :href="route('logout')" method="post" as="button">
-                                            Log Out
-                                        </DropdownLink>
-                                    </template>
-                                </Dropdown>
+                                <NavLink :href="route('events')" :active="route().current('events')">
+                                    Calendrier
+                                </NavLink>
                             </div>
                         </div>
 
@@ -125,14 +88,14 @@ console.log(user.value.permissions.includes('manage users'));
                     class="md:hidden"
                 >
                     <div class="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                            Dashboard
-                        </ResponsiveNavLink>
                         <ResponsiveNavLink :href="route('users')" :active="route().current('users')">
                             Membres
                         </ResponsiveNavLink>
                         <ResponsiveNavLink :href="route('apiary')" :active="route().current('apiary')">
                             Ruchers
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink :href="route('events')" :active="route().current('events')">
+                            Calendrier
                         </ResponsiveNavLink>
                     </div>
 

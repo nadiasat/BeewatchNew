@@ -7,6 +7,7 @@ namespace Database\Seeders;
 use App\Models\Apiary;
 Use App\Models\Hive;
 use App\Models\User;
+use App\Models\Event;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role as SpatieRole;
 use Spatie\Permission\Models\Permission as SpatiePermission;
@@ -96,6 +97,19 @@ class DatabaseSeeder extends Seeder
             'is_active' => false,
             'apiary_id' => 1,
         ])->apiary()->associate(1);
+
+        //Events
+        Event::create([
+            'title' => 'Event Hier',
+            'date_start' => now()->subDay(2)->format('Y-m-d'),
+            'date_end' => now()->subDay(1)->format('Y-m-d'),
+        ]);
+
+        Event::create([
+            'title' => 'Event Demain',
+            'date_start' => now()->addDay()->format('Y-m-d'),
+            'date_end' => now()->addDay(2)->format('Y-m-d'),
+        ]);
 
     }
 }

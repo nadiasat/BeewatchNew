@@ -123,9 +123,6 @@ export default {
             })
         }
     },
-    mounted() {
-        console.log(this.apiary_id)
-    }
 }
 </script>
 

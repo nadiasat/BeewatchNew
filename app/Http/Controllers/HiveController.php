@@ -10,6 +10,7 @@ use Inertia\Inertia;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules;
+use Psy\Readline\Hoa\Console;
 
 class HiveController extends Controller
 {
@@ -73,6 +74,53 @@ class HiveController extends Controller
         $hive->save();
 
         $apiary = Apiary::find($request->apiary);
+        return redirect()->route('hive', ['apiary' => $apiary]);
+    }
+
+    public function updateMaterial(Request $request, int $hive_id)
+    {
+        $request->validate([
+            //rise boolean default false
+            'rise' => 'nullable|boolean',
+            //nb_frames not obligatory
+            'nb_frames' => 'nullable|numeric'
+        ]);
+
+        $hive = Hive::find($hive_id);
+
+        $hive->rise = $request->rise;
+
+        if ($request->nb_frames != null) {
+            $hive->nb_frames = $request->nb_frames;
+        }
+
+        $hive->save();
+
+        $apiary = Apiary::find($hive->apiary_id);
+
+        //redirect to create intervention material
+        return redirect()->route('interventionMaterial.store', 
+        ['new_nb_frames' => $request->nb_frames,
+        'new_rise' => $request->rise,
+        'hive_id' => $hive_id]);
+
+    
+    }
+
+    public function deactivateHive(int $hive_id)
+    {
+        $hive = Hive::find($hive_id);
+
+        $hive->is_active = false;
+        $hive->date_queen = null;
+        $hive->nb_varroa = 0;
+        $hive->rise = false;
+        $hive->nb_frames = 0;
+
+        $hive->save();
+
+        $apiary = Apiary::find($hive->apiary_id);
+
         return redirect()->route('hive', ['apiary' => $apiary]);
     }
 

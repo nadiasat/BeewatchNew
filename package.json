@@ -20,6 +20,10 @@
         "vue": "^3.2.41"
     },
     "dependencies": {
+        "@fullcalendar/core": "^6.1.5",
+        "@fullcalendar/daygrid": "^6.1.5",
+        "@fullcalendar/interaction": "^6.1.5",
+        "@fullcalendar/vue3": "^6.1.5",
         "vue-multiselect": "^3.0.0-beta.1",
         "vue-sweetalert2": "^5.0.5"
     }

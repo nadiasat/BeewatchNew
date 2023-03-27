@@ -3,7 +3,9 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ApiaryController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\HiveController;
+use App\Http\Controllers\InterventionMaterialController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -24,15 +26,10 @@ use App\Models\User;
 
 Route::middleware(['auth', 'user.activation_state:' . User::ACTIVATION_STATE_ACTIVATED])->group(function () {
 
+    //redirect to apiary page
     Route::get('/', function () {
-        return Inertia::render('Dashboard', [
-        ]);
+        return redirect()->route('apiary');
     });
-
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
-    })->name('dashboard');
-
     // Users --------------------------------------------------------------------------------------------------------------------
     Route::get('/users', [UserController::class, 'index'])
         ->middleware(['can:manage users'])
@@ -50,6 +47,19 @@ Route::middleware(['auth', 'user.activation_state:' . User::ACTIVATION_STATE_ACT
         ->middleware(['can:manage users'])
         ->name('users.update');
 
+    //Events --------------------------------------------------------------------------------------------------------------------
+    Route::get('/events', [EventController::class, 'index'])
+        ->name('events');
+
+    Route::post('/events', [EventController::class, 'store'])
+        ->name('events.store');
+
+    Route::delete('/events/{event}', [EventController::class, 'destroy'])
+        ->name('events.destroy');
+
+    Route::put('/events/{event}/update', [EventController::class, 'update'])
+        ->name('events.update');
+
     // Apiaries -----------------------------------------------------------------------------------------------------------------
     Route::get('/apiary', [ApiaryController::class, 'index'])
     ->name('apiary');
@@ -66,6 +76,18 @@ Route::middleware(['auth', 'user.activation_state:' . User::ACTIVATION_STATE_ACT
     //Route is appiray/apiary_id/hive
     Route::get('/apiary/{apiary}/hive', [HiveController::class, 'index'])
     ->name('hive');
+
+    Route::put('/apiary/{apiary}/hive/{hive}/updateMaterial', [HiveController::class, 'updateMaterial'])
+        ->middleware(['can:manage hives'])
+        ->name('hive.updateMaterial');
+
+    Route::get('/interventionMaterial', [InterventionMaterialController::class, 'store'])
+        ->middleware(['can:manage hives'])
+        ->name('interventionMaterial.store');
+
+    Route::put('/apiary/{apiary}/hive/{hive}/deacivateHive', [HiveController::class, 'deactivateHive'])
+        ->middleware(['can:manage hives'])
+        ->name('hive.deactivateHive');
 
     // Route::get('/hive', [HiveController::class, 'index'])
     // ->name('hive');
