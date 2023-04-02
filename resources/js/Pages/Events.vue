@@ -64,6 +64,7 @@
                                         Modifier
                                     </button>
                                     <button :class="{ 'opacity-25': EventForm.processing }"
+                                        type="button"
                                         :disabled="EventForm.processing"
                                         @click="deleteEvent()"
                                         class="bg-red-400 border-red-400 text-black font-semibold border-4 py-2 w-full hover:bg-red-300 hover:border-red-300">
@@ -201,6 +202,7 @@ export default {
         },
         updateEvent() {
             //Verify that the start date is before the end date
+            console.log("ON UPDATE");
             if (this.EventForm.date_start > this.EventForm.date_end) {
                 Swal.fire({
                     icon: 'error',
@@ -243,7 +245,7 @@ export default {
         },
         deleteEvent() {
             Swal.fire({
-                title: "Voulez-vous vraiment supprimer cet utilisateur ?",
+                title: "Voulez-vous vraiment supprimer cet événement ?",
                 text: "Cette action est irréversible.",
                 icon: 'warning',
                 showCancelButton: true,
@@ -252,6 +254,7 @@ export default {
                 cancelButtonText: "Annuler"
             }) .then((result) => {
                 if (result.isConfirmed) {
+                    console.log('ON EST EN TRAIN DE SUPPRIMER')
                     this.EventForm.delete(route('events.destroy', this.EventForm.id), {
                         preserveScroll: true,
                         preserveState: false,
