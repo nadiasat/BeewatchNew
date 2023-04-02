@@ -6,6 +6,9 @@ use App\Http\Controllers\ApiaryController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\HiveController;
 use App\Http\Controllers\InterventionMaterialController;
+use App\Http\Controllers\InterventionQueenController;
+use App\Http\Controllers\InterventionControlController;
+use App\Http\Controllers\InterventionsController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -85,9 +88,34 @@ Route::middleware(['auth', 'user.activation_state:' . User::ACTIVATION_STATE_ACT
         ->middleware(['can:manage hives'])
         ->name('interventionMaterial.store');
 
+    
+    
     Route::put('/apiary/{apiary}/hive/{hive}/deacivateHive', [HiveController::class, 'deactivateHive'])
         ->middleware(['can:manage hives'])
         ->name('hive.deactivateHive');
+    
+    Route::get('/intervetionQueen/deactivate', [InterventionQueenController::class, 'deactivate'])
+        ->middleware(['can:manage hives'])
+        ->name('interventionQueen.deactivate');
+
+    
+    
+        Route::put('/apiary/{apiary}/hive/{hive}/activateHive', [HiveController::class, 'activateHive'])
+        ->middleware(['can:manage hives'])
+        ->name('hive.activateHive');
+
+    Route::get('/interventionQueen', [InterventionQueenController::class, 'store'])
+        ->middleware(['can:manage hives'])
+        ->name('interventionQueen.store');
+
+
+    Route::post('/interventionControl', [InterventionControlController::class, 'store'])
+        ->middleware(['can:manage hives'])
+        ->name('interventionControl.store');
+
+
+    Route::get('/apiary/{apiary}/hive/{hive}/details', [InterventionsController::class, 'index'])
+        ->name('hive.details');
 
     // Route::get('/hive', [HiveController::class, 'index'])
     // ->name('hive');

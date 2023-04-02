@@ -12,6 +12,7 @@ class Hive extends Model
     protected $fillable = [
         'name',
         'date_queen',
+        'color_queen',
         'rise',
         'nb_frames',
         'nb_varroa',

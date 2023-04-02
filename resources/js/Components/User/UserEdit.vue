@@ -12,7 +12,12 @@
                 <h4 class="mb-5 text-center text-2xl font-semibold">Nouveau membre</h4>
 
                 <BreezeLabel for="role" value="Rôle" />
-                <select v-model="updateUserForm.role" id="role" class="mt-1 block w-full" required>
+                <select v-model="updateUserForm.role" 
+                id="role" 
+                class="mt-1 block w-full
+                border-zinc-300 
+                focus:border-amber-400 focus:ring-amber-400 
+                rounded-md shadow-sm" required>
                     <option value="superadmin">Super administrateur</option>
                     <option value="admin">Administrateur</option>
                     <option value="user">Utilisateur</option>

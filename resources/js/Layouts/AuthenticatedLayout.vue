@@ -46,7 +46,13 @@ console.log(user.value.permissions.includes('manage users'));
                                 <NavLink :href="route('events')" :active="route().current('events')">
                                     Calendrier
                                 </NavLink>
+                                <!--- LOGOUT -->
+                                <NavLink :href="route('logout')" method="post" as="button" >
+                                    Déconnexion
+                                </NavLink>
                             </div>
+
+
                         </div>
 
                         <!-- Hamburger -->

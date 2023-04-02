@@ -1,19 +1,18 @@
 <template>
-    <Head title="Ruches" />
+    <Head title="Détails" />
 
     <BreezeAuthenticatedLayout>
         <div class="container mx-auto p-4">
         <div>
                 <div class="flex justify-between flex-wrap my-5 items-center">
                     <back-button></back-button>
-                    <h2 class="text-3xl font-bold mr-6 mb-5 grow ">Gestion des ruches</h2>
-                    <hive-create :apiary_id="apiary_id"></hive-create>
+                    <h2 class="text-3xl font-bold mr-6 mb-5 grow ">Détails : {{ hive_name }}</h2>
                 </div>
             </div>
 
         <div class="py-12 px-4 mx-auto h-full ">
             <div class="flex flex-wrap gap-4 justify-center">
-                <hive-card v-for="hive in hives" :hive="hive"></hive-card>
+                <InterventionCard v-for="intervention in interventions" :intervention="intervention"></InterventionCard>
             </div>
         </div>
 
@@ -39,14 +38,12 @@ import {Head} from '@inertiajs/inertia-vue3';
 import BreezeButton from '@/Components/PrimaryButton.vue'
 import {Link} from "@inertiajs/inertia-vue3";
 import BackButton from "@/Components/BackButton.vue";
-import HiveCreate from "@/Components/Hive/HiveCreate.vue"
-import HiveCard from "@/Components/Hive/HiveCard.vue"
+import InterventionCard from '@/Components/Hive/InterventionCard.vue';
 import BreezeValidationErrors from "@/Components/ValidationErrors.vue"
 
 export default {
     components: {
-        HiveCreate,
-        HiveCard,
+        InterventionCard,
         BreezeAuthenticatedLayout,
         Head,
         BreezeButton,
@@ -55,9 +52,9 @@ export default {
         //UserDisabled,
         BreezeValidationErrors
     },
-    props: ['hives', 'apiary_id'],
+    props: ['interventions', 'hive_id', 'hive_name'],
     mounted() {
-        //console.log(this.hives)
+        //console.log(this.hive_name)
         //console.log segment of url
     }
 }

@@ -3,7 +3,7 @@
       <div class="w-full h-screen fixed left-0 top-0 z-20">
         <div class="bg-black-400 z-30 bg-opacity-60 overflow-hidden h-screen"
              @click="close"></div>
-        <div class="w-full h-full overflow-y-auto max-h-full absolute z-40 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+        <div class="w-full h-full overflow-y-auto max-h-full absolute z-40 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pb-5">
           <div class="bg-[#F6F5F1] relative w-full h-full flex justify-center" style="min-height: 300px">
             <button @click="() => {close()}" class="items-center gap-2 absolute right-12 top-6 rounded-full flex flex-row bg-red text-lg font-medium hover:opacity-70">
                 Fermer
@@ -47,11 +47,11 @@
                 </button>
 
                 <div id="tile-control" 
-                class="tile-intervention bg-amber-400 
+                class="tile-intervention 
                 p-6 flex flex-col gap-4 items-center 
                 rounded-xl w-40 h-40 
                 hover:opacity-60 cursor-pointer"
-                :class="{'bg-[#AFAC99]' : !hive.is_active}"
+                :class="[hive.is_active ? 'bg-amber-400' : 'bg-[#AFAC99]']"
                 @click="()=>{showControlForm = true; showTileContainer = false;}">
                     <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect x="12" y="6" width="56" height="71" rx="5" fill="white" stroke="black" stroke-width="2"/>
@@ -66,11 +66,11 @@
                 </div>
 
                 <div id="tile-material" 
-                class="tile-intervention bg-amber-400 
+                class="tile-intervention
                 p-6 flex flex-col gap-4 items-center 
                 rounded-xl w-40 h-40 
                 hover:opacity-60  cursor-pointer"
-                :class="{'bg-[#AFAC99]' : !hive.is_active}"
+                :class="[hive.is_active ? 'bg-amber-400' : 'bg-[#AFAC99]']"
                 @click="()=>{showMaterialForm = true; showTileContainer = false;}">
                     <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0_306_31)">
@@ -94,29 +94,128 @@
 
             <!-- CONTROL FORM -->
             <div id="control-form-container" 
-            class="pt-[10vh] pb-[10vh]"
-            v-show="showControlForm" 
-            @click="() => {showControlForm = false; showTileContainer = true;}">
+            class="pt-[10vh] pb-[10vh] w-[35vw]"
+            v-show="showControlForm">
                 <h2 class="text-center text-2xl font-bold pb-8">Formulaire de contrôle</h2>
                 <form id="control-form" @submit.prevent="newControl()" class="mx-8">
+                    <BreezeLabel value="Avez-vous aperçu la reine ?" class="text-base"/>
+                    <!-- make 2 radio buttons yes or no -->
+                    <div class="flex items-center gap-4 mt-1">
+                        <label for="yes_glimpse">
+                            <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
+                            v-model="createControlForm.glimpse_queen" type="radio" id="yes_glimpse" name="glimpse_queen" value="true" >
+                            Oui
+                        </label>
+                        <label for="no_glimpse">
+                            <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
+                            v-model="createControlForm.glimpse_queen" type="radio" id="no_glimpse" name="glimpse_queen" value="false">
+                            Non
+                        </label>
+                    </div>
+
+                    <BreezeLabel value="La reine a-t-elle pondu ?" class="text-base"/>
+                    <div class="flex items-center gap-4 mt-1">
+                        <label for="yes_laid">
+                            <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
+                            v-model="createControlForm.queen_laid" type="radio" id="yes_laid" name="queen_laid" value="true" >
+                            Oui
+                        </label>
+                        <label for="no_laid">
+                            <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
+                            v-model="createControlForm.queen_laid" type="radio" id="no_laid" name="queen_laid" value="false">
+                            Non
+                        </label>
+                    </div>
                     
+                    <BreezeLabel value="Y a-t-il du couvain ?" class="text-base" />
+                    <div class="flex items-center gap-4 mt-1">
+                        <label for="yes_brood">
+                            <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
+                            v-model="createControlForm.brood" type="radio" id="yes_brood" name="brood" value="true" >
+                            Oui
+                        </label>
+                        <label for="no_brood">
+                            <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
+                            v-model="createControlForm.brood" type="radio" id="no_brood" name="brood" value="false">
+                            Non
+                        </label>
+                    </div>
+
+                    <BreezeLabel value="Les cadres sont-ils pleins ?" class="text-base"/>
+                    <div class="flex items-center gap-4 mt-1">
+                        <label for="yes_frames">
+                            <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
+                            v-model="createControlForm.frames_full" type="radio" id="yes_frames" name="frames_full" value="true" >
+                            Oui
+                        </label>
+                        <label for="no_frames">
+                            <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
+                            v-model="createControlForm.frames_full" type="radio" id="no_frames" name="frames_full" value="false">
+                            Non
+                        </label>
+                    </div>
+
+                    <BreezeLabel value="Y a-t-il du miel ?" class="text-base"/>
+                    <div class="flex items-center gap-4 mt-1">
+                        <label for="yes_honey">
+                            <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
+                            v-model="createControlForm.honey" type="radio" id="yes_honey" name="honey" value="true" >
+                            Oui
+                        </label>
+                        <label for="no_honey">
+                            <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
+                            v-model="createControlForm.honey" type="radio" id="no_honey" name="honey" value="false">
+                            Non
+                        </label>
+                    </div>
+
+                    <BreezeLabel value="Y a-t-il du miel sur les cadres de la hausse ?" class="text-base"/>
+                    <div class="flex items-center gap-4 mt-1">
+                        <label for="yes_honey_rise">
+                            <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
+                            v-model="createControlForm.honey_rise" type="radio" id="yes_honey_rise" name="honey_rise" value="true" >
+                            Oui
+                        </label>
+                        <label for="no_honey_rise">
+                            <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
+                            v-model="createControlForm.honey_rise" type="radio" id="no_honey_rise" name="honey_rise" value="false">
+                            Non
+                        </label>
+                    </div>
+
+                    <BreezeLabel for="comment" value="Commentaire supllémentaire" class="text-base"/>
+                    <textarea v-model="createControlForm.comment"
+                    id="comment"
+                    class="mt-1 block w-full
+                    border-zinc-300 
+                    focus:border-amber-400 focus:ring-amber-400 
+                    rounded-md shadow-sm"
+                    rows="5" />
+                    
+                    
+                    <button type="submit" :class="{ 'opacity-25': createControlForm.processing }"
+                    :disabled="createControlForm.processing"
+                    class="mb-4 mt-8 bg-amber-400 border-amber-400 text-black font-semibold border-4 py-2 w-full hover:bg-amber-300 hover:border-amber-300">
+                    Confirmer
+                    </button>
+
                 </form>
 
                 <div class="text-center">
-                    <button @click="modalCreateHive = false" class="text-red-1 font-semibold">Annuler</button>
+                    <button @click="() => {showControlForm = false; showTileContainer = true;}" class="text-red-1 font-semibold">Annuler</button>
                 </div>
             </div>
 
             <!-- MATERIAL FORM -->
             <div id="material-form-container" 
-            class="pt-[10vh] pb-[10vh]"
+            class="pt-[10vh] pb-[10vh] w-[35vw]"
             v-show="showMaterialForm" 
             >
                 <h2 class="text-center text-2xl font-bold pb-8">Modification du matériel</h2>
                 <form id="material-form" @submit.prevent="updateMaterial()">
                     <BreezeLabel value="Hausse" />
                     <!-- make 2 radio buttons yes or no -->
-                    <div class="flex items-center gap-4">
+                    <div class="flex items-center gap-4 mt-1">
                         <label for="yes">
                             <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
                             v-model="updateMaterialForm.rise" type="radio" id="yes" name="rise" value="true" :checked="updateMaterialForm.rise === 1">
@@ -142,20 +241,44 @@
                     </button>
                 </form>
 
-                <div class="text-center">
+                <div class="text-center mb-5">
                     <button @click="() => {showMaterialForm = false; showTileContainer = true;}" class="text-red-1 font-semibold">Annuler</button>
                 </div>
             </div>
 
             <!-- QUEEN FORM -->
             <div id="queen-form-container" 
-            class="pt-[10vh] pb-[10vh]"
-            v-show="showQueenForm" 
-            @click="() => {showQueenForm = false; showTileContainer = true;}">
-                <h2 class="text-center text-2xl font-bold pb-8">Nouvelle reine</h2>
-                <form id="queen-form" @submit.prevent="updateQueen()">
+            class="pt-[10vh] pb-[10vh] w-[35vw]"
+            v-show="showQueenForm">
+                <h2 class="text-center text-2xl font-bold pb-8">Relancer la ruche</h2>
+                <form id="queen-form" @submit.prevent="activateHive()">
+                    <BreezeLabel for="date_queen" value="Date de la reine" />
+                    <BreezeInput v-model="updateQueenForm.date_queen" id="date_queen" type="date"
+                        class="mt-1 block w-full"/>
 
+                    <BreezeLabel for="color_queen" value="Couleur de la reine" />
+
+                    <select v-model="updateQueenForm.color_queen" 
+                    id="color_queen" 
+                    class="mt-1 block w-full border-zinc-300 
+                    focus:border-amber-400 focus:ring-amber-400 
+                    rounded-md shadow-sm" required>
+                        <option value="#FF0000">Rouge</option>
+                        <option value="#FFFF00">Jaune</option>
+                        <option value="#008000">Vert</option>
+                        <option value="#0000FF">Bleu</option>
+                        <option value="#EE82EE">Violet</option>
+                    </select>
+
+                    <button type="submit" :class="{ 'opacity-25': updateQueenForm.processing }"
+                    :disabled="updateQueenForm.processing"
+                    class="mb-4 mt-8 bg-amber-400 border-amber-400 text-black font-semibold border-4 py-2 w-full hover:bg-amber-300 hover:border-amber-300">
+                    Confirmer
+                    </button>
                 </form>
+                <div class="text-center">
+                    <button @click="() => {showQueenForm = false; showTileContainer = true;}" class="text-red-1 font-semibold">Annuler</button>
+                </div>
             </div>
           </div>
         </div>
@@ -181,7 +304,14 @@
                 showQueenForm: false,
                 
                 createControlForm: useForm({
-                    good: false,
+                    hive_id: props.hive.id,
+                    glimpse_queen: null,
+                    queen_laid: null,
+                    brood: null,
+                    frames_full: null,
+                    honey: null,
+                    honey_rise: null,
+                    comment: null,
                 }),
 
                 updateMaterialForm: useForm({
@@ -190,10 +320,8 @@
                 }),
 
                 updateQueenForm: useForm({
-                    date_birth: null,
-                    rise: null,
-                    nb_frames: null,
-                    nb_varoas: null,
+                    date_queen: null,
+                    color_queen: null,
                 }),
             }
         },
@@ -204,6 +332,9 @@
                 this.showControlForm = false;
                 this.showMaterialForm = false;
                 this.showQueenForm = false;
+
+                this.createControlForm.reset();
+                this.updateQueenForm.reset();
 
             },
 
@@ -256,6 +387,8 @@
                     preserveScroll: true,
                     preserveState: false,
                     onSuccess: () => {
+                        this.showQueenForm = false;
+                        this.showTileContainer = true;
                         Swal.fire(
                             'Activé !',
                             'La ruche a bien été activée.',
@@ -266,7 +399,46 @@
                 });
             },
             newControl() {
-                console.log('new control');
+                //convert boolean to int if not null
+                if (this.createControlForm.glimpse_queen !== null) {
+                    this.createControlForm.glimpse_queen = this.createControlForm.glimpse_queen === 'true' ? 1 : 0;
+                }
+
+                if (this.createControlForm.queen_laid !== null) {
+                    this.createControlForm.queen_laid = this.createControlForm.queen_laid === 'true' ? 1 : 0;
+                }
+
+                if (this.createControlForm.brood !== null) {
+                    this.createControlForm.brood = this.createControlForm.brood === 'true' ? 1 : 0;
+                }
+
+                if (this.createControlForm.frames_full !== null) {
+                    this.createControlForm.frames_full = this.createControlForm.frames_full === 'true' ? 1 : 0;
+                }
+
+                if (this.createControlForm.honey !== null) {
+                    this.createControlForm.honey = this.createControlForm.honey === 'true' ? 1 : 0;
+                }
+
+                if (this.createControlForm.honey_rise !== null) {
+                    this.createControlForm.honey_rise = this.createControlForm.honey_rise === 'true' ? 1 : 0;
+                }
+
+
+                this.createControlForm.post(route('interventionControl.store'), {
+                    preserveScroll: true,
+                    preserveState: false,
+                    onSuccess: () => {
+                        this.showControlForm = false;
+                        this.showTileContainer = true;
+                        Swal.fire({
+                            title: 'Succès',
+                            text: 'Le contrôle a bien été ajouté',
+                            icon: 'success',
+                            confirmButtonText: 'Ok',
+                        });
+                    },
+                });
             }
         },
         components: {

@@ -27,6 +27,7 @@ class HiveController extends Controller
                 'id' => $hive->id,
                 'name' => $hive->name,
                 'date_queen' => $hive->date_queen,
+                'color_queen' => $hive->color_queen,
                 'rise' => $hive->rise,
                 'nb_frames' => $hive->nb_frames,
                 'nb_varroa' => $hive->nb_varroa,
@@ -51,6 +52,9 @@ class HiveController extends Controller
             'name' => 'required|string|max:255',
             //date not obligatory
             'date_queen' => 'nullable|date',
+
+            //color not obligatory
+            'color_queen' => 'nullable|string|max:255',
             //rise boolean default false
             'rise' => 'nullable|boolean',
             //nb_frames and nb_varroa numeric not obligatory
@@ -61,6 +65,7 @@ class HiveController extends Controller
         $hive = Hive::create([
             'name' => $request->name,
             'date_queen' => $request->date_queen,
+            'color_queen' => $request->color_queen,
             'rise' => $request->rise,
             'nb_frames' => $request->nb_frames == null ? 0 : $request->nb_frames,
             'nb_varroa' => $request->nb_varroa == null ? 0 : $request->nb_varroa,
@@ -113,6 +118,7 @@ class HiveController extends Controller
 
         $hive->is_active = false;
         $hive->date_queen = null;
+        $hive->color_queen = null;
         $hive->nb_varroa = 0;
         $hive->rise = false;
         $hive->nb_frames = 0;
@@ -121,7 +127,32 @@ class HiveController extends Controller
 
         $apiary = Apiary::find($hive->apiary_id);
 
-        return redirect()->route('hive', ['apiary' => $apiary]);
+        return redirect()->route('interventionQueen.deactivate', 
+        ['hive_id' => $hive_id]);
+    }
+
+    public function activateHive(Request $request, int $hive_id)
+    {
+        $hive = Hive::find($hive_id);
+
+        $request->validate([
+            'date_queen' => 'required|date',
+            'color_queen' => 'required|string|max:255',
+        ]);
+
+        $hive->is_active = true;
+        $hive->date_queen = $request->date_queen;
+        $hive->color_queen = $request->color_queen;
+
+
+        $hive->save();
+
+        $apiary = Apiary::find($hive->apiary_id);
+
+        return redirect()->route('interventionQueen.store', 
+        ['date_queen' => $request->date_queen,
+        'color_queen' => $request->color_queen,
+        'hive_id' => $hive_id]);
     }
 
     public function destroy(Hive $hive)

@@ -81,6 +81,8 @@ class DatabaseSeeder extends Seeder
         Hive::create([
             'name' => 'Test Hive',
             'date_queen' => '2021-01-01',
+            //hex color code red
+            'color_queen' => '#FF0000',
             'rise' => true,
             'nb_frames' => 10,
             'nb_varroa' => 0,
@@ -92,7 +94,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test Inactive Hive',
             'date_queen' => null,
             'rise' => false,
-            'nb_frames' => 10,
+            'nb_frames' => 0,
             'nb_varroa' => 0,
             'is_active' => false,
             'apiary_id' => 1,

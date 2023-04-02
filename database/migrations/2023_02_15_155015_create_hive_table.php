@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->date('date_queen')->nullable();
+            $table->string('color_queen')->nullable();
             $table->boolean('rise')->default(false);
             $table->integer('nb_frames');
             $table->integer('nb_varroa');

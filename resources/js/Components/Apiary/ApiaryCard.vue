@@ -28,7 +28,7 @@
 
 import Swal from "sweetalert2";
 import { useForm } from "@inertiajs/inertia-vue3";
-import { Inertia } from "@inertiajs/inertia-vue3";
+import { Inertia } from "@inertiajs/inertia";
 import ApiaryEdit from "./ApiaryEdit.vue";
 
 export default {
@@ -75,9 +75,9 @@ export default {
     //Redirect to hives page
     showHives() {
       //redirect to hives page using route
-      //Inertia.get(route('hive', this.apiary));
+      Inertia.get(route("hive", this.apiary.id));
 
-      location.href = '/apiary/' + this.apiary.id + '/hive';
+      //location.href = '/apiary/' + this.apiary.id + '/hive';
       //this.$inertia.get("hive", { apiary: this.apiary });
     },
   },
