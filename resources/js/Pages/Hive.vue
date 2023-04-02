@@ -7,7 +7,10 @@
                 <div class="flex justify-between flex-wrap my-5 items-center">
                     <back-button></back-button>
                     <h2 class="text-3xl font-bold mr-6 mb-5 grow ">Gestion des ruches</h2>
-                    <hive-create :apiary_id="apiary_id"></hive-create>
+                    <hive-create
+                    v-if="$page.props.auth.user.permissions.includes('manage hives')"
+                    :apiary_id="apiary_id">
+                    </hive-create>
                 </div>
             </div>
 

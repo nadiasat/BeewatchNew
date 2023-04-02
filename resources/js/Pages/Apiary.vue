@@ -6,7 +6,9 @@
         <div>
                 <div class="flex justify-between flex-wrap my-5 items-center">
                     <h2 class="text-3xl font-bold mr-6 mb-5">Gestion des ruchers</h2>
-                    <apiary-create></apiary-create>
+                    <apiary-create
+                    v-if="$page.props.auth.user.permissions.includes('manage apiaries')">
+                    </apiary-create>
                 </div>
             </div>
 
