@@ -52,4 +52,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Apiary::class, 'apiary_user', 'user_id', 'apiary_id');
     }
+
+    public function events()
+    {
+        return $this->belongsToMany(Event::class, 'event_user', 'user_id', 'event_id');
+    }
 }

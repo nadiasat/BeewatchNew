@@ -11,7 +11,7 @@
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-4">
                     <FullCalendar :options="calendarOptions" />
                     
-                    <Modal v-show="modalAddEvent" @close="modalAddEvent = false">
+                    <Modal v-show="modalAddEvent" @close="{modalAddEvent = false; EventForm.reset()}">
                         <div class="container text-center ">
                             <form @submit.prevent="addEvent()" class="mx-8">
                                 <h4 class="mb-5 text-2xl font-semibold">Nouvel évènement</h4>
@@ -28,19 +28,61 @@
                                 <BreezeInput v-model="EventForm.date_end" placeholder="Date de fin" id="date_end" type="date"
                                     class="mt-1 block w-full" required/>
 
+                                <BreezeLabel for="description" value="Description" class="text-left"/>
+                                <textarea v-model="EventForm.description"
+                                id="description"
+                                class="mt-1 block w-full
+                                border-zinc-300 
+                                focus:border-amber-400 focus:ring-amber-400 
+                                rounded-md shadow-sm"
+                                rows="3" />
+
+                                <BreezeLabel for="users" value="Utilisateurs affectés" class="text-left"/>
+                                <div>
+                                    <VueMultiselect 
+                                    v-model="EventForm.users"
+                                    :options="options"
+                                    :taggable="true"
+                                    :multiple="true"
+                                    :label="'name'"
+                                    :track-by="'id'"
+                                    id="users" 
+                                    class="mt-1 block w-full" 
+                                    @tag="addTag">
+                                    </VueMultiselect>
+                                </div>
+
+                                <BreezeLabel for="is_urgent" value="Urgent" class="text-left"/>
+                                <div class="flex items-center gap-4 mt-1">
+                                    <label for="yes">
+                                        <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
+                                        v-model="EventForm.is_urgent" type="radio" id="yes" name="is_urgent" value="true"
+                                        >
+                                        Oui
+                                    </label>
+                                    <label for="no">
+                                        <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
+                                        v-model="EventForm.is_urgent" type="radio" id="no" name="is_urgent" value="false"
+                                        >
+                                        Non
+                                    </label>
+                                </div>
+
+
+
                                 <button type="submit" :class="{ 'opacity-25': EventForm.processing }"
                                     :disabled="EventForm.processing"
                                     class="mb-4 mt-8 bg-amber-400 border-amber-400 text-black font-semibold border-4 py-2 w-full hover:bg-amber-300 hover:border-amber-300">
                                     Confirmer
                                 </button>
                             </form>
-                            <button @click="modalAddEvent = false" class="text-red-1 font-semibold">
+                            <button @click="{modalAddEvent = false; EventForm.reset()}" class="text-red-1 font-semibold">
                                 Annuler
                             </button>
                         </div>
                     </Modal>
 
-                    <Modal v-show="modalUpdateEvent" @close="modalUpdateEvent = false">
+                    <Modal v-show="modalUpdateEvent" @close="{modalUpdateEvent = false; EventForm.reset()}">
                         <div class="container text-center ">
                             <form @submit.prevent="updateEvent()" class="mx-8">
                                 <h4 class="mb-5 text-2xl font-semibold">Modifier un évènement</h4>
@@ -57,6 +99,47 @@
                                 <BreezeInput v-model="EventForm.date_end" placeholder="Date de fin" id="date_end" type="date"
                                     class="mt-1 block w-full" required/>
 
+                                <BreezeLabel for="description" value="Description" class="text-left"/>
+                                <textarea v-model="EventForm.description"
+                                id="description"
+                                class="mt-1 block w-full
+                                border-zinc-300 
+                                focus:border-amber-400 focus:ring-amber-400 
+                                rounded-md shadow-sm"
+                                rows="3" />
+
+
+                                <BreezeLabel for="users" value="Utilisateurs affectés" class="text-left"/>
+                                <div>
+                                    <VueMultiselect 
+                                    v-model="EventForm.users"
+                                    :options="options"
+                                    :taggable="true"
+                                    :multiple="true"
+                                    :label="'name'"
+                                    :track-by="'id'"
+                                    id="users" 
+                                    class="mt-1 block w-full" 
+                                    @tag="addTag">
+                                    </VueMultiselect>
+                                </div>
+
+                                <BreezeLabel for="is_urgent" value="Urgent" class="text-left"/>
+                                <div class="flex items-center gap-4 mt-1">
+                                    <label for="yes">
+                                        <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
+                                        v-model="EventForm.is_urgent" type="radio" id="yes" name="is_urgent" value="true"
+                                        :checked="EventForm.is_urgent === 1">
+                                        Oui
+                                    </label>
+                                    <label for="no">
+                                        <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
+                                        v-model="EventForm.is_urgent" type="radio" id="no" name="is_urgent" value="false"
+                                        :checked="EventForm.is_urgent === 0">
+                                        Non
+                                    </label>
+                                </div>
+
                                 <div class="flex mt-8 mb-6 gap-8">
                                     <button type="submit" :class="{ 'opacity-25': EventForm.processing }"
                                         :disabled="EventForm.processing"
@@ -72,7 +155,7 @@
                                     </button>
                                 </div>
                             </form>
-                            <button @click="modalUpdateEvent = false" class="text-red-1 font-semibold">
+                            <button @click="{modalUpdateEvent = false; EventForm.reset()}" class="text-red-1 font-semibold">
                                 Annuler
                             </button>
                         </div>
@@ -89,10 +172,14 @@ import { Head } from '@inertiajs/inertia-vue3';
 import Modal from "@/Components/Modal.vue";
 import { useForm } from "@inertiajs/inertia-vue3";
 import Swal from 'sweetalert2';
+import tippy from 'tippy.js';
+import 'tippy.js/dist/tippy.css';
+import 'tippy.js/themes/light-border.css';
 
 
 import BreezeLabel from "@/Components/InputLabel.vue";
 import BreezeInput from "@/Components/TextInput.vue";
+import VueMultiselect from 'vue-multiselect';
 
 import FullCalendar from '@fullcalendar/vue3';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -107,17 +194,22 @@ export default {
         Modal,
         BreezeLabel,
         BreezeInput,
+        VueMultiselect,
     },
-    props: ['events'],
-    data() {
+    props: ['events', 'users'],
+    data(props) {
         return {
             modalAddEvent: false,
             modalUpdateEvent: false,
+            options: props.users,
             EventForm: useForm({
                 id: null,
                 title: null,
                 date_start: null,
                 date_end: null,
+                description: null,
+                is_urgent: false,
+                users: [],
             }),
 
             calendarOptions: {
@@ -142,9 +234,65 @@ export default {
                     this.EventForm.title = info.event.title;
                     this.EventForm.date_start = info.event.startStr;
                     this.EventForm.date_end = info.event.endStr;
+                    this.EventForm.description = info.event.extendedProps.description;
+                    this.EventForm.is_urgent = info.event.extendedProps.is_urgent;
+
+                    this.EventForm.users = info.event.extendedProps.users;
+                    console.log(this.EventForm.users);
                 }.bind(this),
+                eventDidMount: function(info) {
+                    if (info.event.extendedProps.is_urgent) {
+                        info.el.style.backgroundColor = '#f87171';
+                        info.el.style.borderColor = '#f87171';
+                        info.el.style.textColor = '#fff';
+                    } else {
+                        info.el.style.backgroundColor = '#FBBF5D';
+                        info.el.style.borderColor = '#FBBF5D';
+                        info.el.style.textColor = '#000';
+                    }
+                    //if event users contains auth user id then add class
+                    if (info.event.extendedProps.users.find(user => user.id === this.$page.props.auth.user.id)) {
+                        //DO SMTH
+                    }
 
+                    //append description to event
+                    
+                    info.el.querySelector('.fc-event-title').classList.add('text-base');
+                    info.el.querySelector('.fc-event-title-container').classList.add('px-1', 'cursor-pointer');
+                    //if description is null dont add it
+                    if (info.event.extendedProps.description) {
+                        info.el.querySelector('.fc-event-title-container').innerHTML += '<div class="text-sm truncate">' + info.event.extendedProps.description + '</div>';
+                    }
+                    //info.el.querySelector('.fc-event-title')
 
+                    //add tooltip
+                    tippy(info.el, {
+                        //content is html so we have description and user names as list, show description if not null
+                        content: info.event.extendedProps.description !== null ?
+                            '<div class="text-sm">' 
+                            + info.event.extendedProps.description 
+                            + '</div>' 
+                            + '<div class="text-xs mt-2"><span class="text-sm">Participants : </span> ' 
+                            + info.event.extendedProps.users.map(user => user.name).join(', ') 
+                            + '</div>' : 
+
+                            '<div class="text-xs mt-2"><span class="text-sm">Participants : </span> ' 
+                            + info.event.extendedProps.users.map(user => user.name).join(', ') 
+                            + '</div>',
+                        allowHTML: true,
+                        theme: 'light-border',
+                        placement: 'top',
+                        arrow: true,
+                        animation: 'fade',
+                        maxWidth: 300,
+                        trigger: 'mouseenter',
+                        hideOnClick: false,
+                        onMount(instance) {
+                            //make text auto wrap
+                           // TODO
+                        },
+                    });
+                }.bind(this),
                 customButtons: {
                     addEventButton: {
                         text: 'Ajouter un évènement',
@@ -160,6 +308,8 @@ export default {
     methods: {
         addEvent() {
             //Verify that the start date is before the end date
+            this.EventForm.users = this.EventForm.users.map(user => user.id);
+            this.EventForm.is_urgent = this.EventForm.is_urgent ? 1 : 0;
             if (this.EventForm.date_start > this.EventForm.date_end) {
                 Swal.fire({
                     icon: 'error',
@@ -202,7 +352,9 @@ export default {
         },
         updateEvent() {
             //Verify that the start date is before the end date
-            console.log("ON UPDATE");
+            //take only users ids
+            this.EventForm.users = this.EventForm.users.map(user => user.id);
+            this.EventForm.is_urgent = this.EventForm.is_urgent ? 1 : 0;
             if (this.EventForm.date_start > this.EventForm.date_end) {
                 Swal.fire({
                     icon: 'error',
@@ -279,9 +431,18 @@ export default {
             })
             
         },
+        addTag (newTag) {
+            const tag = {
+                name: newTag,
+                code: newTag.substring(0, 2) + Math.floor((Math.random() * 10000000))
+            }
+            this.options.push(tag)
+            this.value.push(tag)
+        },
     },
     mounted() {
         console.log(this.events);
     },
 };
 </script>
+<style src="vue-multiselect/dist/vue-multiselect.css"></style>

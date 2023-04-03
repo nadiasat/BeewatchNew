@@ -13,5 +13,12 @@ class Event extends Model
         'title',
         'date_start',
         'date_end',
+        'description',
+        'is_urgent',
     ];
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'event_user', 'event_id', 'user_id');
+    }
 }
