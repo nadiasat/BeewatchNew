@@ -4,11 +4,14 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ApiaryController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\HiveController;
 use App\Http\Controllers\InterventionMaterialController;
 use App\Http\Controllers\InterventionQueenController;
 use App\Http\Controllers\InterventionControlController;
 use App\Http\Controllers\InterventionsController;
+use App\Http\Controllers\InventoryHoneyController;
+use App\Http\Controllers\InventoryMaterialController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -74,6 +77,31 @@ Route::middleware(['auth', 'user.activation_state:' . User::ACTIVATION_STATE_ACT
         ->middleware(['can:manage apiaries'])
         ->name('apiary.update');
 
+    // Documents ----------------------------------------------------------------------------------------------------------------
+
+    Route::get('/documents', [DocumentController::class, 'index'])
+        ->name('documents');
+
+    Route::post('/documents', [DocumentController::class, 'store'])
+        ->name('documents.store');
+
+
+    // InventoryHoney -----------------------------------------------------------------------------------------------------------
+
+    Route::get('/inventoryHoney', [InventoryHoneyController::class, 'index'])
+        ->name('inventoryHoney');
+
+    Route::post('/inventoryHoney', [InventoryHoneyController::class, 'store'])
+        ->name('inventoryHoney.store');
+
+
+    // InventoryMaterial --------------------------------------------------------------------------------------------------------
+
+    Route::get('/inventoryMaterial', [InventoryMaterialController::class, 'index'])
+        ->name('inventoryMaterial');
+
+    Route::post('/inventoryMaterial', [InventoryMaterialController::class, 'store'])
+        ->name('inventoryMaterial.store');
 
     // Hives --------------------------------------------------------------------------------------------------------------------
     //Route is appiray/apiary_id/hive

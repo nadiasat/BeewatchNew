@@ -46,6 +46,15 @@ console.log(user.value.permissions.includes('manage users'));
                                 <NavLink :href="route('events')" :active="route().current('events')">
                                     Calendrier
                                 </NavLink>
+                                <NavLink :href="route('documents')" :active="route().current('documents')">
+                                    Documents
+                                </NavLink>
+                                <NavLink :href="route('inventoryHoney')" :active="route().current('inventoryHoney')">
+                                    Stock Miel
+                                </NavLink>
+                                <NavLink :href="route('inventoryMaterial')" :active="route().current('inventoryMaterial')">
+                                    Stock Matériel
+                                </NavLink>
                                 <!--- LOGOUT -->
                                 <NavLink :href="route('logout')" method="post" as="button" >
                                     Déconnexion
@@ -102,6 +111,15 @@ console.log(user.value.permissions.includes('manage users'));
                         </ResponsiveNavLink>
                         <ResponsiveNavLink :href="route('events')" :active="route().current('events')">
                             Calendrier
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink :href="route('documents')" :active="route().current('documents')">
+                            Documents
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink :href="route('inventoryHoney')" :active="route().current('inventoryHoney')">
+                            Stock Miel
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink :href="route('inventoryMaterial')" :active="route().current('inventoryMaterial')">
+                            Stock Matériel
                         </ResponsiveNavLink>
                     </div>
 
