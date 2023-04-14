@@ -5,7 +5,7 @@
         <div class="container mx-auto p-4">
 
             <div>
-                <div class="flex justify-between flex-wrap my-5 items-center">
+                <div class="flex flex-col lg:fley-row justify-between lg:flex-wrap my-5 lg:items-center">
                     <h2 class="text-3xl font-bold mr-6 mb-5">Gestion des membres</h2>
                     <user-create></user-create>
                 </div>

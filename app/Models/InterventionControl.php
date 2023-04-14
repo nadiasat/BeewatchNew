@@ -16,12 +16,13 @@ class InterventionControl extends Model
         'frames_full',
         'honey',
         'honey_rise',
+        'nb_varroa',
         'comment',
-        'intervention_id'
+        'interventions_id'
     ];
 
     public function intervention()
     {
-        return $this->belongsTo(Intervention::class);
+        return $this->belongsTo(Interventions::class);
     }
 }

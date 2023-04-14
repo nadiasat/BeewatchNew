@@ -2,12 +2,15 @@
     <Head title="Calendrier" />
 
     <AuthenticatedLayout>
-        <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Calendrier</h2>
-        </template>
 
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="container mx-auto p-4 w-full">
+            <div>
+                <div class="flex flex-col lg:flex-row justify-between lg:flex-wrap my-5 px-1 lg:px-6 lg:items-center">   
+                    <h2 class="text-3xl font-bold mr-6 mb-5 grow ">Calendrier des taches et évènements</h2>
+                </div>
+            </div>
+
+            <div class=" px-4 mx-auto h-full">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-4">
                     <FullCalendar :options="calendarOptions" />
                     
@@ -15,20 +18,20 @@
                         <div class="container text-center ">
                             <form @submit.prevent="addEvent()" class="mx-8">
                                 <h4 class="mb-5 text-2xl font-semibold">Nouvel évènement</h4>
-
-                                <BreezeLabel for="Title" value="Titre" class="text-left"/>
+                                
+                                <BreezeLabel for="Title" value="Titre" class="text-left font-bold text-base mt-4 lg:mt-0 text-zinc-900" />
                                 <BreezeInput v-model="EventForm.title" placeholder="Événement 1" id="title" type="text"
                                     class="mt-1 block w-full" required/>
 
-                                <BreezeLabel for="date_start" value="Date de début" class="text-left"/>
+                                <BreezeLabel for="date_start" value="Date de début" class="text-left font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
                                 <BreezeInput v-model="EventForm.date_start" placeholder="Date de début" id="date_start" type="date"
                                     class="mt-1 block w-full" required/>
 
-                                <BreezeLabel for="date_end" value="Date de fin" class="text-left"/>
+                                <BreezeLabel for="date_end" value="Date de fin" class="text-left font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
                                 <BreezeInput v-model="EventForm.date_end" placeholder="Date de fin" id="date_end" type="date"
                                     class="mt-1 block w-full" required/>
 
-                                <BreezeLabel for="description" value="Description" class="text-left"/>
+                                <BreezeLabel for="description" value="Description" class="text-left font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
                                 <textarea v-model="EventForm.description"
                                 id="description"
                                 class="mt-1 block w-full
@@ -37,7 +40,7 @@
                                 rounded-md shadow-sm"
                                 rows="3" />
 
-                                <BreezeLabel for="users" value="Utilisateurs affectés" class="text-left"/>
+                                <BreezeLabel for="users" value="Utilisateurs affectés" class="text-left font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
                                 <div>
                                     <VueMultiselect 
                                     v-model="EventForm.users"
@@ -52,7 +55,7 @@
                                     </VueMultiselect>
                                 </div>
 
-                                <BreezeLabel for="is_urgent" value="Urgent" class="text-left"/>
+                                <BreezeLabel for="is_urgent" value="Urgent" class="text-left font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
                                 <div class="flex items-center gap-4 mt-1">
                                     <label for="yes">
                                         <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
@@ -87,19 +90,19 @@
                             <form @submit.prevent="updateEvent()" class="mx-8">
                                 <h4 class="mb-5 text-2xl font-semibold">Modifier un évènement</h4>
 
-                                <BreezeLabel for="Title" value="Titre" class="text-left"/>
+                                <BreezeLabel for="Title" value="Titre" class="text-left font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
                                 <BreezeInput v-model="EventForm.title" placeholder="Événement 1" id="title" type="text"
                                     class="mt-1 block w-full" required/>
 
-                                <BreezeLabel for="date_start" value="Date de début" class="text-left"/>
+                                <BreezeLabel for="date_start" value="Date de début" class="text-left font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
                                 <BreezeInput v-model="EventForm.date_start" placeholder="Date de début" id="date_start" type="date"
                                     class="mt-1 block w-full" required/>
 
-                                <BreezeLabel for="date_end" value="Date de fin" class="text-left"/>
+                                <BreezeLabel for="date_end" value="Date de fin" class="text-left font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
                                 <BreezeInput v-model="EventForm.date_end" placeholder="Date de fin" id="date_end" type="date"
                                     class="mt-1 block w-full" required/>
 
-                                <BreezeLabel for="description" value="Description" class="text-left"/>
+                                <BreezeLabel for="description" value="Description" class="text-left font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
                                 <textarea v-model="EventForm.description"
                                 id="description"
                                 class="mt-1 block w-full
@@ -109,7 +112,7 @@
                                 rows="3" />
 
 
-                                <BreezeLabel for="users" value="Utilisateurs affectés" class="text-left"/>
+                                <BreezeLabel for="users" value="Utilisateurs affectés" class="text-left font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
                                 <div>
                                     <VueMultiselect 
                                     v-model="EventForm.users"
@@ -124,7 +127,7 @@
                                     </VueMultiselect>
                                 </div>
 
-                                <BreezeLabel for="is_urgent" value="Urgent" class="text-left"/>
+                                <BreezeLabel for="is_urgent" value="Urgent" class="text-left font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
                                 <div class="flex items-center gap-4 mt-1">
                                     <label for="yes">
                                         <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
@@ -441,6 +444,7 @@ export default {
         },
     },
     mounted() {
+        
         console.log(this.events);
     },
 };

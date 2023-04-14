@@ -108,8 +108,6 @@ class HiveController extends Controller
         ['new_nb_frames' => $request->nb_frames,
         'new_rise' => $request->rise,
         'hive_id' => $hive_id]);
-
-    
     }
 
     public function deactivateHive(int $hive_id)
@@ -131,6 +129,7 @@ class HiveController extends Controller
         ['hive_id' => $hive_id]);
     }
 
+
     public function activateHive(Request $request, int $hive_id)
     {
         $hive = Hive::find($hive_id);
@@ -138,11 +137,15 @@ class HiveController extends Controller
         $request->validate([
             'date_queen' => 'required|date',
             'color_queen' => 'required|string|max:255',
+            'nb_frames' => 'nullable|numeric',
+            'rise' => 'nullable|boolean',
         ]);
 
         $hive->is_active = true;
         $hive->date_queen = $request->date_queen;
         $hive->color_queen = $request->color_queen;
+        $hive->rise = $request->rise;
+        $hive->nb_frames = $request->nb_frames == null ? 0 : $request->nb_frames;
 
 
         $hive->save();
@@ -152,6 +155,8 @@ class HiveController extends Controller
         return redirect()->route('interventionQueen.store', 
         ['date_queen' => $request->date_queen,
         'color_queen' => $request->color_queen,
+        'nb_frames' => $request->nb_frames,
+        'rise' => $request->rise,
         'hive_id' => $hive_id]);
     }
 

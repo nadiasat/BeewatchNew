@@ -12,11 +12,13 @@ class InterventionQueen extends Model
     protected $fillable = [
         'date_queen',
         'color_queen',
-        'intervention_id'
+        'rise',
+        'nb_frames',
+        'interventions_id'
     ];
 
     public function intervention()
     {
-        return $this->belongsTo(Intervention::class);
+        return $this->belongsTo(Interventions::class);
     }
 }

@@ -1,9 +1,9 @@
 <template>
 
 
-    <button @click="modalCreateApiary = true" class="flex justify-center items-center mb-4 border-zinc-900 bg-white text-zinc-900 border-2 rounded-xl py-2 font-semibold w-72 mr-5 hover:bg-zinc-900 hover:text-white">
-        <svg class="fill-zinc-900 mr-4" width="16" height="16" viewBox="0 0 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 6H6M12 6H6M6 6V0M6 6V12" stroke="#181818"/>
+    <button @click="modalCreateApiary = true" class="flex justify-center items-center mb-4 border-zinc-900 bg-white text-zinc-900 border-2 rounded-xl py-2 font-semibold w-full lg:w-72 mr-5 hover:bg-zinc-900 hover:text-white">
+        <svg class="fill-zinc-900 mr-4" width="16" height="16" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 6H6M12 6H6M6 6V0M6 6V12" stroke="currentColor"/>
         </svg>
         Ajouter un rucher
 

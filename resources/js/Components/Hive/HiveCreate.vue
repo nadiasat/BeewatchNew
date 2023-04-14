@@ -1,9 +1,18 @@
 <template>
 
 
-    <button @click="modalCreateHive = true" class="flex justify-center items-center gap-4 mb-4 border-zinc-900 bg-white text-zinc-900 border-2 rounded-xl py-2 font-semibold w-72 mr-5 hover:bg-zinc-900 hover:text-white">
+    <button @click="modalCreateHive = true" class="
+    flex justify-center ¨
+    items-center gap-4 
+    mb-4 
+    border-zinc-900 bg-white 
+    text-zinc-900 border-2 
+    rounded-xl py-2 
+    font-semibold w-full lg:w-72
+    mr-5 hover:bg-zinc-900 
+    hover:text-white">
         <svg width="16" height="16" viewBox="0 0 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 6H6M12 6H6M6 6V0M6 6V12" stroke="#181818" stroke-linecap="round"/>
+            <path d="M0 6H6M12 6H6M6 6V0M6 6V12" stroke="currentColor" stroke-linecap="round"/>
         </svg>
         Ajouter une ruche
     </button>
@@ -12,17 +21,17 @@
     <Modal v-show="modalCreateHive" @close="modalCreateHive = false">
         <div class="container">
             <form @submit.prevent="submit" class="mx-8">
-                <h4 class="mb-5 text-center text-2xl font-semibold">Nouvelle ruche</h4>
-                <BreezeLabel for="name" value="Nom" />
+                <h4 class="mb-5 text-center text-2xl font-bold text-zinc-900">Nouvelle ruche</h4>
+                <BreezeLabel for="name" value="Nom" class=" font-bold text-base mt-4 lg:mt-0 text-zinc-900 "/>
                 <BreezeInput v-model="createHiveForm.name" placeholder="Ruche" id="name" type="text"
                     class="mt-1 block w-full" required/>
 
-                <BreezeLabel for="date_queen" value="Date de la reine" />
+                <BreezeLabel for="date_queen" value="Date de la reine" class=" font-bold text-base mt-4 lg:mt-0 text-zinc-900 "/>
                 <BreezeInput v-model="createHiveForm.date_queen" id="date_queen" type="date"
                     class="mt-1 block w-full"/>
 
                 
-                <BreezeLabel value="Hausse" />
+                <BreezeLabel value="Hausse" class=" font-bold text-base mt-4 lg:mt-0 text-zinc-900 "/>
                 <!-- make 2 radio buttons yes or no -->
                 <div class="flex items-center gap-4">
                     <label for="yes">
@@ -39,12 +48,12 @@
 
                 <div class="flex justify-between gap-4">
                     <div class="grow">
-                        <BreezeLabel for="nb_frames" value="Nombre de cadres" />
+                        <BreezeLabel for="nb_frames" value="Nombre de cadres" class=" font-bold text-base mt-4 lg:mt-0 text-zinc-900 " />
                         <BreezeInput v-model="createHiveForm.nb_frames" placeholder="5" id="nb_frames" type="number" min="0" max="12"
                             class="mt-1 block w-full"/>
                     </div>
                     <div class="grow">
-                        <BreezeLabel for="nb_varroa" value="Nombre de varroas" />
+                        <BreezeLabel for="nb_varroa" value="Nombre de varroas" class=" font-bold text-base mt-4 lg:mt-0 text-zinc-900 "/>
                         <BreezeInput v-model="createHiveForm.nb_varroa" placeholder="25" id="nb_varroa" type="number" min="0" max="500"
                             class="mt-1 block w-full"/>
                     </div>

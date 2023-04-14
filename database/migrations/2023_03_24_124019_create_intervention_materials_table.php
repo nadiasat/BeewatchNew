@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->boolean('new_rise');
             $table->integer('new_nb_frames');
-            $table->foreignId('intervention_id')->constrained();
+            $table->foreignId('interventions_id')->constrained();
             $table->timestamps();
         });
     }

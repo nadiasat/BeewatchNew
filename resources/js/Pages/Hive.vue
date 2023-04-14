@@ -2,11 +2,13 @@
     <Head title="Ruches" />
 
     <BreezeAuthenticatedLayout>
-        <div class="container mx-auto p-4">
-        <div>
-                <div class="flex justify-between flex-wrap my-5 items-center">
-                    <back-button></back-button>
-                    <h2 class="text-3xl font-bold mr-6 mb-5 grow ">Gestion des ruches</h2>
+        <div class="container mx-auto p-4 w-full">
+            <div>
+                <div class="flex flex-col lg:flex-row justify-between lg:flex-wrap my-5 px-1 lg:px-6 lg:items-center">
+                    <div class="flex">
+                        <back-button></back-button>
+                        <h2 class="text-3xl font-bold mr-6 mb-5 grow ">Gestion des ruches</h2>
+                    </div>
                     <hive-create
                     v-if="$page.props.auth.user.permissions.includes('manage hives')"
                     :apiary_id="apiary_id">
@@ -14,19 +16,13 @@
                 </div>
             </div>
 
-        <div class="py-12 px-4 mx-auto h-full ">
-            <div class="flex flex-wrap gap-4 justify-center">
-                <hive-card v-for="hive in hives" :hive="hive"></hive-card>
+            <div class="py-5 lg:py-12 px-4 mx-auto h-full ">
+                <div class="flex flex-wrap gap-4 justify-center">
+                    <hive-card v-for="hive in hives" :hive="hive"></hive-card>
+                </div>
             </div>
-        </div>
 
-
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                
-            </div>
         </div>
-    </div>
 
     
 

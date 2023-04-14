@@ -85,7 +85,7 @@ class DatabaseSeeder extends Seeder
             'color_queen' => '#FF0000',
             'rise' => true,
             'nb_frames' => 10,
-            'nb_varroa' => 0,
+            'nb_varroa' => 10,
             'is_active' => true,
             'apiary_id' => 1,
         ])->apiary()->associate(1);

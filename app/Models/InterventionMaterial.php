@@ -12,11 +12,11 @@ class InterventionMaterial extends Model
     protected $fillable = [
         'new_rise',
         'new_nb_frames',
-        'intervention_id'
+        'interventions_id'
     ];
 
     public function intervention()
     {
-        return $this->belongsTo(Intervention::class);
+        return $this->belongsTo(Interventions::class);
     }
 }

@@ -1,9 +1,9 @@
 <template>
 
 
-    <button @click="modalCreateUser = true" class="flex justify-center items-center mb-4 border-zinc-900 bg-white text-zinc-900 border-2 rounded-xl py-2 font-semibold w-72 mr-5 hover:bg-zinc-900 hover:text-white">
+    <button @click="modalCreateUser = true" class="flex justify-center items-center mb-4 border-zinc-900 bg-white text-zinc-900 border-2 rounded-xl py-2 font-semibold w-full lg:w-72 mr-5 hover:bg-zinc-900 hover:text-white">
         <svg class="fill-zinc-900 mr-4" width="16" height="16" viewBox="0 0 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 6H6M12 6H6M6 6V0M6 6V12" stroke="#181818"/>
+            <path d="M0 6H6M12 6H6M6 6V0M6 6V12" stroke="currentColor"/>
         </svg>
         Ajouter un membre
 
@@ -18,19 +18,19 @@
                 <h4 class="mb-5 text-center text-2xl font-semibold">Nouveau membre</h4>
                 <p class="text-center my-4">La personne concernée recevra un email avec un mot de passe généré
                     aléatoirement qui lui permettra d'activer son compte.</p>
-                <BreezeLabel for="firstname" value="Prénom" />
+                <BreezeLabel for="firstname" value="Prénom" class=" font-bold text-base mt-4 lg:mt-0 text-zinc-900 "/>
                 <BreezeInput v-model="createUserForm.firstname" placeholder="Dupont" id="firstname" type="text"
                     class="mt-1 block w-full" required autocomplete="fisrtname"/>
 
-                <BreezeLabel for="lastname" value="Nom" />
+                <BreezeLabel for="lastname" value="Nom" class=" font-bold text-base mt-4 lg:mt-0 text-zinc-900 "/>
                 <BreezeInput v-model="createUserForm.lastname" placeholder="Jean" id="lastname" type="text"
                     class="mt-1 block w-full" required autocomplete="lastname"/>
 
-                <BreezeLabel for="email" value="Adresse email" />
+                <BreezeLabel for="email" value="Adresse email" class=" font-bold text-base mt-4 lg:mt-0 text-zinc-900 "/>
                 <BreezeInput v-model="createUserForm.email" placeholder="john.doe@example.com" id="email" type="email"
                     class="mt-1 block w-full" required autocomplete="email" />
 
-                <BreezeLabel for="role" value="Rôle" />
+                <BreezeLabel for="role" value="Rôle" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
                 <select v-model="createUserForm.role" 
                 id="role" 
                 class="mt-1 block w-full

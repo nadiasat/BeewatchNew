@@ -22,10 +22,12 @@ class InterventionQueenController extends Controller
         ]);
 
         $int_queen = InterventionQueen::create([
-            'intervention_id' => $intervention->id,
+            'interventions_id' => $intervention->id,
             'date_queen' => $request->date_queen,
             'color_queen' => $request->color_queen,
-        ]);
+            'rise' => $request->rise,
+            'nb_frames' => $request->nb_frames,
+        ])->intervention()->associate($intervention);
 
         $apiary = Hive::find($request->hive_id)->apiary_id;
 

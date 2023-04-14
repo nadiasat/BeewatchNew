@@ -2,26 +2,19 @@
     <Head title="Ruchers" />
 
     <BreezeAuthenticatedLayout>
-        <div class="container mx-auto p-4">
+        <div class="container mx-auto p-4 w-full">
         <div>
-                <div class="flex justify-between flex-wrap my-5 items-center">
-                    <h2 class="text-3xl font-bold mr-6 mb-5">Gestion des ruchers</h2>
-                    <apiary-create
-                    v-if="$page.props.auth.user.permissions.includes('manage apiaries')">
-                    </apiary-create>
-                </div>
-            </div>
-
-        <div class="py-12 px-4 mx-auto h-full ">
-            <div class="flex flex-wrap gap-4 justify-center">
-                <apiary-card v-for="apiary in apiaries" :apiary="apiary"></apiary-card>
+            <div class="flex flex-col lg:flex-row justify-between lg:flex-wrap my-5 px-1 lg:px-6 lg:items-center">
+                <h2 class="text-3xl font-bold mr-6 mb-5">Gestion des ruchers</h2>
+                <apiary-create
+                v-if="$page.props.auth.user.permissions.includes('manage apiaries')">
+                </apiary-create>
             </div>
         </div>
 
-
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                
+        <div class="py-5 lg:py-12 px-4 mx-auto h-full ">
+            <div class="flex flex-wrap gap-4 justify-center">
+                <apiary-card v-for="apiary in apiaries" :apiary="apiary"></apiary-card>
             </div>
         </div>
     </div>

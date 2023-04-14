@@ -17,7 +17,9 @@ return new class extends Migration
             $table->id();
             $table->date('date_queen');
             $table->string('color_queen');
-            $table->foreignId('intervention_id')->constrained();
+            $table->boolean('rise')->default(false);
+            $table->integer('nb_frames');
+            $table->foreignId('interventions_id')->constrained();
             $table->timestamps();
         });
     }

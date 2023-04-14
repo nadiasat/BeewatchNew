@@ -14,11 +14,33 @@ class InterventionsController extends Controller
     {
         //print in console the interventions
         //dd($request->all());
-        $interventions = Hive::find($request->hive_id)->interventions;
+        //get all interventions of the hive ordered by date
+        $interventions = Hive::find($request->hive_id)->interventions()->orderBy('created_at', 'desc')->get();
+
+        //array of all dates and nb varoas of the hive on each control interventio
+        $record_nb_varroa = [];
+
+        //for each intervention
+        foreach ($interventions as $intervention) {
+            //if the intervention is a control intervention
+            if ($intervention->type == 'control') {
+                //get the nb varroa of the intervention
+                $nb_varroa = $intervention->intervention_control->nb_varroa;
+                //get the date of the intervention
+                $date = $intervention->created_at->format('d/m/Y');
+                //add the date and the nb varroa to the array
+                $record_nb_varroa[] = ['date' => $date, 'nb_varroa' => $nb_varroa];
+            }
+        }
+
+        //invert the array to have the last nb varroa at the first position
+        $record_nb_varroa = array_reverse($record_nb_varroa);
+
         //dd($interventions);
         //return intertia render of intervention
         return Inertia::render('HiveDetails', [
             'interventions' => $interventions,
+            'record_nb_varroa' => $record_nb_varroa,
             'hive_id' => $request->hive_id,
             'hive_name' => $request->hive_name,
         ]);

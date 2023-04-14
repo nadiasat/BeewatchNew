@@ -3,9 +3,14 @@
       <div class="w-full h-screen fixed left-0 top-0 z-20">
         <div class="bg-black-400 z-30 bg-opacity-60 overflow-hidden h-screen"
              @click="close"></div>
-        <div class="w-full h-full overflow-y-auto max-h-full absolute z-40 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pb-5">
-          <div class="bg-[#F6F5F1] relative w-full h-full flex justify-center" style="min-height: 300px">
-            <button @click="() => {close()}" class="items-center gap-2 absolute right-12 top-6 rounded-full flex flex-row bg-red text-lg font-medium hover:opacity-70">
+        <div class="w-full h-full max-h-full absolute z-40 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+          <div class="bg-[#F6F5F1] relative w-full h-full overflow-y-scroll flex justify-center" style="min-height: 300px">
+            <button @click="() => {close()}" class="
+                items-center gap-2 absolute 
+                right-5 lg:right-12 top-6 
+                rounded-full text-lg 
+                flex flex-row
+                font-medium hover:opacity-70">
                 Fermer
                 <svg stroke="#18181b" fill="#18181b" width="24" height="24" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
@@ -13,9 +18,9 @@
             </button>
             <div id="tile-container" 
             class="pt-[10vh] pb-[10vh] 
-            grid md:grid-cols-3 sm:grid-cols-2 
-            auto-rows-min gap-4 
-            justify-center allign-items-center" 
+            grid grid-cols-2 lg:grid-cols-3
+            auto-rows-min
+            auto-cols-min gap-4"
             v-show="showTileContainer">
 
                 <h2 class="text-center text-2xl font-bold col-span-3 pb-8">Nouvelle intervention</h2>
@@ -94,11 +99,11 @@
 
             <!-- CONTROL FORM -->
             <div id="control-form-container" 
-            class="pt-[10vh] pb-[10vh] w-[35vw]"
+            class="pt-[10vh] pb-[10vh] w-[90vw] lg:w-[35vw]"
             v-show="showControlForm">
-                <h2 class="text-center text-2xl font-bold pb-8">Formulaire de contrôle</h2>
+                <h2 class="text-center text-2xl font-bold pb-8 text-zinc-900">Formulaire de contrôle</h2>
                 <form id="control-form" @submit.prevent="newControl()" class="mx-8">
-                    <BreezeLabel value="Avez-vous aperçu la reine ?" class="text-base"/>
+                    <BreezeLabel value="Avez-vous aperçu la reine ?" class=" font-bold text-base mt-4 lg:mt-0 text-zinc-900 "/>
                     <!-- make 2 radio buttons yes or no -->
                     <div class="flex items-center gap-4 mt-1">
                         <label for="yes_glimpse">
@@ -113,7 +118,7 @@
                         </label>
                     </div>
 
-                    <BreezeLabel value="La reine a-t-elle pondu ?" class="text-base"/>
+                    <BreezeLabel value="La reine a-t-elle pondu ?" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
                     <div class="flex items-center gap-4 mt-1">
                         <label for="yes_laid">
                             <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
@@ -127,7 +132,7 @@
                         </label>
                     </div>
                     
-                    <BreezeLabel value="Y a-t-il du couvain ?" class="text-base" />
+                    <BreezeLabel value="Y a-t-il du couvain ?" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900" />
                     <div class="flex items-center gap-4 mt-1">
                         <label for="yes_brood">
                             <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
@@ -141,7 +146,7 @@
                         </label>
                     </div>
 
-                    <BreezeLabel value="Les cadres sont-ils pleins ?" class="text-base"/>
+                    <BreezeLabel value="Les cadres sont-ils pleins ?" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
                     <div class="flex items-center gap-4 mt-1">
                         <label for="yes_frames">
                             <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
@@ -155,7 +160,7 @@
                         </label>
                     </div>
 
-                    <BreezeLabel value="Y a-t-il du miel ?" class="text-base"/>
+                    <BreezeLabel value="Y a-t-il du miel ?" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
                     <div class="flex items-center gap-4 mt-1">
                         <label for="yes_honey">
                             <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
@@ -169,7 +174,7 @@
                         </label>
                     </div>
 
-                    <BreezeLabel value="Y a-t-il du miel sur les cadres de la hausse ?" class="text-base"/>
+                    <BreezeLabel value="Y a-t-il du miel sur les cadres de la hausse ?" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
                     <div class="flex items-center gap-4 mt-1">
                         <label for="yes_honey_rise">
                             <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
@@ -182,8 +187,12 @@
                             Non
                         </label>
                     </div>
+                    
+                    <BreezeLabel for="nb_varroa" value="Nombre de varroas" class=" font-bold text-base mt-4 lg:mt-0 text-zinc-900 "/>
+                    <BreezeInput v-model="createControlForm.nb_varroa" placeholder="25" id="nb_varroa" type="number" min="0" max="500"
+                                class="mt-1 block w-full"/>
 
-                    <BreezeLabel for="comment" value="Commentaire supllémentaire" class="text-base"/>
+                    <BreezeLabel for="comment" value="Commentaire supllémentaire" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
                     <textarea v-model="createControlForm.comment"
                     id="comment"
                     class="mt-1 block w-full
@@ -200,20 +209,20 @@
                     </button>
 
                 </form>
-
-                <div class="text-center">
-                    <button @click="() => {showControlForm = false; showTileContainer = true;}" class="text-red-1 font-semibold">Annuler</button>
+                
+                <div class="text-center h-20">
+                        <button @click="() => {showControlForm = false; showTileContainer = true;}" class="text-red-1 font-semibold">Annuler</button>
                 </div>
             </div>
 
             <!-- MATERIAL FORM -->
             <div id="material-form-container" 
-            class="pt-[10vh] pb-[10vh] w-[35vw]"
+            class="pt-[10vh] pb-[10vh] w-[90vw] lg:w-[35vw]"
             v-show="showMaterialForm" 
             >
                 <h2 class="text-center text-2xl font-bold pb-8">Modification du matériel</h2>
                 <form id="material-form" @submit.prevent="updateMaterial()">
-                    <BreezeLabel value="Hausse" />
+                    <BreezeLabel value="Hausse" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
                     <!-- make 2 radio buttons yes or no -->
                     <div class="flex items-center gap-4 mt-1">
                         <label for="yes">
@@ -230,7 +239,7 @@
                     </div>
 
 
-                    <BreezeLabel for="nb_frames" value="Nombre de cadres" />
+                    <BreezeLabel for="nb_frames" value="Nombre de cadres" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
                     <BreezeInput v-model="updateMaterialForm.nb_frames" placeholder="5" id="nb_frames" type="number" min="0" max="12"
                         class="mt-1 block w-full"/>
 
@@ -239,24 +248,25 @@
                     class="mb-4 mt-8 bg-amber-400 border-amber-400 text-black font-semibold border-4 py-2 w-full hover:bg-amber-300 hover:border-amber-300">
                     Confirmer
                     </button>
-                </form>
 
-                <div class="text-center mb-5">
-                    <button @click="() => {showMaterialForm = false; showTileContainer = true;}" class="text-red-1 font-semibold">Annuler</button>
+                    
+                </form>
+                <div class="text-center">
+                        <button @click="() => {showMaterialForm = false; showTileContainer = true;}" class="text-red-1 font-semibold">Annuler</button>
                 </div>
             </div>
 
             <!-- QUEEN FORM -->
             <div id="queen-form-container" 
-            class="pt-[10vh] pb-[10vh] w-[35vw]"
+            class="pt-[10vh] pb-[10vh] w-[90vw] lg:w-[35vw]"
             v-show="showQueenForm">
                 <h2 class="text-center text-2xl font-bold pb-8">Relancer la ruche</h2>
                 <form id="queen-form" @submit.prevent="activateHive()">
-                    <BreezeLabel for="date_queen" value="Date de la reine" />
+                    <BreezeLabel for="date_queen" value="Date de la reine" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
                     <BreezeInput v-model="updateQueenForm.date_queen" id="date_queen" type="date"
                         class="mt-1 block w-full"/>
 
-                    <BreezeLabel for="color_queen" value="Couleur de la reine" />
+                    <BreezeLabel for="color_queen" value="Couleur de la reine" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
 
                     <select v-model="updateQueenForm.color_queen" 
                     id="color_queen" 
@@ -269,6 +279,25 @@
                         <option value="#0000FF">Bleu</option>
                         <option value="#EE82EE">Violet</option>
                     </select>
+
+                    <BreezeLabel value="Hausse" class=" font-bold text-base mt-4 lg:mt-0 text-zinc-900 "/>
+                    
+                    <div class="flex items-center gap-4">
+                        <label for="yes">
+                            <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
+                            v-model="updateQueenForm.rise" type="radio" id="yes" name="rise" value="true">
+                            Oui
+                        </label>
+                        <label for="no">
+                            <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
+                            v-model="updateQueenForm.rise" type="radio" id="no" name="rise" value="false">
+                            Non
+                        </label>
+                    </div>
+
+                    <BreezeLabel for="nb_frames" value="Nombre de cadres" class=" font-bold text-base mt-4 lg:mt-0 text-zinc-900 " />
+                    <BreezeInput v-model="updateQueenForm.nb_frames" placeholder="5" id="nb_frames" type="number" min="0" max="12"
+                        class="mt-1 block w-full"/>
 
                     <button type="submit" :class="{ 'opacity-25': updateQueenForm.processing }"
                     :disabled="updateQueenForm.processing"
@@ -311,6 +340,7 @@
                     frames_full: null,
                     honey: null,
                     honey_rise: null,
+                    nb_varroa: props.hive.nb_varroa,
                     comment: null,
                 }),
 
@@ -322,6 +352,8 @@
                 updateQueenForm: useForm({
                     date_queen: null,
                     color_queen: null,
+                    rise: false,
+                    nb_frames: null,
                 }),
             }
         },
@@ -383,6 +415,8 @@
                 })
             },
             activateHive() {
+                this.updateQueenForm.rise = this.updateQueenForm.rise === 'true' ? 1 : 0;
+                console.log(this.updateQueenForm);
                 this.updateQueenForm.put(route('hive.activateHive', [this.hive.id, this.hive.apiary_id]), {
                     preserveScroll: true,
                     preserveState: false,

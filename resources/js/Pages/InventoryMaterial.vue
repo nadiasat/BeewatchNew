@@ -3,21 +3,18 @@
     <Head title="Stock Matériel" />
 
     <AuthenticatedLayout>
-        <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Stock de Matériel</h2>
-        </template>
-
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-4">
-                    
-
-
-
-                    
-                    
+        <div class="container mx-auto p-4 w-full">
+                <div>
+                    <div class="flex flex-col lg:flex-row justify-between lg:flex-wrap my-5 px-1 lg:px-6 lg:items-center">   
+                        <h2 class="text-3xl font-bold mr-6 mb-5 grow ">Stock du matériel</h2>
+                    </div>
                 </div>
-            </div>
+
+                <div class=" px-4 mx-auto h-full">
+                    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-4">
+                    
+                    </div>
+                </div>
         </div>
     </AuthenticatedLayout>
 </template>

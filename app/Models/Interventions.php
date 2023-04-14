@@ -23,4 +23,14 @@ class Interventions extends Model
     {
         return $this->hasOne(InterventionMaterial::class);
     }
+
+    public function intervention_control()
+    {
+        return $this->hasOne(InterventionControl::class);
+    }
+
+    public function intervention_queen()
+    {
+        return $this->hasOne(InterventionQueen::class);
+    }
 }

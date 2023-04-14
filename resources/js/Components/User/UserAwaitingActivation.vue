@@ -6,22 +6,46 @@
     <div v-if="!usersAwaitingActivation.length">
         Aucun utilisateur en attente d'activation
     </div>
-    <div v-else class="border rounded-xl overflow-hidden">
+    <div v-else class="border rounded-xl overflow-x-scroll">
         <table calss="table-auto text-sm">
             <thead>
                 <tr class="bg-[#AFAC99] divide-x divide-[#99978C]">
-                    <th class="p-4 pl-8 pt-4 pb-4 text-zinc-900 text-left">Nom et prénom</th>
-                    <th class="p-4 pl-8 pt-4 pb-4 text-zinc-900 text-left">Email</th>
-                    <th class="p-4 pl-8 pt-4 pb-4 text-zinc-900 text-left">Rôle</th>
-                    <th class="p-4 pl-8 pt-3 pb-4 text-zinc-900 text-left">Actions</th>
+                    <th class="
+                    p-2 pl-4 pt-2 pb-2
+                    lg:p-4 lg:pl-8 lg:pt-4 lg:pb-4 
+                    text-zinc-900 text-left">Nom et prénom</th>
+                    <th class="
+                    p-2 pl-4 pt-2 pb-2
+                    lg:p-4 lg:pl-8 lg:pt-4 lg:pb-4 
+                    text-zinc-900 text-left">Email</th>
+                    <th class="
+                    p-2 pl-4 pt-2 pb-2
+                    lg:p-4 lg:pl-8 lg:pt-4 lg:pb-4 
+                    text-zinc-900 text-left">Rôle</th>
+                    <th class="
+                    p-2 pl-4 pt-2 pb-2
+                    lg:p-4 lg:pl-8 lg:pt-4 lg:pb-4 
+                    text-zinc-900 text-left">Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="(user, index) in usersAwaitingActivation" :class="index % 2 === 0 ? 'bg-white' : 'bg-[#F5F3E7]'" class="divide-x divide-[#E0DDCE]">
-                    <td class="p-4 pl-8 text-zinc-900">{{ user.lastname + " " + user.firstname}}</td>
-                    <td class="p-4 pl-8 text-zinc-900">{{ user.email }}</td>
-                    <td class="p-4 pl-8 text-zinc-900">{{ user.role }}</td>
-                    <td class="p-4 pl-8 text-zinc-900">
+                    <td class="
+                    p-2 pl-4 
+                    lg:p-4 lg:pl-8 
+                    text-zinc-900">{{ user.lastname + " " + user.firstname}}</td>
+                    <td class="
+                    p-2 pl-4 
+                    lg:p-4 lg:pl-8  
+                    text-zinc-900">{{ user.email }}</td>
+                    <td class="
+                    p-2 pl-4 
+                    lg:p-4 lg:pl-8  
+                    text-zinc-900">{{ user.role }}</td>
+                    <td class="
+                    p-2 pl-4 
+                    lg:p-4 lg:pl-8  
+                    -zinc-900">
                         <UserDelete :user_id="user.id"></UserDelete>
                     </td>
                 </tr>

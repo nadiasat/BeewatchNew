@@ -20,17 +20,24 @@ class InterventionControlController extends Controller
         ]);
 
         $int_queen = InterventionControl::create([
-            'intervention_id' => $intervention->id,
+            'interventions_id' => $intervention->id,
             'glimpse_queen' => $request->glimpse_queen,
             'queen_laid' => $request->queen_laid,
             'brood' => $request->brood,
             'frames_full' => $request->frames_full,
             'honey' => $request->honey,
             'honey_rise' => $request->honey_rise,
+            'nb_varroa' => $request->nb_varroa,
             'comment' => $request->comment,
-        ]);
+        ])->intervention()->associate($intervention);
 
-        $apiary = Hive::find($request->hive_id)->apiary_id;
+        $hive = Hive::find($request->hive_id);
+        $apiary = $hive->apiary_id;
+
+        //update nb varroa of the hive
+        $hive->nb_varroa = $request->nb_varroa;
+
+        $hive->save();
 
         return redirect()->route('hive', ['apiary' => $apiary]);
     }

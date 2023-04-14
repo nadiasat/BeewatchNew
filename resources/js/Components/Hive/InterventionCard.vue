@@ -57,7 +57,7 @@
         // fromat date to display "le dd-mm-yyyy à hh:mm"
         this.intervention.created_at = this.intervention.created_at.slice(0, 10) + " à " + this.intervention.created_at.slice(11, 16);
 
-        console.log(this.intervention);
+        //console.log(this.intervention);
     
     },
   };

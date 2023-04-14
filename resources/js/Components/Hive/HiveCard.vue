@@ -42,8 +42,13 @@
         </p>
       </div> -->
       <ButtonNewIntervention :hive="hive" ></ButtonNewIntervention>
-      <div @click="showDetails()" class="btn-hive-details rounded-md flex items-center justify-center self-stretch px-10 py-2 border-solid border-black border-2 cursor-pointer">
-        <p class="btn-new-intervention-text font-medium text-black text-center text-sm">
+      <div @click="showDetails()" 
+      class="btn-hive-details rounded-md flex 
+      items-center justify-center 
+      self-stretch px-10 py-2 
+      border-solid border-zinc-900 border-2
+      hover:bg-zinc-900 hover:text-white text-zinc-900 cursor-pointer">
+        <p class="btn-new-intervention-text font-medium text-center text-sm">
           Détails de la ruche
         </p>
       </div>

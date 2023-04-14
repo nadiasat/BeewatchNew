@@ -1,26 +1,37 @@
 <template>
     <div @click="modalUpdateApiary = true"
-        class="btn-edit-hive rounded-md flex items-center justify-center self-stretch px-12 py-2 border-solid border-black border-2">
-        <img alt="" class="edit-icon w-4 h-4 mr-2"
-            src="https://static.overlay-tech.com/assets/7d7cec2a-72c6-4360-b376-ef7e694a0092.svg" />
-
-        <p class="btn-edit-hive-text font-medium text-black text-center text-sm">Modifier le rucher </p>
+        class="btn-edit-hive rounded-md flex 
+        items-center justify-center 
+        self-stretch px-12 py-2 border-solid 
+        border-zinc-900 border-2
+        text-zinc-900 
+        hover:text-white hover:bg-zinc-900
+        cursor-pointer">
+        <svg width="21" height="21" viewBox="0 0 21 21" 
+        fill="none" xmlns="http://www.w3.org/2000/svg"
+        class="w-4 h-4 mr-2">
+            <path d="M3.54862 17.5379L3.60417 17.3712L3.71527 17.4823L3.54862 17.5379Z" stroke="currentColor" stroke-width="4"/>
+            <path d="M17.8215 1.34072L19.7469 3.26613C20.3144 3.83362 20.3144 4.75371 19.7469 5.3212L8.59066 16.4774L4.61018 12.4969L15.7664 1.34072C16.3339 0.773227 17.254 0.773227 17.8215 1.34072Z" stroke="currentColor"/>
+        </svg>
+        
+        <p class="btn-edit-hive-text font-medium text-center text-sm">Modifier le rucher </p>
 
     </div>
 
 
     <Modal v-show="modalUpdateApiary" @close="modalUpdateApiary = false">
         <div class="container">
-            <form @submit.prevent="updateApiary(apiary)" class="mx-8">
+            <form @submit.prevent="updateApiary(apiary)" 
+            class="mx-8">
                 <h4 class="mb-5 text-center text-2xl font-semibold">Modification rucher</h4>
 
-                <BreezeLabel for="name" value="Nom" />
+                <BreezeLabel for="name" value="Nom" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900" />
                 <!-- create a textbox with apiary value -->
-                <BreezeInput class="mt-1 block full" id="name" type="text" v-model="updateApiaryForm.name" required autofocus />
+                <BreezeInput class="mt-1 w-full" id="name" type="text" v-model="updateApiaryForm.name" required autofocus />
 
-                <BreezeLabel for="address" value="Adresse" />
+                <BreezeLabel for="address" value="Adresse" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
                 <!-- create a textbox with apiary value -->
-                <BreezeInput class="mt-1 block full" id="address" type="text" v-model="updateApiaryForm.address" required autofocus />
+                <BreezeInput class="mt-1 w-full" id="address" type="text" v-model="updateApiaryForm.address" required autofocus />
 
                 <button type="submit" :class="{ 'opacity-25': updateApiaryForm.processing }"
                     :disabled="updateApiaryForm.processing" 

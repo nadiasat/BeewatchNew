@@ -21,8 +21,9 @@ return new class extends Migration
             $table->boolean('frames_full')->nullable();
             $table->boolean('honey')->nullable();
             $table->boolean('honey_rise')->nullable();
+            $table->integer('nb_varroa')->nullable();
             $table->text('comment')->nullable();
-            $table->foreignId('intervention_id')->constrained();
+            $table->foreignId('interventions_id')->constrained();
             $table->timestamps();
         });
     }
