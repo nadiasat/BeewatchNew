@@ -23,7 +23,7 @@ return new class extends Migration
             $table->boolean('honey_rise')->nullable();
             $table->integer('nb_varroa')->nullable();
             $table->text('comment')->nullable();
-            $table->foreignId('interventions_id')->constrained();
+            $table->foreignId('interventions_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -371,7 +371,10 @@
             },
 
             updateMaterial() {
-                this.updateMaterialForm.rise = this.updateMaterialForm.rise === 'true' ? 1 : 0;
+                if (this.updateMaterialForm.rise !== null) {
+                    this.updateMaterialForm.rise = this.updateMaterialForm.rise === 'true' ? 1 : 0;
+                }
+                
                 console.log(this.updateMaterialForm.rise);
                 this.updateMaterialForm.put(route('hive.updateMaterial', [this.hive.id, this.hive.apiary_id]), {
                     preserveScroll: true,
@@ -380,10 +383,18 @@
                         this.showMaterialForm = false;
                         this.showTileContainer = true;
                         Swal.fire({
+                            icon: 'success',
                             title: 'Succès',
                             text: 'Le matériel a bien été modifié',
-                            icon: 'success',
-                            confirmButtonText: 'Ok',
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3500,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
                         });
                     },
                 });
@@ -423,11 +434,20 @@
                     onSuccess: () => {
                         this.showQueenForm = false;
                         this.showTileContainer = true;
-                        Swal.fire(
-                            'Activé !',
-                            'La ruche a bien été activée.',
-                            'success'
-                        );
+                        Swal.fire({
+                            icon: 'success',
+                            titel: 'Activé !',
+                            text: 'La ruche a bien été activée.',
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3500,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                        });
                         this.close();
                     },
                 });
@@ -466,10 +486,18 @@
                         this.showControlForm = false;
                         this.showTileContainer = true;
                         Swal.fire({
+                            icon: 'success',
                             title: 'Succès',
                             text: 'Le contrôle a bien été ajouté',
-                            icon: 'success',
-                            confirmButtonText: 'Ok',
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3500,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
                         });
                     },
                 });

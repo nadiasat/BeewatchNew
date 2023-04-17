@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->integer('current_stock');
             $table->integer('max_stock');
-            $table->foreignId('inventory_place_id')->constrained();
+            $table->foreignId('inventory_place_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

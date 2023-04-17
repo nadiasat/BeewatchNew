@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('interventions', function (Blueprint $table) {
             $table->id();
             $table->string('type');
-            $table->foreignId('hive_id')->constrained();
+            $table->foreignId('hive_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

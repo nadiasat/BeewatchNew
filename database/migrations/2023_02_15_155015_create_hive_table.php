@@ -22,8 +22,10 @@ return new class extends Migration
             $table->integer('nb_frames');
             $table->integer('nb_varroa');
             $table->boolean('is_active')->default(false);
-            $table->foreignId('apiary_id')->constrained();
+            $table->foreignId('apiary_id')->constrained()->onDelete('cascade');
             $table->timestamps();
+            //delete field
+            $table->softDeletes();
         });
     }
 

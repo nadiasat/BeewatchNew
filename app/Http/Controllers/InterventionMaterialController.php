@@ -25,7 +25,7 @@ class InterventionMaterialController extends Controller
             'interventions_id' => $intervention->id,
             'new_rise' => $request->new_rise,
             'new_nb_frames' => $request->new_nb_frames,
-        ])->intervetion()->associate($intervention);
+        ])->intervention()->associate($intervention);
 
         $apiary = Hive::find($request->hive_id)->apiary_id;
 

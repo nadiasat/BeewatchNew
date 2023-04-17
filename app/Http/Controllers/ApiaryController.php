@@ -87,6 +87,18 @@ class ApiaryController extends Controller
 
     }
 
+    public function destroy(Apiary $apiary)
+    {    
+        
+        //detach all users from the apiary
+        $apiary->users()->detach();
+
+        //soft delete the apiary
+        $apiary->delete();
+
+        return redirect()->route('apiary');
+    }
+
     
 
 }

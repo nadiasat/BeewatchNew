@@ -41,6 +41,8 @@ class UserController extends Controller
 
             
             if ($user->activation_state == User::ACTIVATION_STATE_AWAITING_ACTIVATION) {
+                //store password as activation key in user object
+                $user->activation_key = $user->password;
                 $users['awaiting_activation'][] = $user;
             }
 
@@ -48,7 +50,6 @@ class UserController extends Controller
                 $users['activated'][] = $user;
             }
         }
-
         #Get appiaries linked to users
         $apiaries = Apiary::all();
 
@@ -75,12 +76,11 @@ class UserController extends Controller
             'firstname' => $request->firstname,
             'lastname' => $request->lastname,
             'email' => $request->email,
-            'password' => Hash::make($password),
+            'password' => $password,
             'activation_state' => User::ACTIVATION_STATE_AWAITING_ACTIVATION,
         ]);
 
         $user->assignRole($request->role);
-        $user->notify(new UserCreated($password));
 
         return redirect()->route('users');
     }

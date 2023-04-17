@@ -77,6 +77,10 @@ Route::middleware(['auth', 'user.activation_state:' . User::ACTIVATION_STATE_ACT
         ->middleware(['can:manage apiaries'])
         ->name('apiary.update');
 
+    Route::delete('/apiary/{apiary}', [ApiaryController::class, 'destroy'])
+        ->middleware(['can:manage apiaries'])
+        ->name('apiary.destroy');
+
     // Documents ----------------------------------------------------------------------------------------------------------------
 
     Route::get('/documents', [DocumentController::class, 'index'])
@@ -115,6 +119,12 @@ Route::middleware(['auth', 'user.activation_state:' . User::ACTIVATION_STATE_ACT
     Route::get('/interventionMaterial', [InterventionMaterialController::class, 'store'])
         ->middleware(['can:manage hives'])
         ->name('interventionMaterial.store');
+
+
+    //delete hive
+    Route::delete('/hive/{hive}', [HiveController::class, 'destroy'])
+        ->middleware(['can:manage hives'])
+        ->name('hive.destroy');
 
     
     

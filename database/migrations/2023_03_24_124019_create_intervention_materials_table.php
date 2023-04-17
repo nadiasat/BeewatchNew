@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('intervention_materials', function (Blueprint $table) {
             $table->id();
-            $table->boolean('new_rise');
-            $table->integer('new_nb_frames');
-            $table->foreignId('interventions_id')->constrained();
+            $table->boolean('new_rise')->nullable();
+            $table->integer('new_nb_frames')->nullable();
+            $table->foreignId('interventions_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

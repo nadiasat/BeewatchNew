@@ -21,7 +21,7 @@ console.log(user.value.permissions.includes('manage users'));
 <template>
     <div>
         <div class="min-h-screen bg-[#F6F5F1] lg:flex">
-            <nav class="bg-white border-b border-gray-100">
+            <nav class="bg-white border-b border-gray-100 sticky top-0">
                 <!-- Primary Navigation Menu -->
                 <div class="px-6 py-4 lg:py-10">
                     <div class="w-full flex justify-between">
@@ -211,7 +211,7 @@ console.log(user.value.permissions.includes('manage users'));
 
                         <div class="mt-3 space-y-1">
                             <ResponsiveNavLink :href="route('logout')" method="post" as="button">
-                                Log Out
+                                Déconnexion
                             </ResponsiveNavLink>
                         </div>
                     </div>

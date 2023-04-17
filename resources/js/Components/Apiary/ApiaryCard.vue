@@ -1,7 +1,7 @@
 <template>
-  <div class="apiary-card bg-white p-4 flex flex-col items-start rounded-xl max-w-md">
+  <div class="apiary-card bg-white p-4 flex flex-col items-start rounded-xl grow max-w-xs">
     <p class="name text-base font-semibold text-black self-stretch flex items-center mb-2">{{ apiary.name }}</p>
-    <p class="adresse font-medium text-amber-400 self-stretch flex items-center mb-2 text-sm">{{ apiary.address }}</p>
+    <p class="adresse font-medium text-amber-400 self-stretch flex items-center mb-2 text-sm break-normal">{{ apiary.address }}</p>
     <p class="title-nb-active-hives text-sm font-medium text-black self-stretch flex items-center mb-2">Ruches actives</p>
     <p class="value-nb-active-hives text-base font-medium text-amber-400 self-stretch flex items-center mb-2">{{
       apiary.nb_active_hives }}</p>
@@ -16,9 +16,9 @@
       </p>
     </div>
 
-    <div>
-      <ApiaryEdit :apiary="apiary"></ApiaryEdit>
-    </div>
+    <ApiaryEdit 
+    v-if="$page.props.auth.user.permissions.includes('manage apiaries')"
+    :apiary="apiary"></ApiaryEdit>
 
     </div>
 </template>

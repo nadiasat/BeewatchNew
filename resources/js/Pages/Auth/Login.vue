@@ -29,7 +29,7 @@
         </div> -->
 
         <div class="block mt-4">
-            <Link class="underline hover:text-amber-800" :href="route('password.request')">Mot de passe oublié ? Changez-le ici</Link>
+            <Link class="underline hover:text-amber-500" :href="route('password.request')">Mot de passe oublié ? Changez-le ici</Link>
         </div>
 
         <div class="flex items-center justify-end mt-4">

@@ -124,7 +124,7 @@ export default {
         VueMultiselect ,
     },
     mounted() {
-        console.log(this.apiaries);
+        //console.log(this.apiaries);
     }
 };
 

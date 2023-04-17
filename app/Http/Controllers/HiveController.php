@@ -82,6 +82,8 @@ class HiveController extends Controller
         return redirect()->route('hive', ['apiary' => $apiary]);
     }
 
+
+
     public function updateMaterial(Request $request, int $hive_id)
     {
         $request->validate([
@@ -93,7 +95,9 @@ class HiveController extends Controller
 
         $hive = Hive::find($hive_id);
 
-        $hive->rise = $request->rise;
+        if ($request->rise != null) {
+            $hive->rise = $request->rise;
+        }
 
         if ($request->nb_frames != null) {
             $hive->nb_frames = $request->nb_frames;
@@ -160,11 +164,13 @@ class HiveController extends Controller
         'hive_id' => $hive_id]);
     }
 
-    public function destroy(Hive $hive)
+    public function destroy(Hive $hive, Request $request)
     {
+
+        //dd($request->all());
         $hive->delete();
 
-        return redirect()->route('hive');
+        return redirect()->route('hive', ['apiary' => $request->id]);
     }
 
 

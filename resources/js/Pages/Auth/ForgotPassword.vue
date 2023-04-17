@@ -27,7 +27,7 @@
         </div>
 
         <div class="flex items-center justify-end mt-4">
-            <BreezeButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+            <BreezeButton class="w-full py-4 bg-amber-400 text-black hover:bg-amber-200" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                 Demander une réinitialisation de mot de passe
             </BreezeButton>
         </div>

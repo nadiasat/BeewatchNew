@@ -6,7 +6,7 @@
             <div>
                 <div class="flex flex-col lg:flex-row justify-between lg:flex-wrap my-5 px-1 lg:px-6 lg:items-center">
                     <div class="flex">
-                        <back-button></back-button>
+                        <back-button :previousRoute="previousRoute"></back-button>
                         <h2 class="text-3xl font-bold mr-6 mb-5 grow ">Gestion des ruches</h2>
                     </div>
                     <hive-create
@@ -54,10 +54,24 @@ export default {
         //UserDisabled,
         BreezeValidationErrors
     },
-    props: ['hives', 'apiary_id'],
+    props: {
+        hives: {
+            type: Array,
+            required: true
+        },
+        apiary_id: {
+            type: Number,
+            required: true
+        },
+        previousRoute: {
+            type: String,
+            default: '/apiary'
+        }
+    },
     mounted() {
         //console.log(this.hives)
         //console.log segment of url
+        console.log(this.previousRoute);
     }
 }
 </script>

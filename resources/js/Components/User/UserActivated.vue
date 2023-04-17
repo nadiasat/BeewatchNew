@@ -6,8 +6,8 @@
     <div v-if="!usersActivated.length">
         Aucun utilisateur activé
     </div>
-    <div v-else class="border rounded-xl overflow-x-scroll">
-        <table calss="table-auto text-sm w-full">
+    <div v-else class="border rounded-xl overflow-x-auto">
+        <table class="table-auto text-sm lg:text-base w-full">
             <thead>
                 <tr class="bg-amber-400 divide-x divide-[#C69202]">
                     <th class="
@@ -46,7 +46,8 @@
                     p-2 pl-4 
                     lg:p-4 lg:pl-8 
                     text-zinc-900
-                    flex flex-row">
+                    flex flex-row
+                    justify-center">
                         <!-- User edit component pass user and apiaries-->
                         <UserEdit :user="user" :apiaries="apiaries"></UserEdit>
                         <UserDelete :user_id="user.id"></UserDelete>

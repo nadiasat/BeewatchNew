@@ -6,8 +6,8 @@
     <div v-if="!usersAwaitingActivation.length">
         Aucun utilisateur en attente d'activation
     </div>
-    <div v-else class="border rounded-xl overflow-x-scroll">
-        <table calss="table-auto text-sm">
+    <div v-else class="border rounded-xl overflow-x-auto">
+        <table class="table-auto text-sm lg:text-base w-full">
             <thead>
                 <tr class="bg-[#AFAC99] divide-x divide-[#99978C]">
                     <th class="
@@ -18,6 +18,10 @@
                     p-2 pl-4 pt-2 pb-2
                     lg:p-4 lg:pl-8 lg:pt-4 lg:pb-4 
                     text-zinc-900 text-left">Email</th>
+                    <th class="
+                    p-2 pl-4 pt-2 pb-2
+                    lg:p-4 lg:pl-8 lg:pt-4 lg:pb-4 
+                    text-zinc-900 text-left">Clé d'activation</th>
                     <th class="
                     p-2 pl-4 pt-2 pb-2
                     lg:p-4 lg:pl-8 lg:pt-4 lg:pb-4 
@@ -41,11 +45,16 @@
                     <td class="
                     p-2 pl-4 
                     lg:p-4 lg:pl-8  
+                    text-zinc-900">{{ user.activation_key }}</td>
+                    <td class="
+                    p-2 pl-4 
+                    lg:p-4 lg:pl-8  
                     text-zinc-900">{{ user.role }}</td>
                     <td class="
                     p-2 pl-4 
                     lg:p-4 lg:pl-8  
-                    -zinc-900">
+                    -zinc-900
+                    flex justify-center">
                         <UserDelete :user_id="user.id"></UserDelete>
                     </td>
                 </tr>
@@ -61,7 +70,10 @@ import UserEdit from "./UserEdit.vue";
 export default {
     name: "UserAwaitingActivation",
     props: ['usersAwaitingActivation'],
-    components: { UserDelete, UserEdit }
+    components: { UserDelete, UserEdit },
+    mounted() {
+        console.log(this.usersAwaitingActivation);
+    }
 }
 </script>
 

@@ -32,13 +32,21 @@
                 <BreezeLabel for="address" value="Adresse" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
                 <!-- create a textbox with apiary value -->
                 <BreezeInput class="mt-1 w-full" id="address" type="text" v-model="updateApiaryForm.address" required autofocus />
-
-                <button type="submit" :class="{ 'opacity-25': updateApiaryForm.processing }"
-                    :disabled="updateApiaryForm.processing" 
-                    @click="modalUpdateApiary = false"
-                    class="mb-4 mt-8 bg-amber-400 border-amber-400 text-black font-semibold border-4 py-2 w-full hover:bg-amber-300 hover:border-amber-300">
-                    Confirmer
-                </button>
+                <div class="flex mt-8 mb-6 gap-8">
+                    <button type="submit" :class="{ 'opacity-25': updateApiaryForm.processing }"
+                        :disabled="updateApiaryForm.processing" 
+                        @click="modalUpdateApiary = false"
+                        class="mb-4 mt-8 bg-amber-400 border-amber-400 text-black font-semibold border-4 py-2 w-full hover:bg-amber-300 hover:border-amber-300">
+                        Confirmer
+                    </button>
+                    <button :class="{ 'opacity-25': updateApiaryForm.processing }"
+                        type="button"
+                        :disabled="updateApiaryForm.processing"
+                        @click="deleteApiary()"
+                        class="mb-4 mt-8 bg-red-400 border-red-400 text-black font-semibold border-4 py-2 w-full hover:bg-red-300 hover:border-red-300">
+                        Supprimer
+                    </button>
+                </div>
             </form>
 
             <div class="text-center">
@@ -88,6 +96,39 @@ export default {
                         didOpen: (toast) => {
                             toast.addEventListener('mouseenter', Swal.stopTimer)
                             toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    });
+                }
+            });
+        },
+        deleteApiary() {
+            Swal.fire({
+                title: "Voulez-vous vraiment supprimer cet événement ?",
+                text: "Cette action est irréversible.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d93131',
+                confirmButtonText: "Confirmer",
+                cancelButtonText: "Annuler"
+            }) .then((result) => {
+                if (result.isConfirmed) {
+                    this.updateApiaryForm.delete(route('apiary.destroy', this.apiary), {
+                        preserveState: false,
+                        onSuccess: () => {
+                            console.log('success');
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Rucher supprimé avec succès',
+                                toast: true,
+                                position: 'top-end',
+                                showConfirmButton: false,
+                                timer: 3500,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                }
+                            });
                         }
                     });
                 }

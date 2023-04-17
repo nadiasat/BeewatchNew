@@ -53,7 +53,7 @@ export default {
         }
     },
     mounted() {
-        console.log(this.usersActivated)
+        //console.log(this.usersActivated)
     }
 }
 </script>

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('color_queen');
             $table->boolean('rise')->default(false);
             $table->integer('nb_frames');
-            $table->foreignId('interventions_id')->constrained();
+            $table->foreignId('interventions_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

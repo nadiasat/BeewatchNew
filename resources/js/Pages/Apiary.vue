@@ -13,7 +13,7 @@
         </div>
 
         <div class="py-5 lg:py-12 px-4 mx-auto h-full ">
-            <div class="flex flex-wrap gap-4 justify-center">
+            <div class="flex flex-wrap gap-4 justify-center ">
                 <apiary-card v-for="apiary in apiaries" :apiary="apiary"></apiary-card>
             </div>
         </div>

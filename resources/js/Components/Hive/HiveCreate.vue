@@ -30,6 +30,21 @@
                 <BreezeInput v-model="createHiveForm.date_queen" id="date_queen" type="date"
                     class="mt-1 block w-full"/>
 
+                <BreezeLabel v-if="createHiveForm.date_queen != null"
+                for="color_queen" value="Couleur de la reine" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
+                <select v-if="createHiveForm.date_queen != null"
+                v-model="createHiveForm.color_queen" 
+                id="color_queen" 
+                class="mt-1 block w-full border-zinc-300 
+                focus:border-amber-400 focus:ring-amber-400 
+                rounded-md shadow-sm" required>
+                    <option value="#FF0000">Rouge</option>
+                    <option value="#FFFF00">Jaune</option>
+                    <option value="#008000">Vert</option>
+                    <option value="#0000FF">Bleu</option>
+                    <option value="#EE82EE">Violet</option>
+                </select>
+
                 
                 <BreezeLabel value="Hausse" class=" font-bold text-base mt-4 lg:mt-0 text-zinc-900 "/>
                 <!-- make 2 radio buttons yes or no -->
@@ -100,6 +115,7 @@ export default {
             createHiveForm: useForm({
                 name: null,
                 date_queen: null,
+                color_queen: null,
                 rise: null,
                 nb_frames: null,
                 nb_varroa: null,
@@ -111,6 +127,7 @@ export default {
         submit() {
             console.log(this.createHiveForm)
             this.createHiveForm.rise = this.createHiveForm.rise === 'true' ? true : false
+
             this.createHiveForm.post(route('hive.store'), {
                 preserveState: false,
                 onSuccess() {

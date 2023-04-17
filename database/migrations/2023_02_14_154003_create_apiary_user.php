@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('apiary_user', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('apiary_id');
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('apiary_id')->onDelete('cascade');
+            $table->unsignedBigInteger('user_id')->onDelete('cascade');
             $table->timestamps();
         });
     }

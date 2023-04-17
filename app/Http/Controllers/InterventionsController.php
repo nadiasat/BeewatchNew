@@ -5,17 +5,48 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Http\Controllers\Controller;
+use App\Models\Apiary;
 use App\Models\Interventions;
 use App\Models\Hive;
+use Illuminate\Support\Facades\App;
 
 class InterventionsController extends Controller
 {
     public function index(Request $request)
     {
-        //print in console the interventions
-        //dd($request->all());
+        //print in console the intervention
         //get all interventions of the hive ordered by date
-        $interventions = Hive::find($request->hive_id)->interventions()->orderBy('created_at', 'desc')->get();
+        $hive = Hive::find($request->hive_id);
+        //dd($hive);
+        $apiary = Apiary::find($hive->apiary_id);
+
+        $interventions = $hive->interventions()->orderBy('created_at', 'desc')->get();
+
+        //foreach intervention store in details field the 
+        foreach ($interventions as $intervention) {
+            switch ($intervention->type) {
+                case 'control':
+                    $intervention->details = $intervention->intervention_control;
+                    break;
+
+                case 'material':
+                    $intervention->details = $intervention->intervention_material;
+                    break;
+
+                case 'new_queen':
+                    $intervention->details = $intervention->intervention_new_queen;
+                    break;
+
+                case 'remove_queen':
+                    $intervention->details = $intervention->intervention_remove_queen;
+                    break;
+
+                case 'treatment':
+                    $intervention->details = $intervention->intervention_treatment;
+                    break;
+            }
+        }
+
 
         //array of all dates and nb varoas of the hive on each control interventio
         $record_nb_varroa = [];
@@ -41,8 +72,9 @@ class InterventionsController extends Controller
         return Inertia::render('HiveDetails', [
             'interventions' => $interventions,
             'record_nb_varroa' => $record_nb_varroa,
-            'hive_id' => $request->hive_id,
-            'hive_name' => $request->hive_name,
+            'hive' => $hive,
+            'apiary' => $apiary,
+            'previousRoute' => url()->previous(),
         ]);
 
     }

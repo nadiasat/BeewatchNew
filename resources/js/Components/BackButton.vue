@@ -8,11 +8,15 @@
 
 <script>
 
+import {Inertia} from "@inertiajs/inertia";
+
 export default {
     name: "BackButton",
-    setup() {
+    props: ['previousRoute'],
+    setup(props) {
         const goBack = () => {
-            window.history.back();
+            //go back to previous route
+            Inertia.visit(props.previousRoute);
         }
         return {
             goBack
