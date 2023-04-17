@@ -1,0 +1,21 @@
+{
+  "id": "37b4a730-4c5b-49b0-9c9f-52360a274881",
+  "version": "2.0",
+  "name": "Beewatch",
+  "url": "",
+  "tests": [{
+    "id": "0c43482f-5c60-4aa5-9f59-1a44d0f05e7b",
+    "name": "Untitled",
+    "commands": []
+  }],
+  "suites": [{
+    "id": "3f55c208-0b58-4970-9b50-2286c03855ad",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["0c43482f-5c60-4aa5-9f59-1a44d0f05e7b"]
+  }],
+  "urls": [],
+  "plugins": []
+}
