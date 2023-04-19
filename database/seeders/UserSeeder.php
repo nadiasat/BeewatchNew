@@ -28,7 +28,7 @@ class UserSeeder extends Seeder
             'firstname' => 'Admin',
             'lastname' => 'Tester',
             'email' => 'admin@beewatch.ch',
-            'password' => 'WatchB33',
+            'password' => Hash::make('WatchB33adm'),
             'activation_state' => false
         ])->assignRole('admin');
 

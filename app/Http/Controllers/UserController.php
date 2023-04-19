@@ -42,7 +42,7 @@ class UserController extends Controller
             
             if ($user->activation_state == User::ACTIVATION_STATE_AWAITING_ACTIVATION) {
                 //store password as activation key in user object
-                $user->activation_key = $user->password;
+                $user->activation_key = 'WatchB33' . substr($user->email, 0, 3);
                 $users['awaiting_activation'][] = $user;
             }
 
@@ -67,16 +67,18 @@ class UserController extends Controller
 
         $request->validate([
             'email' => 'required|string|email|max:255|unique:users',
+            'firstname' => 'required|string|max:255',
+            'lastname' => 'required|string|max:255',
         ]);
 
 
-
-        $password = Str::random(12);
+        //password is WatchB33 + 3 frist letters of email
+        $password = 'WatchB33' . substr($request->email, 0, 3);
         $user = User::create([
             'firstname' => $request->firstname,
             'lastname' => $request->lastname,
             'email' => $request->email,
-            'password' => $password,
+            'password' => Hash::make($password),
             'activation_state' => User::ACTIVATION_STATE_AWAITING_ACTIVATION,
         ]);
 
