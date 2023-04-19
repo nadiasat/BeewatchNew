@@ -24,7 +24,7 @@
         <p class="title-hausse h-3 flex items-center mb-1 font-medium text-sm">Hausse</p>
       </div>
       <div class="top-text mb-2 flex flex-col items-start self-stretch">
-        <p class="title-frames h-3 flex items-center mb-1 text-sm">Nombre de rayons</p>
+        <p class="title-frames h-3 flex items-center mb-1 text-sm">Nombre de cadres</p>
         <div class="nb-frames flex items-start self-stretch">
           <p class="text-nb-frames mr-4 text-base font-semibold text-amber-400 self-stretch flex items-center align-middle" :class="{'text-[#AFAC99]' : !hive.is_active}">{{ hive.nb_frames }}</p>
           <div class="frames-indicator h-full grow flex items-start justify-between pt-[2px] pb-[2px]" >

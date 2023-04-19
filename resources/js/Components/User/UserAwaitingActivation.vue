@@ -7,13 +7,15 @@
         Aucun utilisateur en attente d'activation
     </div>
     <div v-else class="border rounded-xl overflow-x-auto">
-        <table class="table-auto text-sm lg:text-base w-full">
+        <table class="table-auto text-sm lg:text-base w-full"
+        id="users-awating-activation">
             <thead>
                 <tr class="bg-[#AFAC99] divide-x divide-[#99978C]">
                     <th class="
                     p-2 pl-4 pt-2 pb-2
                     lg:p-4 lg:pl-8 lg:pt-4 lg:pb-4 
-                    text-zinc-900 text-left">Nom et prénom</th>
+                    text-zinc-900 text-left"
+                    >Nom et prénom</th>
                     <th class="
                     p-2 pl-4 pt-2 pb-2
                     lg:p-4 lg:pl-8 lg:pt-4 lg:pb-4 
@@ -37,15 +39,19 @@
                     <td class="
                     p-2 pl-4 
                     lg:p-4 lg:pl-8 
-                    text-zinc-900">{{ user.lastname + " " + user.firstname}}</td>
+                    text-zinc-900"
+                    :id='user.lastname + " " + user.firstname'
+                    >{{ user.lastname + " " + user.firstname}}</td>
                     <td class="
                     p-2 pl-4 
                     lg:p-4 lg:pl-8  
-                    text-zinc-900">{{ user.email }}</td>
+                    text-zinc-900"
+                    :id='user.email'>{{ user.email }}</td>
                     <td class="
                     p-2 pl-4 
                     lg:p-4 lg:pl-8  
-                    text-zinc-900">{{ user.activation_key }}</td>
+                    text-zinc-900"
+                    >{{ user.activation_key }}</td>
                     <td class="
                     p-2 pl-4 
                     lg:p-4 lg:pl-8  
@@ -55,6 +61,7 @@
                     lg:p-4 lg:pl-8  
                     -zinc-900
                     flex justify-center">
+                        <UserEdit :user="user" :apiaries="apiaries"></UserEdit>
                         <UserDelete :user_id="user.id"></UserDelete>
                     </td>
                 </tr>
@@ -69,7 +76,7 @@ import UserEdit from "./UserEdit.vue";
 
 export default {
     name: "UserAwaitingActivation",
-    props: ['usersAwaitingActivation'],
+    props: ['usersAwaitingActivation', 'apiaries'],
     components: { UserDelete, UserEdit },
     mounted() {
         console.log(this.usersAwaitingActivation);

@@ -7,6 +7,8 @@
 </template>
 
 <script lang="ts">
+import Swal from "sweetalert2";
+
 export default {
     computed: {
         errors() {
@@ -14,7 +16,26 @@ export default {
         },
 
         hasErrors() {
-            return Object.keys(this.errors).length > 0
+            let errors =  Object.keys(this.errors).length > 0
+            if (errors) {
+                //foreach error, display a sweetalert
+                for (const [key, value] of Object.entries(this.errors)) {
+                    Swal.fire({
+                        icon: 'error',
+                        //title is the error
+                        title: value,
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3500,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    })
+                }
+            }
         },
     }
 }

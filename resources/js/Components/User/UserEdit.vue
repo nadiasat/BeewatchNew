@@ -10,7 +10,7 @@
     <Modal v-show="modalUpdateUser" @close="modalUpdateUser = false">
         <div class="container">
             <form @submit.prevent="updateUser(user)" class="mx-8">
-                <h4 class="mb-5 text-center text-2xl font-semibold">Nouveau membre</h4>
+                <h4 class="mb-5 text-center text-2xl font-semibold">Modifier l'utilisateur : <br>{{ user.email }}</h4>
 
                 <BreezeLabel for="role" value="Rôle" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
                 <select v-model="updateUserForm.role" 

@@ -7,7 +7,7 @@
             <div>
                 <div class="flex flex-col lg:flex-row justify-between lg:flex-wrap my-5 px-1 lg:px-6 lg:items-center">
                     <h2 class="text-3xl font-bold mr-6 mb-5">Gestion des membres</h2>
-                    <user-create></user-create>
+                    <user-create :apiaries="apiaries"></user-create>
                 </div>
             </div>
 
@@ -16,7 +16,7 @@
             <BreezeValidationErrors class="my-8" />
 
             <div class="mt-10">
-                <UserAwaitingActivation :users-awaiting-activation="users.awaiting_activation"></UserAwaitingActivation>
+                <UserAwaitingActivation :users-awaiting-activation="users.awaiting_activation" :apiaries="apiaries"></UserAwaitingActivation>
             </div>
 
             <div class="mt-8">

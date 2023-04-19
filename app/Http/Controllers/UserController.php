@@ -71,6 +71,17 @@ class UserController extends Controller
             'lastname' => 'required|string|max:255',
         ]);
 
+        //if user email is not unique return error
+        if (User::where('email', $request->email)->exists()) {
+            return redirect()->route('users')->with('error', 'Email already exists');
+        }
+
+        //get only ids from apiaries if not empty
+        if (!empty($request->apiaries)) {
+            $request->apiaries = array_map(function ($apiary) {
+                return $apiary['id'];
+            }, $request->apiaries);
+        }
 
         //password is WatchB33 + 3 frist letters of email
         $password = 'WatchB33' . substr($request->email, 0, 3);
@@ -83,6 +94,11 @@ class UserController extends Controller
         ]);
 
         $user->assignRole($request->role);
+
+        if(!empty($request->apiaries)){
+            //SYNC APIARIES ids WITH USER
+            $user->apiaries()->sync($request->apiaries);
+        }
 
         return redirect()->route('users');
     }
@@ -103,7 +119,7 @@ class UserController extends Controller
         $user->activation_state = User::ACTIVATION_STATE_ACTIVATED;
         $user->save();
 
-        return redirect()->route('dashboard');
+        return redirect()->route('apiary');
     }
 
 

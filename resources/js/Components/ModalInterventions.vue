@@ -198,8 +198,8 @@
                     class="mt-1 block w-full
                     border-zinc-300 
                     focus:border-amber-400 focus:ring-amber-400 
-                    rounded-md shadow-sm"
-                    rows="5" />
+                    rounded-md shadow-sm resize-none"
+                    rows="6" />
                     
                     
                     <button type="submit" :class="{ 'opacity-25': createControlForm.processing }"
@@ -264,7 +264,7 @@
                 <form id="queen-form" @submit.prevent="activateHive()">
                     <BreezeLabel for="date_queen" value="Date de la reine" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
                     <BreezeInput v-model="updateQueenForm.date_queen" id="date_queen" type="date"
-                        class="mt-1 block w-full"/>
+                        class="mt-1 block w-full" required/>
 
                     <BreezeLabel for="color_queen" value="Couleur de la reine" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
 
@@ -280,7 +280,7 @@
                         <option value="#EE82EE">Violet</option>
                     </select>
 
-                    <BreezeLabel value="Hausse" class=" font-bold text-base mt-4 lg:mt-0 text-zinc-900 "/>
+                    <BreezeLabel value="Hausse" class=" font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
                     
                     <div class="flex items-center gap-4">
                         <label for="yes">
