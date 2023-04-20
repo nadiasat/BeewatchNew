@@ -127,11 +127,9 @@ Route::middleware(['auth', 'user.activation_state:' . User::ACTIVATION_STATE_ACT
     
     
     Route::put('/apiary/{apiary}/hive/{hive}/deacivateHive', [HiveController::class, 'deactivateHive'])
-        ->middleware(['can:manage hives'])
         ->name('hive.deactivateHive');
     
     Route::get('/intervetionQueen/deactivate', [InterventionQueenController::class, 'deactivate'])
-        ->middleware(['can:manage hives'])
         ->name('interventionQueen.deactivate');
 
     
