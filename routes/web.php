@@ -113,11 +113,9 @@ Route::middleware(['auth', 'user.activation_state:' . User::ACTIVATION_STATE_ACT
     ->name('hive');
 
     Route::put('/apiary/{apiary}/hive/{hive}/updateMaterial', [HiveController::class, 'updateMaterial'])
-        ->middleware(['can:manage hives'])
         ->name('hive.updateMaterial');
 
     Route::get('/interventionMaterial', [InterventionMaterialController::class, 'store'])
-        ->middleware(['can:manage hives'])
         ->name('interventionMaterial.store');
 
 
@@ -138,18 +136,15 @@ Route::middleware(['auth', 'user.activation_state:' . User::ACTIVATION_STATE_ACT
 
     
     
-        Route::put('/apiary/{apiary}/hive/{hive}/activateHive', [HiveController::class, 'activateHive'])
-        ->middleware(['can:manage hives'])
-        ->name('hive.activateHive');
+    Route::put('/apiary/{apiary}/hive/{hive}/activateHive', [HiveController::class, 'activateHive'])
+    ->name('hive.activateHive');
 
     Route::get('/interventionQueen', [InterventionQueenController::class, 'store'])
-        ->middleware(['can:manage hives'])
-        ->name('interventionQueen.store');
+    ->name('interventionQueen.store');
 
 
     Route::post('/interventionControl', [InterventionControlController::class, 'store'])
-        ->middleware(['can:manage hives'])
-        ->name('interventionControl.store');
+    ->name('interventionControl.store');
 
 
     Route::get('/apiary/{apiary}/hive/{hive}/details', [InterventionsController::class, 'index'])
