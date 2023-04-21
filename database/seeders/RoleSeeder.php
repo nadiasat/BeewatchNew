@@ -24,19 +24,19 @@ class RoleSeeder extends Seeder
         SpatiePermission::create(['name' => 'manage users'])->assignRole('superadmin');
 
         //Manage honey
-        SpatiePermission::create(['name' => 'manage honey'])->assignRole('superadmin' , 'admin');
+        SpatiePermission::create(['name' => 'manage honey'])->assignRole('superadmin' , 'admin', 'user');
 
         //Manage apiaries
         SpatiePermission::create(['name' => 'manage apiaries'])->assignRole('superadmin', 'admin');
 
         //Manage hives
-        SpatiePermission::create(['name' => 'manage hives'])->assignRole('superadmin', 'admin');
+        SpatiePermission::create(['name' => 'manage hives'])->assignRole('superadmin', 'admin', 'user');
 
         //Manage documents
         SpatiePermission::create(['name' => 'manage documents'])->assignRole('superadmin', 'admin');
 
         //Manage material
-        SpatiePermission::create(['name' => 'manage materials'])->assignRole('superadmin', 'admin');
+        SpatiePermission::create(['name' => 'manage materials'])->assignRole('superadmin', 'admin', 'user');
 
     }
 }
