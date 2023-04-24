@@ -11,7 +11,7 @@
     </div>
 
     <div class="mb-4 mt-2 text-sm text-gray-600">
-        Vous avez oublié votre mot de passe ? Aucun problème. Il suffit de nous communiquer votre adresse email et nous vous enverrons un lien de réinitialisation qui vous permettra d'en choisir un nouveau.
+        Vous avez oublié votre mot de passe ? Entrez votre adresse e-mail ci-dessous pour réinitialiser votre mot de passe.
     </div>
 
     <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
@@ -28,7 +28,7 @@
 
         <div class="flex items-center justify-end mt-4">
             <BreezeButton class="w-full py-4 bg-amber-400 text-black hover:bg-amber-200" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                Demander une réinitialisation de mot de passe
+                Réinitialiser le mot de passe
             </BreezeButton>
         </div>
     </form>
