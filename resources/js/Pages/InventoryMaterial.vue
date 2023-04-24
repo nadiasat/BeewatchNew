@@ -7,13 +7,20 @@
                 <div>
                     <div class="flex flex-col lg:flex-row justify-between lg:flex-wrap my-5 px-1 lg:px-6 lg:items-center">   
                         <h2 class="text-3xl font-bold mr-6 mb-5 grow ">Stock du matériel</h2>
+                        <div class="flex flex-row justify-center">
+                             
+                        </div>
                     </div>
                 </div>
 
-                <div class=" px-4 mx-auto h-full">
-                    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-4">
-                    
-                    </div>
+                <hr>
+
+                <BreezeValidationErrors class="my-8" />
+
+
+                <div class="mt-8">
+                    <MaterialList
+                    :materials="materials" :inventory_places="inventory_places"></MaterialList>
                 </div>
         </div>
     </AuthenticatedLayout>
@@ -22,9 +29,10 @@
 <script>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head } from '@inertiajs/inertia-vue3';
+import {ref} from 'vue';
 import Modal from "@/Components/Modal.vue";
-import 'tippy.js/dist/tippy.css';
-import 'tippy.js/themes/light-border.css';
+import MaterialList from "@/Components/Material/MaterialList.vue";
+import MaterialCreate from '@/Components/Material/MaterialCreate.vue';
 
 
 import BreezeLabel from "@/Components/InputLabel.vue";
@@ -40,21 +48,12 @@ export default {
         Modal,
         BreezeLabel,
         BreezeInput,
+        MaterialList,
+        MaterialCreate
     },
-    props: ['users'],
-    data: () => ({
-    }),
-    methods: {
-        addDocument() {
-        
-        },
-        deleteEvent() {
-
-        },
-       
-    },
+    props: ['materials', 'inventory_places'],
     mounted() {
-        console.log(this.events);
+
     },
 };
 </script>

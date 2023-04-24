@@ -25,6 +25,8 @@ class DatabaseSeeder extends Seeder
             ApiarySeeder::class,
             HiveSeeder::class,
             EventSeeder::class,
+            InventoryPlaceSeeder::class,
+            MaterialSeeder::class,
         ]);
 
 

@@ -1,0 +1,138 @@
+<template>
+    <div class="flex flex-col lg:flex-row items-left lg:items-center mb-4">
+        <h4 class="w-full sm:w-96 font-bold text-xl shrink">Lieu de stockage</h4>
+            
+        <div class="w-full flex mt-4 lg:mt-0">
+            <InventoryPlaceEdit v-if="childNMounted"
+            v-bind="editProps"></InventoryPlaceEdit>
+            <select @change="changeMaterials()"
+            class="w-full rounded-xl border border-gray-300 p-2" name="inventory_place_id" id="inventory_place_id">
+                <option v-for="inventory_place in inventory_places" :value="inventory_place.id">{{ inventory_place.name }}</option>
+            </select>
+        </div>
+
+    </div>
+    <hr>
+    <div class="flex flex-col lg:flex-row items-center my-4 gap-2 lg:gap-4">
+        <InventoryPlaceCreate></InventoryPlaceCreate>
+        <MaterialCreate
+        v-bind="createProps"></MaterialCreate>
+    </div>
+
+    <hr>
+
+    <div v-if="currentMaterials == null || !currentMaterials.length">
+        Aucun matériel stocké à cet emplacement
+    </div>
+    <div v-else class="border rounded-xl overflow-x-auto mt-8">
+        <table class="table-auto text-sm lg:text-base w-full">
+            <thead>
+                <tr class="bg-amber-400 divide-x divide-[#C69202]">
+                    <th class="
+                    p-2 pl-4 pt-2 pb-2
+                    lg:p-4 lg:pl-8 lg:pt-4 lg:pb-4 
+                    text-zinc-900 text-left">Matériel</th>
+                    <th class="
+                    p-2 pl-4 pt-2 pb-2
+                    lg:p-4 lg:pl-8 lg:pt-4 lg:pb-4 
+                    text-zinc-900 text-left">Stock</th>
+                    <th class="
+                    p-2 pl-4 pt-2 pb-2
+                    lg:p-4 lg:pl-8 lg:pt-4 lg:pb-4 
+                    text-zinc-900 text-left">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(material, index) in currentMaterials" :class="index % 2 === 0 ? 'bg-white' : 'bg-amber-100/50'" class="divide-x divide-[#E0DDCE]">
+                    <td class="
+                    p-2 pl-4 
+                    lg:p-4 lg:pl-8 
+                    text-zinc-900">{{ material.name }}</td>
+                    <td class="
+                    p-2 pl-4 
+                    lg:p-4 lg:pl-8 
+                    text-zinc-900">{{ material.current_stock }} / {{ material.max_stock }}</td>
+                    <td class="
+                    p-2 pl-4 
+                    lg:p-4 lg:pl-8 
+                    text-zinc-900
+                    flex flex-row
+                    justify-center">
+                        <!-- User edit component pass user and apiaries-->
+                        <!-- <MaterialEdit :user="user" :apiaries="apiaries"></MaterialEdit>
+                        <MaterialDelete :user_id="user.id"></MaterialDelete> -->
+                        
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</template>
+
+<script>
+
+import MaterialCreate from './MaterialCreate.vue';
+import InventoryPlaceCreate from './InventoryPlaceCreate.vue';
+import InventoryPlaceEdit from './InventoryPlaceEdit.vue';
+
+import { ref } from 'vue';
+
+export default {
+    name: "MaterialList",
+    props: ['materials', 'inventory_places'],
+    components: { 
+        MaterialCreate,
+        InventoryPlaceCreate,
+        InventoryPlaceEdit, },
+    setup () {
+
+        const childNMounted = ref(false);
+
+        const createProps = ref({
+            inventory_place_id: 0,
+        });
+        const editProps = ref({
+            inventory_place: null,
+        });
+        const currentMaterials = null;
+
+        setTimeout(() => {
+            childNMounted.value = true;
+        }, 0);
+
+        return {
+            childNMounted,
+            createProps,
+            editProps,
+            currentMaterials,
+        };
+    },
+    methods: {
+        changeMaterials() {
+            //get the selected inventory place id
+            this.createProps.inventory_place_id = document.getElementById('inventory_place_id').value;
+
+            // set current materials equal to materials object of the selected inventory place
+            this.currentMaterials = this.materials[this.createProps.inventory_place_id];
+           
+            //set editprops inventory place as the inventory place with same id as the selected one
+            this.editProps.inventory_place = this.inventory_places.find(inventory_place => inventory_place.id == this.createProps.inventory_place_id);
+
+            
+            console.log(this.editProps.inventory_place);
+        }
+    },
+    mounted() {
+        //console.log(this.materials[1]);
+        // set current materials equal to materials object of the selected inventory place (default is the first one)
+        this.changeMaterials();
+
+        console.log(this.inventory_places);
+    },
+    //components: { UserDelete, UserEdit }
+}
+</script>
+
+<style scoped>
+
+</style>

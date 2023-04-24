@@ -11,7 +11,8 @@ use App\Http\Controllers\InterventionQueenController;
 use App\Http\Controllers\InterventionControlController;
 use App\Http\Controllers\InterventionsController;
 use App\Http\Controllers\InventoryHoneyController;
-use App\Http\Controllers\InventoryMaterialController;
+use App\Http\Controllers\MaterialController;
+use App\Http\Controllers\InventoryPlaceController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -101,11 +102,20 @@ Route::middleware(['auth', 'user.activation_state:' . User::ACTIVATION_STATE_ACT
 
     // InventoryMaterial --------------------------------------------------------------------------------------------------------
 
-    Route::get('/inventoryMaterial', [InventoryMaterialController::class, 'index'])
+    Route::get('/inventoryMaterial', [MaterialController::class, 'index'])
         ->name('inventoryMaterial');
 
-    Route::post('/inventoryMaterial', [InventoryMaterialController::class, 'store'])
+    Route::post('/inventoryMaterial', [MaterialController::class, 'store'])
         ->name('inventoryMaterial.store');
+
+    Route::post('/inventoryMaterial/newPlace', [InventoryPlaceController::class, 'store'])
+    ->name('inventoryPlace.store');
+
+    Route::put('/inventoryMaterial/updatePlace', [InventoryPlaceController::class, 'update'])
+    ->name('inventoryPlace.update');
+
+    Route::delete('/inventoryMaterial/deletePlace', [InventoryPlaceController::class, 'destroy'])
+    ->name('inventoryPlace.destroy');
 
     // Hives --------------------------------------------------------------------------------------------------------------------
     //Route is appiray/apiary_id/hive

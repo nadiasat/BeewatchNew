@@ -15,7 +15,7 @@
 
             <BreezeValidationErrors class="my-8" />
 
-            <div class="mt-10">
+            <div class="mt-8">
                 <UserAwaitingActivation :users-awaiting-activation="users.awaiting_activation" :apiaries="apiaries"></UserAwaitingActivation>
             </div>
 
