@@ -54,4 +54,42 @@ class MaterialController extends Controller
 
         return redirect()->route('inventoryMaterial');
     }
+
+    public function update(Request $request)
+    {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'inventory_place_id' => ['required', 'integer'],
+            'current_stock' => ['required', 'integer'],
+            'max_stock' => ['required', 'integer'],
+        ]);
+
+        $material = Material::find($request->id);
+
+        //if current stock is geater than max stock return error
+        // if ($request->current_stock > $request->max_stock) {
+        //     return redirect()->route('inventoryMaterial')->with('error', 'Le sotck actuel ne peut pas être supérieur au stock maximum');
+        // }
+
+        $material->update([
+            'name' => $request->name,
+            'inventory_place_id' => 1,
+            'current_stock' => $request->current_stock,
+            'max_stock' => $request->max_stock,
+        ]);
+
+        $material->save();
+
+        return redirect()->route('inventoryMaterial');
+    }
+
+    public function destroy(Material $material)
+    {
+        //dd($material);
+       // $material = Material::find($request->id);
+
+        $material->delete();
+
+        return redirect()->route('inventoryMaterial');
+    }
 }

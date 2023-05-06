@@ -27,13 +27,13 @@
 
                 <div class="flex justify-between gap-4">
                     <div class="grow">
-                        <BreezeLabel for="nb_frames" value="Stock actuel" class=" font-bold text-base mt-4 lg:mt-0 text-zinc-900 " />
-                        <BreezeInput v-model="createMaterialForm.current_stock" id="nb_frames" type="number" min="0" max="12"
+                        <BreezeLabel for="nb_current_stock" value="Stock actuel" class=" font-bold text-base mt-4 lg:mt-0 text-zinc-900 " />
+                        <BreezeInput v-model="createMaterialForm.current_stock" id="nb_current_stock" type="number" min="0" max="500"
                             class="mt-1 block w-full"/>
                     </div>
                     <div class="grow">
-                        <BreezeLabel for="nb_varroa" value="Stock maximal" class=" font-bold text-base mt-4 lg:mt-0 text-zinc-900 "/>
-                        <BreezeInput v-model="createMaterialForm.max_stock" id="nb_varroa" type="number" min="0" max="500"
+                        <BreezeLabel for="nb_max_stock" value="Stock maximal" class=" font-bold text-base mt-4 lg:mt-0 text-zinc-900 "/>
+                        <BreezeInput v-model="createMaterialForm.max_stock" id="nb_max_stock" type="number" min="0" max="500"
                             class="mt-1 block w-full"/>
                     </div>
                 </div>
@@ -90,7 +90,7 @@ export default {
     methods: {
         submit() {
             console.log(this.createMaterialForm)
-
+            console.log(this.createMaterialForm.current_stock > this.createMaterialForm.max_stock)
             //if current stock is greater than max stock then return error
             if (this.createMaterialForm.current_stock > this.createMaterialForm.max_stock) {
                 Swal.fire({

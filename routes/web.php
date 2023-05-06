@@ -108,6 +108,12 @@ Route::middleware(['auth', 'user.activation_state:' . User::ACTIVATION_STATE_ACT
     Route::post('/inventoryMaterial', [MaterialController::class, 'store'])
         ->name('inventoryMaterial.store');
 
+    Route::put('/inventoryMaterial/updateMaterial', [MaterialController::class, 'update'])
+        ->name('inventoryMaterial.update');
+
+    Route::delete('/inventoryMaterial/deleteMaterial/{material}', [MaterialController::class, 'destroy'])
+        ->name('inventoryMaterial.destroy');
+
     Route::post('/inventoryMaterial/newPlace', [InventoryPlaceController::class, 'store'])
     ->name('inventoryPlace.store');
 

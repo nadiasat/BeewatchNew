@@ -59,8 +59,8 @@
                     flex flex-row
                     justify-center">
                         <!-- User edit component pass user and apiaries-->
-                        <!-- <MaterialEdit :user="user" :apiaries="apiaries"></MaterialEdit>
-                        <MaterialDelete :user_id="user.id"></MaterialDelete> -->
+                        <MaterialEdit :material="material"></MaterialEdit>
+                        <MaterialDelete :material_id="material.id"></MaterialDelete>
                         
                     </td>
                 </tr>
@@ -74,6 +74,8 @@
 import MaterialCreate from './MaterialCreate.vue';
 import InventoryPlaceCreate from './InventoryPlaceCreate.vue';
 import InventoryPlaceEdit from './InventoryPlaceEdit.vue';
+import MaterialEdit from './MaterialEdit.vue';
+import MaterialDelete from './MaterialDelete.vue';
 
 import { ref } from 'vue';
 
@@ -83,7 +85,10 @@ export default {
     components: { 
         MaterialCreate,
         InventoryPlaceCreate,
-        InventoryPlaceEdit, },
+        InventoryPlaceEdit, 
+        MaterialEdit,
+        MaterialDelete,
+    },
     setup () {
 
         const childNMounted = ref(false);
