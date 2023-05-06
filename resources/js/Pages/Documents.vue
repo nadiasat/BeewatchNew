@@ -3,17 +3,22 @@
     <Head title="Documents" />
 
     <AuthenticatedLayout>
-        <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Documents</h2>
-        </template>
-
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-4">
-                    
-
+        <div class="container mx-auto p-4 w-full">
+                <div>
+                    <div class="flex flex-col lg:flex-row justify-between lg:flex-wrap my-5 px-1 lg:px-6 lg:items-center">   
+                        <h2 class="text-3xl font-bold mr-6 mb-5 grow ">Documents</h2>
+                        <DocumentCreate></DocumentCreate>
+                    </div>
                 </div>
-            </div>
+
+                <hr>
+
+                <BreezeValidationErrors class="my-8" />
+
+
+                <div class="mt-8">
+                    <DocumentCard></DocumentCard>
+                </div>
         </div>
     </AuthenticatedLayout>
 </template>
@@ -22,10 +27,8 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head } from '@inertiajs/inertia-vue3';
 import Modal from "@/Components/Modal.vue";
-import 'tippy.js/dist/tippy.css';
-import 'tippy.js/themes/light-border.css';
-
-
+import DocumentCard from "@/Components/Document/DocumentCard.vue";
+import DocumentCreate from '@/Components/Document/DocumentCreate.vue';
 import BreezeLabel from "@/Components/InputLabel.vue";
 import BreezeInput from "@/Components/TextInput.vue";
 
@@ -39,19 +42,24 @@ export default {
         Modal,
         BreezeLabel,
         BreezeInput,
+        DocumentCard,
+        DocumentCreate
     },
+    props: ['documents'],
     data: () => ({
+
     }),
     methods: {
         addDocument() {
         
         },
-        deleteDocument() {
+        deleteEvent() {
 
         },
        
     },
     mounted() {
+        console.log(this.events);
     },
 };
 </script>
