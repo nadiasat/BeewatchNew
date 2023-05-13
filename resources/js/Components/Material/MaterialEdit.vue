@@ -32,7 +32,7 @@
                 <div class="flex mt-8 gap-8">
                     <button type="submit" :class="{ 'opacity-25': updateMaterialForm.processing }"
                     :disabled="updateMaterialForm.processing"
-                    @click="modalUpdateMaterial = false" 
+                     
                     class="mb-4 mt-8 bg-amber-400 border-amber-400 text-black font-semibold border-4 py-2 w-full hover:bg-amber-300 hover:border-amber-300">
                     Confirmer
                     </button>
@@ -79,6 +79,26 @@ export default {
     methods: {
         updateMaterial() {
             console.log(this.updateMaterialForm);
+
+            if (this.updateMaterialForm.current_stock > this.updateMaterialForm.max_stock) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Le stock actuel ne peut pas être supérieur au stock maximal !',
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3500,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+                //set stock to null
+                this.updateMaterialForm.current_stock = null;
+                return;
+            }
+
             this.updateMaterialForm.put(route('inventoryMaterial.update', this.material), {
                 preserveState: false,
                 onSuccess() {
@@ -98,6 +118,8 @@ export default {
                     })
                 }
             })
+
+            this.modalUpdateMaterial = false;
         }, 
         click() {
             console.log('click');
