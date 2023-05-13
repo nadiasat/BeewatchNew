@@ -1,0 +1,171 @@
+<template>
+
+
+    <button @click="modalCreateJar = true" class="flex justify-center items-center mb-4 
+    border-amber-400 bg-amber-400 text-zinc-900 
+    border-2 rounded-xl py-2 font-semibold 
+    w-full lg:w-72 hover:bg-amber-200 hover:border-amber-200">
+        <svg class="fill-zinc-900 mr-4" width="16" height="16" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 6H6M12 6H6M6 6V0M6 6V12" stroke="currentColor"/>
+        </svg>
+        Ajouter une sortie de pots
+
+    </button>
+
+    <Modal v-show="modalCreateJar" @close="modalCreateJar = false">
+        <div class="container">
+            <form @submit.prevent="submit" class="mx-8">
+                <h4 class="mb-5 text-center text-2xl font-semibold">Nouvelle sortie de pots</h4>
+                
+                <BreezeLabel for="user" value="Personne" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900" />
+                <VueMultiselect 
+                    v-model="createJarForm.user"
+                    :options="users"
+                    :taggable="true"
+                    :multiple="false"
+                    :label="'name'"
+                    :track-by="'id'"
+                    id="user" 
+                    class="mt-1 block w-full">
+                </VueMultiselect>
+
+                <div class="flex gap-4">
+                    <div class="flex-grow">
+                        <BreezeLabel for="date" value="Date de sortie" class="text-left font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
+                        <BreezeInput v-model="createJarForm.created_at" placeholder="Date de début" id="date_start" type="date"
+                        class="mt-1 block w-full"/>
+                    </div>
+                    
+                    <div class="flex-grow">
+                        <BreezeLabel for="jar" value="Type" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900" />
+                        <VueMultiselect 
+                            v-model="createJarForm.jar"
+                            :options="jars"
+                            :taggable="true"
+                            :multiple="false"
+                            :label="'size'"
+                            :track-by="'id'"
+                            id="jar" 
+                            class="mt-1 block w-full">
+                        </VueMultiselect>
+                    </div>
+                </div>
+
+                <BreezeLabel for="nb_jars" value="Nombre de pots" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900" />
+                <BreezeInput v-model="createJarForm.nb_jar" id="nb_jars" type="number" min="0" max="100"
+                    class="mt-1 block w-full" required/>
+
+
+
+                <button type="submit" :class="{ 'opacity-25': createJarForm.processing }"
+                    :disabled="createJarForm.processing"
+                    class="mb-4 mt-8 bg-amber-400 border-amber-400 text-black font-semibold border-4 py-2 w-full hover:bg-amber-300 hover:border-amber-300">
+                    Confirmer
+                </button>
+            </form>
+
+            <div class="text-center">
+                <button @click="modalCreateJar = false" class="text-red-1 font-semibold">Annuler</button>
+            </div>
+        </div>
+    </Modal>
+
+
+
+
+</template>
+
+<script>
+import Modal from "@/Components/Modal.vue";
+import { useForm } from "@inertiajs/inertia-vue3";
+import BreezeLabel from "@/Components/InputLabel.vue";
+import BreezeInput from "@/Components/TextInput.vue";
+import VueMultiselect from 'vue-multiselect';
+import Swal from "sweetalert2";
+
+export default {
+    name: "RecordCreate",
+    props: {
+        jars: {
+            type: Object,
+            required: true
+        },
+        users: {
+             type: Object,
+             required: true
+        }
+    },
+    components: {
+        Modal,
+        BreezeLabel,
+        BreezeInput,
+        VueMultiselect
+    },
+    data: function (props) {
+
+        //get only size and id of jars in jar object
+        // props.jars.forEach((element, index) => {
+        //     props.jars[index] = {
+        //         size: element.size,
+        //         id: element.id
+        //     }
+        // });
+
+        //get only lastname + firstname and id of users in users object
+        props.users.forEach((element, index) => {
+            props.users[index] = {
+                name: element.lastname + ' ' + element.firstname,
+                id: element.id
+            }
+        });
+        return {
+            modalCreateJar: false,
+            createJarForm: useForm({
+                created_at: null,
+                nb_jar: null,
+                jar: null,
+                user: null,
+            }),
+            jars: props.jars,
+            
+            users: props.users,
+        }
+    },
+    methods: {
+        submit() {
+            //get only id of jar
+            this.createJarForm.jar = this.createJarForm.jar.id;
+            //get only id of user
+            this.createJarForm.user = this.createJarForm.user.id;
+
+            console.log(this.createJarForm);
+
+            this.createJarForm.post(route('inventoryHoney.record'), {
+                preserveState: false,
+                onSuccess() {
+                    console.log('success');
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Nouvelle sortie de pots créés avec succès',
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3500,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    })
+                }
+            })
+        },
+    },
+    mounted() {
+        // console.log(this.jars);
+        // console.log(this.users);
+    }
+}
+</script>
+
+<style src="vue-multiselect/dist/vue-multiselect.css"></style>

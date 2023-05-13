@@ -5,15 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class InventoryMaterial extends Model
+class HoneyJar_user extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'quantity',
-        'inventory_places'
+        'honey_jar_id',
+        'user_id',
+        'nb_jar'
     ];
-
-
 }

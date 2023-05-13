@@ -7,13 +7,26 @@
                 <div>
                     <div class="flex flex-col lg:flex-row justify-between lg:flex-wrap my-5 px-1 lg:px-6 lg:items-center">   
                         <h2 class="text-3xl font-bold mr-6 mb-5 grow ">Stock du miel</h2>
+                        <HoneyJarCreate></HoneyJarCreate>
                     </div>
                 </div>
 
-                <div class=" px-4 mx-auto h-full">
-                    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-4">
-                    
-                    </div>
+                <hr>
+
+                <BreezeValidationErrors class="my-8" />
+
+
+                <div class="my-8
+                grid grid-cols-2 lg:grid-cols-3
+                auto-rows-min
+                auto-cols-min gap-4">
+                    <HoneyJarCard v-for="honey_jar in honey_jars" :honey_jar="honey_jar"></HoneyJarCard>
+                </div>
+
+                <hr>
+
+                <div class="my-8">
+                    <HoneyJarsRecord :records="records" :jars="honey_jars" :users="users"></HoneyJarsRecord>
                 </div>
         </div>
     </AuthenticatedLayout>
@@ -29,7 +42,10 @@ import 'tippy.js/themes/light-border.css';
 
 import BreezeLabel from "@/Components/InputLabel.vue";
 import BreezeInput from "@/Components/TextInput.vue";
-
+import HoneyJarCard from '@/Components/Honey/HoneyJarCard.vue';
+import HoneyJarsRecord from '@/Components/Honey/HoneyJarsRecord.vue';
+import HoneyJarsEdit from '@/Components/Honey/HoneyJarsEdit.vue';
+import HoneyJarCreate from '@/Components/Honey/HoneyJarCreate.vue';
 
 
 
@@ -40,21 +56,16 @@ export default {
         Modal,
         BreezeLabel,
         BreezeInput,
+        HoneyJarCard,
+        HoneyJarsRecord,
+        HoneyJarsEdit,
+        HoneyJarCreate,
     },
-    props: ['users'],
-    data: () => ({
-    }),
-    methods: {
-        addDocument() {
-        
-        },
-        deleteEvent() {
-
-        },
-       
-    },
+    props: ['honey_jars', 'records', 'users'],
     mounted() {
-        console.log(this.events);
+        //console.log(this.honey_jars);
+        console.log(this.users);
+        //console.log(this.records);
     },
 };
 </script>

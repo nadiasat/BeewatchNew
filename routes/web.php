@@ -13,6 +13,7 @@ use App\Http\Controllers\InterventionsController;
 use App\Http\Controllers\InventoryHoneyController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\InventoryPlaceController;
+use App\Http\Controllers\HoneyJarController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -93,11 +94,20 @@ Route::middleware(['auth', 'user.activation_state:' . User::ACTIVATION_STATE_ACT
 
     // InventoryHoney -----------------------------------------------------------------------------------------------------------
 
-    Route::get('/inventoryHoney', [InventoryHoneyController::class, 'index'])
-        ->name('inventoryHoney');
+    Route::get('/inventoryHoney', [HoneyJarController::class, 'index'])
+    ->name('inventoryHoney');
 
-    Route::post('/inventoryHoney', [InventoryHoneyController::class, 'store'])
+    Route::post('/inventoryHoney', [HoneyJarController::class, 'store'])
         ->name('inventoryHoney.store');
+
+    Route::put('/inventoryHoney/{honey_jar}/updateHoney', [HoneyJarController::class, 'update'])
+        ->name('inventoryHoney.update');
+
+    Route::delete('/inventoryHoney/{honey_jar}', [HoneyJarController::class, 'destroy'])
+        ->name('inventoryHoney.destroy');
+
+    Route::post('/inventoryHoney/record', [HoneyJarController::class, 'createRecord'])
+        ->name('inventoryHoney.record');
 
 
     // InventoryMaterial --------------------------------------------------------------------------------------------------------
@@ -169,6 +179,7 @@ Route::middleware(['auth', 'user.activation_state:' . User::ACTIVATION_STATE_ACT
 
     Route::post('/hive', [HiveController::class, 'store'])
         ->name('hive.store');
+
 
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

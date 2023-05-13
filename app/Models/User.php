@@ -57,4 +57,11 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Event::class, 'event_user', 'user_id', 'event_id');
     }
+
+    public function honeyJars()
+    {
+        return $this->belongsToMany(HoneyJar::class, 'honey_jar_user', 'user_id', 'honey_jar_id')
+        ->withPivot('nb_jar')
+        ->withTimestamps();
+    }
 }
