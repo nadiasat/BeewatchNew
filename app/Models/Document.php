@@ -11,6 +11,9 @@ class Document extends Model
 
     protected $fillable = [
         'name',
+        'description',
+        'type',
+        'file_path',
     ];
 
     public function documents()

@@ -7,7 +7,7 @@
                 <div>
                     <div class="flex flex-col lg:flex-row justify-between lg:flex-wrap my-5 px-1 lg:px-6 lg:items-center">   
                         <h2 class="text-3xl font-bold mr-6 mb-5 grow ">Documents</h2>
-                        <DocumentCreate></DocumentCreate>
+                        <DocumentCreate :documents="documents"></DocumentCreate>
                     </div>
                 </div>
 
@@ -16,8 +16,10 @@
                 <BreezeValidationErrors class="my-8" />
 
 
-                <div class="mt-8">
-                    <DocumentCard></DocumentCard>
+                <div class="mt-8 flex flex-col gap-4">
+                    <DocumentCard
+                    v-for="document in documents"
+                    :document="document"></DocumentCard>
                 </div>
         </div>
     </AuthenticatedLayout>
@@ -46,20 +48,11 @@ export default {
         DocumentCreate
     },
     props: ['documents'],
-    data: () => ({
-
-    }),
     methods: {
-        addDocument() {
-        
-        },
-        deleteEvent() {
-
-        },
        
     },
     mounted() {
-        console.log(this.events);
+        console.log(this.documents);
     },
 };
 </script>

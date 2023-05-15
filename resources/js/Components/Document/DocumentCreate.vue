@@ -18,17 +18,28 @@
                 <h4 class="mb-5 text-center text-2xl font-semibold">Nouveau document</h4>
                 <BreezeLabel for="document" value="Nom" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900" />
                 <input type="file" name="document" id="document"
+                v-on:change="selectFile($event)"
                 class="mt-1 block w-full" required 
                 accept=".pdf"
                 >
                 <!-- <BreezeInput placeholder="Rucher 1" id="document" type="text"
                     class="mt-1 block w-full" required autocomplete="name"/> -->
-
-                <BreezeLabel for="documentType" value="Description du document" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900" />
-                <BreezeInput placeholder="Type de document" id="documentType" type="text"
-                    @change="selectFile"
+                <BreezeLabel for="name" value="Nom du document" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900" />
+                <BreezeInput placeholder="Type de document" id="name" type="text"
+                    v-model="documentForm.name"
                     class="mt-1 block w-full" required />
 
+                <BreezeLabel for="documentType" value="Type de document" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900" />
+                <BreezeInput placeholder="Type de document" id="documentType" type="text"
+                    v-model="documentForm.documentType"
+                    class="mt-1 block w-full" required />
+                
+                <BreezeLabel for="description" value="Description du document" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900" />
+                <BreezeInput placeholder="Type de document" id="documentType" type="text"
+                    v-model="documentForm.description"
+                    class="mt-1 block w-full" required />
+                
+                
                 <button type="submit"
                     
                     class="mb-4 mt-8 bg-amber-400 border-amber-400 text-black font-semibold border-4 py-2 w-full hover:bg-amber-300 hover:border-amber-300">
@@ -56,6 +67,7 @@ import Swal from "sweetalert2";
 
 export default {
     name: "ApiaryCreate",
+    props: ['documents'],
     components: {
         Modal,
         BreezeLabel,
@@ -63,22 +75,28 @@ export default {
     },
     data: function () {
         return {
+            documentForm: useForm({
+                name: null,
+                document: null,
+                documentType: null,
+                description: null,
+            }),
             modalCreateDocument: false,
-            document: null,
-            documentType: null,
         }
     },
     methods: {
+
         selectFile(e) {
             console.log(e.target.files[0]);
             this.document = e.target.files[0];
+            this.documentForm.document = e.target.files[0];
+            //get file name but remove the extension
+            this.documentForm.name = e.target.files[0].name.split('.').slice(0, -1).join('.');
         },
         submit() {
-            const fileForm = new FormData();
-            fileForm.append('file', this.document);
-            fileForm.append('documentType', this.documentType);
-
-            this.$inertia.post(route('document.store'), fileForm, {
+            console.log(this.documentForm);
+            
+            this.documentForm.post(route('documents.store'), {
                 preserveState: false,
                 onSuccess() {
                     console.log('success');
@@ -95,7 +113,7 @@ export default {
                             toast.addEventListener('mouseleave', Swal.resumeTimer)
                         }
                     })
-                }
+                },
             })
         }
     }
