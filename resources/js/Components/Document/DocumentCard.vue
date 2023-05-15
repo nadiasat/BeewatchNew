@@ -14,9 +14,14 @@
         p-3 flex items-center
         bg-amber-400 hover:bg-amber-200
         cursor-pointer"
-        @click="openPdf()">
-            Détails
+        @click="open_file(document.file_path)">
+        
+
+            Visualiser
         </div>
+        
+       
+
       </div>
       
     </div>
@@ -28,32 +33,21 @@
   </template>
   
   <script>
+import { Inertia } from '@inertiajs/inertia';
+
 
   //import { VuePDF, usePDF} from '@tato30/vue-pdf'
 
   export default {
     name: "DocumentCard",
     props: ["document"],
-    components: {
-      //VuePDF,
-    },
-    // setup(props) {
 
-    //   const showPDF = false;
-    //   const { pdf, pages, info } = usePDF(props.document.file_path)
-
-    //   console.log(`Document has ${pages} pages`)
-    //   console.log(`Document info: ${info}`)
-
-    //   return {
-    //     pdf,
-    //     showPDF,
-    //   }
-    // },
     methods: {
-        openPdf() {
-          showPDF = true;
+        open_file(file_path) {
+          console.log(file_path);
+          window.open(`${file_path}`, '_blank');
         }
+
     },
     mounted() {
 

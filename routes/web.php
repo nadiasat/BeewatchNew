@@ -88,8 +88,15 @@ Route::middleware(['auth', 'user.activation_state:' . User::ACTIVATION_STATE_ACT
     Route::get('/documents', [DocumentController::class, 'index'])
         ->name('documents');
 
+    // get one document
+    Route::get('/documents/{document}', [DocumentController::class, 'show'])
+        ->name('documents.show');
+
     Route::post('/documents', [DocumentController::class, 'store'])
         ->name('documents.store');
+
+    Route::delete('/documents/{document}', [DocumentController::class, 'destroy'])
+        ->name('documents.destroy');
 
 
     // InventoryHoney -----------------------------------------------------------------------------------------------------------

@@ -6,8 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Document;
 use Inertia\Inertia;
-
-
+use Psy\Readline\Hoa\Console;
 
 class DocumentController extends Controller
 {
@@ -26,6 +25,14 @@ class DocumentController extends Controller
     {
         //dd($request->all());
 
+
+        $document_path = '';
+
+        
+
+        
+        
+
         $request->validate([
             'name' => 'required',
             'description' => 'required',
@@ -42,17 +49,26 @@ class DocumentController extends Controller
         ]);
 
         if ($request->hasFile('document')) {
-            $path = $request->file('document')->store('public/documents');
-            $document->file_path = $path;
+            $document_path = $request->file('document')->store('documents');
+            $document->file_path = $document_path;
         }
+
+        
 
         //dd($document);
 
         $document->save();
 
-        return redirect()->route('Documents');
+        return redirect()->route('documents');
         
 
+    }
+
+    public function show(String $document_path)
+    {
+        //dd($document_path);
+        $document_path = storage_path('app/documents/' . $document_path);
+        return response()->file($document_path);
     }
 
 
