@@ -29,7 +29,7 @@ class DocumentController extends Controller
         $document_path = '';
 
         
-
+        //dd($request->all());
         
         
 
@@ -48,14 +48,15 @@ class DocumentController extends Controller
             'file_path' => "VIDE",
         ]);
 
+        //dd($document->name);
+
         if ($request->hasFile('document')) {
-            $document_path = $request->file('document')->store('documents');
+    
+
+            // Store as permet de renommer le fichier et d'empecher le hash automatique du nom de fichier
+            $document_path = $request->file('document')->storeAs('documents', $document->name . '.pdf');
             $document->file_path = $document_path;
         }
-
-        
-
-        //dd($document);
 
         $document->save();
 
