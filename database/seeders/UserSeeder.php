@@ -47,5 +47,29 @@ class UserSeeder extends Seeder
             'password' => Hash::make('WatchB33'),
             'activation_state' => true
         ])->assignRole('user');
+
+        User::create([
+            'firstname' => 'utilisateur',
+            'lastname' => 'tamboureine',
+            'email' => 'utilisateur@tamboureine.ch',
+            'password' => Hash::make('WatchB33'),
+            'activation_state' => true
+        ])->assignRole('user');
+
+        User::create([
+            'firstname' => 'superadmin',
+            'lastname' => 'tamboureine',
+            'email' => 'superadministrateur@tamboureine.ch',
+            'password' => Hash::make('WatchB33'),
+            'activation_state' => true
+        ])->assignRole('superadmin');
+
+        User::create([
+            'firstname' => 'admin',
+            'lastname' => 'tamboureine',
+            'email' => 'administrateur@tamboureine.ch',
+            'password' => Hash::make('WatchB33'),
+            'activation_state' => true
+        ])->assignRole('admin');
     }
 }

@@ -21,6 +21,10 @@ return new class extends Migration
             $table->boolean('frames_full')->nullable();
             $table->boolean('honey')->nullable();
             $table->boolean('honey_rise')->nullable();
+            $table->boolean('sealed_honey')->nullable();
+            $table->boolean('male_cells')->nullable();
+            $table->boolean('eliminate_queen_cells')->nullable();
+            $table->boolean('clean_plate')->nullable();
             $table->integer('nb_varroa')->nullable();
             $table->text('comment')->nullable();
             $table->foreignId('interventions_id')->constrained()->onDelete('cascade');

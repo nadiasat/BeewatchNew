@@ -10,7 +10,7 @@
       </div>
       <div class="flex justify-center w-full gap-2">
         <HoneyJarsEdit :honey_jar="honey_jar"></HoneyJarsEdit>
-        <HoneyJarsEdit :honey_jar="honey_jar"></HoneyJarsEdit>
+        <HoneyJarDelete :honey_jar_id="honey_jar.id"></HoneyJarDelete>
       </div>
     </div>
   </template>
@@ -18,12 +18,14 @@
   <script>
 
   import HoneyJarsEdit from './HoneyJarsEdit.vue';
+  import HoneyJarDelete from './HoneyJarDelete.vue';
 
   export default {
     name: "HoneyJarCard",
     props: ["honey_jar"],
     components: {
       HoneyJarsEdit,
+      HoneyJarDelete,
     },
 
     mounted() {

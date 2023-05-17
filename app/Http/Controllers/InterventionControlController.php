@@ -27,6 +27,10 @@ class InterventionControlController extends Controller
             'frames_full' => $request->frames_full,
             'honey' => $request->honey,
             'honey_rise' => $request->honey_rise,
+            'sealed_honey' => $request->sealed_honey,
+            'male_cells' => $request->male_cells,
+            'eliminate_queen_cells' => $request->eliminate_queen_cells,
+            'clean_plate' => $request->clean_plate,
             'nb_varroa' => $request->nb_varroa,
             'comment' => $request->comment,
         ])->intervention()->associate($intervention);

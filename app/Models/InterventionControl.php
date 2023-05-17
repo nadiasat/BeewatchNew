@@ -16,6 +16,10 @@ class InterventionControl extends Model
         'frames_full',
         'honey',
         'honey_rise',
+        'sealed_honey',
+        'male_cells',
+        'eliminate_queen_cells',
+        'clean_plate',
         'nb_varroa',
         'comment',
         'interventions_id'

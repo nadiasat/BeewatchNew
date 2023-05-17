@@ -68,8 +68,10 @@ class HoneyJarController extends Controller
         return redirect()->route('inventoryHoney');
     }
 
-    public function destroy(HoneyJar $honey_jar)
+    public function destroy(String $honey_jar_id)
     {
+        $honey_jar = HoneyJar::find($honey_jar_id);
+
         $honey_jar->delete();
 
         return redirect()->route('inventoryHoney');

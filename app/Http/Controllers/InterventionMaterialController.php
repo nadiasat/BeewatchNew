@@ -24,6 +24,10 @@ class InterventionMaterialController extends Controller
         $int_material = InterventionMaterial::create([
             'interventions_id' => $intervention->id,
             'new_rise' => $request->new_rise,
+            //'partitions_full' => $request->partitions_full,
+            //'frame_male_cells' => $request->frame_male_cells,
+            //'to_purchase' => $request->to_purchase,
+            //'to_repair' => $request->to_repair,
             'new_nb_frames' => $request->new_nb_frames,
         ])->intervention()->associate($intervention);
 

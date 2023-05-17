@@ -21,6 +21,10 @@
                     v-for="document in documents"
                     :document="document"></DocumentCard>
                 </div>
+
+
+
+
         </div>
     </AuthenticatedLayout>
 </template>
@@ -33,6 +37,7 @@ import DocumentCard from "@/Components/Document/DocumentCard.vue";
 import DocumentCreate from '@/Components/Document/DocumentCreate.vue';
 import BreezeLabel from "@/Components/InputLabel.vue";
 import BreezeInput from "@/Components/TextInput.vue";
+
 
 
 
@@ -51,6 +56,8 @@ export default {
     methods: {
        
     },
+    
+
     mounted() {
         console.log(this.documents);
     },

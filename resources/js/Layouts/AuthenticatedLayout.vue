@@ -16,6 +16,8 @@ const user = computed(() => usePage().props.value.auth.user)
 
 console.log(user.value.permissions.includes('manage users'));
 
+
+
 </script>
 
 <template>
@@ -101,6 +103,8 @@ console.log(user.value.permissions.includes('manage users'));
                                         </svg>
                                         Matériel
                                     </NavLink>
+
+                                    <p>fe</p>
                                 </div>
                             </div>
 
@@ -207,6 +211,8 @@ console.log(user.value.permissions.includes('manage users'));
                             </svg>
                             Matériel
                         </ResponsiveNavLink>
+
+                        
                     </div> 
 
                    <!-- Responsive Settings Options -->

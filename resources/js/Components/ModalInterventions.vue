@@ -187,12 +187,68 @@
                             Non
                         </label>
                     </div>
+
+                    <BreezeLabel value="Le miel est-t-il operculé ?" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
+                    <div class="flex items-center gap-4 mt-1">
+                        <label for="yes_sealed_honey">
+                            <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
+                            v-model="createControlForm.sealed_honey" type="radio" id="yes_sealed_honey" name="sealed_honey" value="true" >
+                            Oui
+                        </label>
+                        <label for="no_sealed_honey">
+                            <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
+                            v-model="createControlForm.sealed_honey" type="radio" id="no_sealed_honey" name="sealed_honey" value="false">
+                            Non
+                        </label>
+                    </div>
+
+                    <BreezeLabel value="Y a-t-il beaucoup de cellules males ?" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
+                    <div class="flex items-center gap-4 mt-1">
+                        <label for="yes_male_cells">
+                            <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
+                            v-model="createControlForm.male_cells" type="radio" id="yes_male_cells" name="male_cells" value="true" >
+                            Oui
+                        </label>
+                        <label for="no_male_cells">
+                            <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
+                            v-model="createControlForm.male_cells" type="radio" id="no_male_cells" name="male_cells" value="false">
+                            Non
+                        </label>
+                    </div>
+
+                    <BreezeLabel value="Avez-vous aperçu et éliminé des cellules de futures reines ?" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
+                    <div class="flex items-center gap-4 mt-1">
+                        <label for="yes_eliminate_queen_cells">
+                            <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
+                            v-model="createControlForm.eliminate_queen_cells" type="radio" id="yes_eliminate_queen_cells" name="eliminate_queen_cells" value="true" >
+                            Oui
+                        </label>
+                        <label for="no_eliminate_queen_cells">
+                            <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
+                            v-model="createControlForm.eliminate_queen_cells" type="radio" id="no_eliminate_queen_cells" name="eliminate_queen_cells" value="false">
+                            Non
+                        </label>
+                    </div>
+
+                    <BreezeLabel value="La plaque sous les ruchers a-t-elle été nettoyée ?" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
+                    <div class="flex items-center gap-4 mt-1">
+                        <label for="yes_clean_plate">
+                            <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
+                            v-model="createControlForm.clean_plate" type="radio" id="yes_clean_plate" name="clean_plate" value="true" >
+                            Oui
+                        </label>
+                        <label for="no_eclean_plate">
+                            <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
+                            v-model="createControlForm.clean_plate" type="radio" id="no_clean_plate" name="clean_plate" value="false">
+                            Non
+                        </label>
+                    </div>
                     
                     <BreezeLabel for="nb_varroa" value="Nombre de varroas" class=" font-bold text-base mt-4 lg:mt-0 text-zinc-900 "/>
                     <BreezeInput v-model="createControlForm.nb_varroa" placeholder="25" id="nb_varroa" type="number" min="0" max="500"
                                 class="mt-1 block w-full"/>
 
-                    <BreezeLabel for="comment" value="Commentaire supllémentaire" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
+                    <BreezeLabel for="comment" value="Commentaire supplémentaire" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
                     <textarea v-model="createControlForm.comment"
                     id="comment"
                     class="mt-1 block w-full
@@ -340,6 +396,10 @@
                     frames_full: null,
                     honey: null,
                     honey_rise: null,
+                    sealed_honey: null,
+                    male_cells: null,
+                    eliminate_queen_cells: null,
+                    clean_plate: null,
                     nb_varroa: props.hive.nb_varroa,
                     comment: null,
                 }),
@@ -476,6 +536,22 @@
 
                 if (this.createControlForm.honey_rise !== null) {
                     this.createControlForm.honey_rise = this.createControlForm.honey_rise === 'true' ? 1 : 0;
+                }
+
+                if (this.createControlForm.sealed_honey !== null) {
+                    this.createControlForm.sealed_honey = this.createControlForm.sealed_honey === 'true' ? 1 : 0;
+                }
+
+                if (this.createControlForm.male_cells !== null) {
+                    this.createControlForm.male_cells = this.createControlForm.male_cells === 'true' ? 1 : 0;
+                }
+
+                if (this.createControlForm.eliminate_queen_cells !== null) {
+                    this.createControlForm.eliminate_queen_cells = this.createControlForm.eliminate_queen_cells === 'true' ? 1 : 0;
+                }
+
+                if (this.createControlForm.clean_plate !== null) {
+                    this.createControlForm.clean_plate = this.createControlForm.clean_plate === 'true' ? 1 : 0;
                 }
 
 

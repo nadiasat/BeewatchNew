@@ -68,12 +68,20 @@ class DocumentController extends Controller
     public function show(String $document_path)
     {
         //dd($document_path);
+        // Find the complete path of the document
         $document_path = storage_path('app/documents/' . $document_path);
         return response()->file($document_path);
     }
 
 
-
-    
+    public function destroy(String $document_id)
+    {
+        // Find the document with the given id
+        $document = Document::find($document_id);
+        // Delete the document
+        $document->delete();
+        // Redirect to the documents page
+        return redirect()->route('documents');
+    }
 
 }

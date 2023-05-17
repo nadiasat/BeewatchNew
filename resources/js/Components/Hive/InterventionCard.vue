@@ -122,6 +122,70 @@
                   Non
               </label>
           </div>
+
+          <BreezeLabel value="Le miel est-t-il operculé ?" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
+                    <div class="flex items-center gap-4 mt-1">
+                        <label for="yes_sealed_honey">
+                            <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
+                            v-model="controlForm.sealed_honey" type="radio" id="yes_sealed_honey" name="sealed_honey" value="true" 
+                            :checked="controlForm.sealed_honey === 1">
+                            Oui
+                        </label>
+                        <label for="no_sealed_honey">
+                            <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
+                            v-model="controlForm.sealed_honey" type="radio" id="no_sealed_honey" name="sealed_honey" value="false"
+                            :checked="controlForm.sealed_honey === 0">
+                            Non
+                        </label>
+                    </div>
+
+                    <BreezeLabel value="Y a-t-il beaucoup de cellules males ?" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
+                    <div class="flex items-center gap-4 mt-1">
+                        <label for="yes_male_cells">
+                            <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
+                            v-model="controlForm.male_cells" type="radio" id="yes_male_cells" name="male_cells" value="true" 
+                            :checked="controlForm.male_cells === 1">
+                            Oui
+                        </label>
+                        <label for="no_male_cells">
+                            <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
+                            v-model="controlForm.male_cells" type="radio" id="no_male_cells" name="male_cells" value="false"
+                            :checked="controlForm.male_cells === 0">
+                            Non
+                        </label>
+                    </div>
+
+                    <BreezeLabel value="Avez-vous aperçu et éliminé des cellules de futures reines ?" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
+                    <div class="flex items-center gap-4 mt-1">
+                        <label for="yes_eliminate_queen_cells">
+                            <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
+                            v-model="controlForm.eliminate_queen_cells" type="radio" id="yes_eliminate_queen_cells" name="eliminate_queen_cells" value="true" 
+                            :checked="controlForm.eliminate_queen_cells === 1">
+                            Oui
+                        </label>
+                        <label for="no_eliminate_queen_cells">
+                            <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
+                            v-model="controlForm.eliminate_queen_cells" type="radio" id="no_eliminate_queen_cells" name="eliminate_queen_cells" value="false"
+                            :checked="controlForm.eliminate_queen_cells === 0">
+                            Non
+                        </label>
+                    </div>
+
+                    <BreezeLabel value="La plaque sous les ruchers a-t-elle été nettoyée ?" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
+                    <div class="flex items-center gap-4 mt-1">
+                        <label for="yes_clean_plate">
+                            <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
+                            v-model="controlForm.clean_plate" type="radio" id="yes_clean_plate" name="clean_plate" value="true" 
+                            :checked="controlForm.clean_plate === 1">
+                            Oui
+                        </label>
+                        <label for="no_eclean_plate">
+                            <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
+                            v-model="controlForm.clean_plate" type="radio" id="no_clean_plate" name="clean_plate" value="false"
+                            :checked="controlForm.clean_plate === 0">
+                            Non
+                        </label>
+                    </div>
           
           <BreezeLabel for="nb_varroa" value="Nombre de varroas" class=" font-bold text-base mt-4 lg:mt-0 text-zinc-900 "/>
           <BreezeInput readonly v-model="controlForm.nb_varroa" placeholder="25" id="nb_varroa" type="number" min="0" max="500"
@@ -259,6 +323,10 @@
         frames_full: null,
         honey: null,
         honey_rise: null,
+        sealed_honey: null,
+        male_cells: null,
+        eliminate_queen_cells: null,
+        clean_plate: null,
         nb_varroa: null,
         comment: null,
       });
@@ -280,6 +348,10 @@
             frames_full: props.intervention.details.frames_full,
             honey: props.intervention.details.honey,
             honey_rise: props.intervention.details.honey_rise,
+            sealed_honey: props.intervention.details.sealed_honey,
+            male_cells: props.intervention.details.male_cells,
+            eliminate_queen_cells: props.intervention.details.eliminate_queen_cells,
+            clean_plate: props.intervention.details.clean_plate,
             nb_varroa: props.intervention.details.nb_varroa,
             comment: props.intervention.details.comment,
           });

@@ -9,38 +9,34 @@
       </div>
       <div class="btn-container slef-stretch flex gap-4">
 
+        
         <div 
         class="btn-show-details rounded-lg
         p-3 flex items-center
         bg-amber-400 hover:bg-amber-200
         cursor-pointer"
         @click="open_file(document.file_path)">
-        
-
             Visualiser
         </div>
-        
+        <DocumentDelete :document_id="document.id"></DocumentDelete>
        
 
       </div>
-      
     </div>
-
-    <!-- <div class="pdf-container"
-    v-show="showPDF">
-        <VuePDF :src="pdf" />
-    </div> -->
   </template>
   
   <script>
 import { Inertia } from '@inertiajs/inertia';
+import DocumentDelete from "./DocumentDelete.vue";
 
-
-  //import { VuePDF, usePDF} from '@tato30/vue-pdf'
 
   export default {
     name: "DocumentCard",
     props: ["document"],
+
+    components: {
+        DocumentDelete
+    },
 
     methods: {
         open_file(file_path) {

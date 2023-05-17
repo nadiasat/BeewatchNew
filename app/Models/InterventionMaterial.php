@@ -12,6 +12,8 @@ class InterventionMaterial extends Model
     protected $fillable = [
         'new_rise',
         'new_nb_frames',
+        //'partitions_full',
+        //'frame_male_cells',
         'interventions_id'
     ];
 
