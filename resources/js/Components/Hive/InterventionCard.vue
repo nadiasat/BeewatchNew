@@ -191,7 +191,7 @@
           <BreezeInput readonly v-model="controlForm.nb_varroa" placeholder="25" id="nb_varroa" type="number" min="0" max="500"
                       class="mt-1 block w-full"/>
 
-          <BreezeLabel for="comment" value="Commentaire supllémentaire" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
+          <BreezeLabel for="comment" value="Commentaire supplémentaire" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
           <textarea readonly v-model="controlForm.comment"
           id="comment"
           class="mt-1 block w-full

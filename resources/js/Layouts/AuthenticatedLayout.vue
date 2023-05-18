@@ -106,22 +106,21 @@ console.log(user.value.permissions.includes('manage users'));
                                         Matériel
                                     </NavLink>
 
+                                    <NavLink :href="route('logout')" 
+                                        method="post" as="button"
+                                        class="hidden text-lg lg:flex gap-3 text-red-400
+                                        hover:text-red-600 hover:bg-red-200/75 focus:outline-none focus:text-red-600 focus:bg-red-200/75 rounded-lg transition duration-150 ease-in-out" >
+                                        <svg width="39" height="39" viewBox="0 0 39 39" fill="none" xmlns="http://www.w3.org/2000/svg"
+                                        class="w-6 h-auto">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M0 12.0714C0 5.40456 5.35178 0 11.9535 0H20.5356V1.85714H11.9535C6.36744 1.85714 1.83901 6.43023 1.83901 12.0714V26.9286C1.83901 32.5698 6.36744 37.1429 11.9535 37.1429H20.5356V39H11.9535C5.35178 39 0 33.5954 0 26.9286V12.0714ZM29.1548 9.55769L39 19.5L29.1548 29.4423L27.8544 28.1291L35.4797 20.4286H10.1145V18.5714H35.4797L27.8544 10.8709L29.1548 9.55769Z" fill="currentColor"/>
+                                        </svg>
+                                        Déconnexion
+                                    </NavLink>
                                     
 
                                 </div>
                             </div>
 
-                                                            <!--- LOGOUT -->
-                            <NavLink :href="route('logout')" 
-                                method="post" as="button"
-                                class="hidden text-lg lg:flex gap-3 text-red-400
-                                hover:text-red-600 hover:bg-red-200/75 focus:outline-none focus:text-red-600 focus:bg-red-200/75 rounded-lg transition duration-150 ease-in-out" >
-                                <svg width="39" height="39" viewBox="0 0 39 39" fill="none" xmlns="http://www.w3.org/2000/svg"
-                                class="w-6 h-auto">
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M0 12.0714C0 5.40456 5.35178 0 11.9535 0H20.5356V1.85714H11.9535C6.36744 1.85714 1.83901 6.43023 1.83901 12.0714V26.9286C1.83901 32.5698 6.36744 37.1429 11.9535 37.1429H20.5356V39H11.9535C5.35178 39 0 33.5954 0 26.9286V12.0714ZM29.1548 9.55769L39 19.5L29.1548 29.4423L27.8544 28.1291L35.4797 20.4286H10.1145V18.5714H35.4797L27.8544 10.8709L29.1548 9.55769Z" fill="currentColor"/>
-                                </svg>
-                                Déconnexion
-                            </NavLink>
 
 
                         </div>
@@ -250,7 +249,7 @@ console.log(user.value.permissions.includes('manage users'));
             </header>
 
             <!-- Page Content -->
-            <main class="w-full max-h-screen">
+            <main class="w-full">
                 <slot />
             </main>
         </div>
