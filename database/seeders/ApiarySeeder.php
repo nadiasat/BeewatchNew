@@ -24,7 +24,7 @@ class ApiarySeeder extends Seeder
         Apiary::create([
             'name' => 'Rucher Drize',
             'address' => 'Route de drize 1, 1227 Carouge',
-        ])->users()->sync(array_slice($users, 0, 2));
+        ])->users()->sync($users);
 
         Apiary::create([
             'name' => 'Rucher Batelle',
