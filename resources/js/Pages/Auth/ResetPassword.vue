@@ -3,6 +3,15 @@
 
     <BreezeValidationErrors class="mb-4" />
 
+    <div>
+        <Link class="text-sm flex items-center" :href="route('password.request')">
+            <svg class="mr-2" width="10" height="8" viewBox="0 0 19 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18.9999 6.99997H4.41394L9.70694 1.70697L8.29294 0.292969L0.585938 7.99997L8.29294 15.707L9.70694 14.293L4.41394 8.99997H18.9999V6.99997Z" fill="black"/>
+            </svg>
+            Retour
+        </Link>
+    </div>
+
     <form @submit.prevent="submit">
         <div>
             <BreezeLabel for="email" value="Email" />
@@ -33,6 +42,7 @@ import BreezeGuestLayout from '@/Layouts/GuestLayout.vue'
 import BreezeInput from '@/Components/TextInput.vue'
 import BreezeLabel from '@/Components/InputLabel.vue'
 import BreezeValidationErrors from '@/Components/ValidationErrors.vue'
+import { Link } from '@inertiajs/inertia-vue3';
 import { Head } from '@inertiajs/inertia-vue3';
 
 import Swal from 'sweetalert2'
@@ -48,6 +58,7 @@ export default {
         BreezeLabel,
         BreezeValidationErrors,
         Head,
+        Link
     },
 
     props: {
