@@ -23,6 +23,8 @@
                 <UserActivated :users-activated="users.activated" :apiaries="apiaries"></UserActivated>
             </div>
 
+
+
         </div>
     </BreezeAuthenticatedLayout>
 </template>
@@ -37,6 +39,7 @@ import UserAwaitingActivation from "@/Components/User/UserAwaitingActivation.vue
 import UserActivated from "@/Components/User/UserActivated.vue";
 import UserCreate from "@/Components/User/UserCreate.vue"
 import BreezeValidationErrors from "@/Components/ValidationErrors.vue"
+import { config } from '@fullcalendar/core/internal';
 
 export default {
     components: {
@@ -53,6 +56,7 @@ export default {
     props: ['users', 'apiaries'],
     mounted() {
         console.log(this.users);
+        
     }
 }
 </script>

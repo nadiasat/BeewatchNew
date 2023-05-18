@@ -13,7 +13,6 @@ use App\Http\Controllers\InterventionsController;
 use App\Http\Controllers\InventoryHoneyController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\InventoryPlaceController;
-use App\Http\Controllers\WeatherController;
 use App\Http\Controllers\HoneyJarController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -116,11 +115,7 @@ Route::middleware(['auth', 'user.activation_state:' . User::ACTIVATION_STATE_ACT
 
     Route::post('/inventoryHoney/record', [HoneyJarController::class, 'createRecord'])
         ->name('inventoryHoney.record');
-    // Weathers -----------------------------------------------------------------------------------------------------------------
-
-    Route::get('/weather', [WeatherController::class, 'index'])
-        ->name('weather');
-
+ 
     // InventoryMaterial --------------------------------------------------------------------------------------------------------
 
     Route::get('/inventoryMaterial', [MaterialController::class, 'index'])

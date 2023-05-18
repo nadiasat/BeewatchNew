@@ -8,6 +8,7 @@ import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import { Link } from '@inertiajs/inertia-vue3';
 import { usePage } from '@inertiajs/inertia-vue3'
 import { computed } from 'vue'
+import WeatherModal from '@/Components/Weather/WeatherModal.vue';
 
 const showingNavigationDropdown = ref(false);
 
@@ -31,12 +32,13 @@ console.log(user.value.permissions.includes('manage users'));
                             <div class="flex lg:flex-col gap-10">
 
                                 <!-- Logo -->
-                                <div class="flex items-center">
+                                <div class="flex items-center justify-between">
                                     <Link :href="route('apiary')">
                                         <ApplicationLogo
-                                            class="block lg:h-6 h-4 w-auto fill-current text-gray-800"
+                                            class="block lg:h-4 h-3 w-auto fill-current text-gray-800"
                                         />
                                     </Link>
+                                    <WeatherModal></WeatherModal>
                                 </div>
 
                                 <!-- Navigation Links -->
@@ -104,7 +106,8 @@ console.log(user.value.permissions.includes('manage users'));
                                         Matériel
                                     </NavLink>
 
-                                    <p>fe</p>
+                                    
+
                                 </div>
                             </div>
 
