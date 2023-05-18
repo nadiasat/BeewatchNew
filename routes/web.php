@@ -93,9 +93,11 @@ Route::middleware(['auth', 'user.activation_state:' . User::ACTIVATION_STATE_ACT
         ->name('documents.show');
 
     Route::post('/documents', [DocumentController::class, 'store'])
+        ->middleware(['can:manage documents'])
         ->name('documents.store');
 
     Route::delete('/documents/{document}', [DocumentController::class, 'destroy'])
+        ->middleware(['can:manage documents'])
         ->name('documents.destroy');
 
 

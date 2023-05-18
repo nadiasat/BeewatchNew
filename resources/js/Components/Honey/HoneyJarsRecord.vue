@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col lg:flex-row items-left lg:items-center mb-4 gap-4">
+    <div class="flex flex-col lg:flex-row justify-between lg:flex-wrap my-5 px-1 lg:px-6 lg:items-center gap-4 lg:gap-0">
         <h4 class="w-full sm:w-96 font-bold text-xl shrink">Historique des sorties</h4>
         <RecordCreate :jars="jars" :users="users"></RecordCreate>
     </div>

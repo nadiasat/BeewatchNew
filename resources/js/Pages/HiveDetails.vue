@@ -2,7 +2,7 @@
     <Head title="Détails" />
 
     <BreezeAuthenticatedLayout>
-        <div class="container mx-auto p-4">
+        <div class="container mx-auto p-4 z-0">
         <div>
                 <div class="flex flex-col lg:flex-row justify-between lg:flex-wrap my-5 px-1 lg:px-6 lg:items-center">
                     <div class="flex items-center">

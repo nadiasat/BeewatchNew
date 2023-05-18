@@ -7,7 +7,8 @@
                 <div>
                     <div class="flex flex-col lg:flex-row justify-between lg:flex-wrap my-5 px-1 lg:px-6 lg:items-center">   
                         <h2 class="text-3xl font-bold mr-6 mb-5 grow ">Documents</h2>
-                        <DocumentCreate :documents="documents"></DocumentCreate>
+                        <DocumentCreate v-if="$page.props.auth.user.permissions.includes('manage documents')" 
+                        :documents="documents"></DocumentCreate>
                     </div>
                 </div>
 

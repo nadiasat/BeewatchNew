@@ -1,6 +1,6 @@
 <template>
     <transition name="fade">
-      <div class="w-full h-screen fixed left-0 top-0 z-20">
+      <div class="w-full h-screen fixed left-0 top-0 z-50">
         <div class="bg-black-400 z-30 bg-opacity-60 overflow-hidden h-screen"
              @click="close"></div>
         <div class="w-full h-full max-h-full absolute z-40 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">

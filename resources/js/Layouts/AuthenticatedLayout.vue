@@ -24,7 +24,7 @@ console.log(user.value.permissions.includes('manage users'));
 <template>
     <div>
         <div class="min-h-screen bg-[#F6F5F1] lg:flex">
-            <nav class="bg-white border-b border-gray-100 sticky top-0">
+            <nav class="bg-white border-b border-gray-100 sticky top-0 z-40">
                 <!-- Primary Navigation Menu -->
                 <div class="px-6 py-4 lg:py-10 h-full">
                     <div class="w-full flex justify-between h-full">
@@ -32,10 +32,10 @@ console.log(user.value.permissions.includes('manage users'));
                             <div class="flex lg:flex-col gap-10">
 
                                 <!-- Logo -->
-                                <div class="flex items-center justify-between">
+                                <div class="flex items-center lg:items-stretch justify-between gap-4 lg:gap-6 flex-row lg:flex-col">
                                     <Link :href="route('apiary')">
                                         <ApplicationLogo
-                                            class="block lg:h-4 h-3 w-auto fill-current text-gray-800"
+                                            class="block h-4 lg:h-6 w-auto fill-current text-gray-800"
                                         />
                                     </Link>
                                     <WeatherModal></WeatherModal>
@@ -250,7 +250,7 @@ console.log(user.value.permissions.includes('manage users'));
             </header>
 
             <!-- Page Content -->
-            <main class="grow">
+            <main class="w-full max-h-screen">
                 <slot />
             </main>
         </div>

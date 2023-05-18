@@ -10,7 +10,7 @@
                 </div>
             </div>
 
-            <div class=" px-4 mx-auto h-full">
+            <div class=" px-4 mx-auto h-full z-0">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-4">
                     <FullCalendar :options="calendarOptions" />
                     
@@ -221,6 +221,7 @@ export default {
                 initialView: 'dayGridMonth',
                 selectable: true,
                 events: this.events,
+                height: 'auto',
                 headerToolbar: {
                     center: 'addEventButton'
                 },
