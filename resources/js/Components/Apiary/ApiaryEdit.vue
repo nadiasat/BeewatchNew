@@ -103,7 +103,7 @@ export default {
         },
         deleteApiary() {
             Swal.fire({
-                title: "Voulez-vous vraiment supprimer cet événement ?",
+                title: "Voulez-vous vraiment supprimer ce rucher ?",
                 text: "Cette action est irréversible.",
                 icon: 'warning',
                 showCancelButton: true,

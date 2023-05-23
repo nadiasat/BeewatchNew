@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Models\HoneyJar;
 use App\Models\User;
 use Inertia\Inertia;
+use PHPUnit\Runner\Hook;
+use Termwind\Components\Dd;
 
 class HoneyJarController extends Controller
 {
@@ -72,6 +74,8 @@ class HoneyJarController extends Controller
     {
         $honey_jar = HoneyJar::find($honey_jar_id);
 
+        // delete only honey_jar not honey_jar_user (records)
+
         $honey_jar->delete();
 
         return redirect()->route('inventoryHoney');
@@ -91,7 +95,9 @@ class HoneyJarController extends Controller
 
         //update nb_jar in honey_jar table where current nb_jar - nb_jar in request
         //if nb_jar is negative, return error
+        
         if ($honey_jar->nb_jar - $request->nb_jar < 0) {
+            //dd('error');
             return redirect()->route('inventoryHoney');
         } else {
             $honey_jar->update([

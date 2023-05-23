@@ -10,7 +10,7 @@
     <Modal v-show="modalUpdateMaterial" @close="modalUpdateMaterial = false">
         <div class="container">
             <form @submit.prevent="updateMaterial()" class="mx-8">
-                <h4 class="mb-5 text-center text-2xl font-semibold">Modifier le lieu de stockage</h4>
+                <h4 class="mb-5 text-center text-2xl font-semibold">Modifier le matériel</h4>
 
                 <BreezeLabel for="name" value="Nom" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900" />
                 <BreezeInput v-model="updateMaterialForm.name" placeholder="Nom du lieu" id="name" type="text"

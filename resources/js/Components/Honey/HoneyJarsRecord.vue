@@ -70,7 +70,8 @@ export default {
             //parse date to display mm-dd-yyyy hh:mm
             record.created_at = new Date(record.created_at).toLocaleString();
             // fromat date to display "le dd-mm-yyyy à hh:mm"
-            record.created_at = record.created_at.slice(0, 10);
+            //record.created_at = record.created_at.slice(0, 10);
+            record.created_at = record.created_at.replace(/-/g, "/");
             
         });
 

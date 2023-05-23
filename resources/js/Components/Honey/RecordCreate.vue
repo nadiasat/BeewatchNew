@@ -82,6 +82,7 @@ import BreezeLabel from "@/Components/InputLabel.vue";
 import BreezeInput from "@/Components/TextInput.vue";
 import VueMultiselect from 'vue-multiselect';
 import Swal from "sweetalert2";
+import { constrainPoint } from "@fullcalendar/core/internal";
 
 export default {
     name: "RecordCreate",
@@ -138,9 +139,36 @@ export default {
             //get only id of user
             this.createJarForm.user = this.createJarForm.user.id;
 
-            console.log(this.createJarForm);
+            //console.log(this.createJarForm);
+            //$honey_jar->nb_jar - $request->nb_jar < 0
+            //console.log(this.jars);
+
+            // find jar in jars array
+            let jar = this.jars.find(jar => jar.id == this.createJarForm.jar);
+
+            if (jar.nb_jar - this.createJarForm.nb_jar < 0) {
+                //console.log('error');
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Le stock actuel de pot n\'est pas suffisant !',
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3500,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+                //set stock to null
+                this.createJarForm.nb_jar = null;
+                return;
+            }
 
             this.createJarForm.post(route('inventoryHoney.record'), {
+                // if  new record nb_jar - nb_nbjar is lower than 0, print error
+
                 preserveState: false,
                 onSuccess() {
                     console.log('success');
