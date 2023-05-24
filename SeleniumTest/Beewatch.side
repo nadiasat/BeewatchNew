@@ -621,6 +621,20 @@
     "parallel": false,
     "timeout": 300,
     "tests": ["65104c92-bd96-4666-b96b-99902e540dc4", "0c43482f-5c60-4aa5-9f59-1a44d0f05e7b", "31be967a-fc90-43ff-83f5-4dc78a2150e2", "af94bd2c-6ae1-41e0-bcfa-88ee272413db", "c664ba03-9f52-4f75-9787-6f02026bd70c"]
+  }, {
+    "id": "2df6ebd4-8084-4f78-b204-df0ea34d8e53",
+    "name": "Hives",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": []
+  }, {
+    "id": "b7534563-f46c-4e6f-be0b-692bb25d4b40",
+    "name": "Apiaries",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": []
   }],
   "urls": ["http://127.0.0.1:8000/", "http://127.0.0.1:8000/users"],
   "plugins": []

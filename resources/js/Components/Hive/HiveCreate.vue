@@ -125,6 +125,14 @@ export default {
     },
     methods: {
         submit() {
+            // format date_queen if not null
+            if (this.createHiveForm.date_queen != null) {
+
+                this.createHiveForm.date_queen = this.createHiveForm.date_queen.split('-').reverse().join('/')
+                console.log(this.createHiveForm.date_queen)
+            }
+
+
             console.log(this.createHiveForm)
             this.createHiveForm.rise = this.createHiveForm.rise === 'true' ? true : false
 

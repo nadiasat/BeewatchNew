@@ -53,7 +53,7 @@ class HiveController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             //date not obligatory
-            'date_queen' => 'nullable|date',
+            'date_queen' => 'nullable|string|max:255',
 
             //color not obligatory
             'color_queen' => 'nullable|string|max:255',
@@ -64,9 +64,10 @@ class HiveController extends Controller
             'nb_varroa' => 'nullable|numeric',
         ]);
 
+
         $hive = Hive::create([
             'name' => $request->name,
-            'date_queen' => $request->date_queen->format('d/m/Y'),
+            'date_queen' => $request->date_queen,   
             'color_queen' => $request->color_queen,
             'rise' => $request->rise,
             'nb_frames' => $request->nb_frames == null ? 0 : $request->nb_frames,
