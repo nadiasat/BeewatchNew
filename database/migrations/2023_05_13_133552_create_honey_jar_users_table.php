@@ -15,7 +15,6 @@ return new class extends Migration
     {
         Schema::create('honey_jar_user', function (Blueprint $table) {
             $table->id();
-            // do not delete when associated honey jar is deleted
             $table->unsignedBigInteger('honey_jar_id');
             $table->unsignedBigInteger('user_id');
             $table->integer('nb_jar');

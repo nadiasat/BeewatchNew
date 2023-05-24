@@ -63,30 +63,12 @@ import RecordCreate from './RecordCreate.vue';
 export default {
     name: "HoneyJarsRecord",
     props: ['records', 'jars', 'users'],
-    setup(props) {
-        //for each records in props format the date¨
-        props.records.forEach(record => {
-            
-            //parse date to display mm-dd-yyyy hh:mm
-            record.created_at = new Date(record.created_at).toLocaleString();
-            // fromat date to display "le dd-mm-yyyy à hh:mm"
-            //record.created_at = record.created_at.slice(0, 10);
-            record.created_at = record.created_at.replace(/-/g, "/");
-            
-        });
-
-    },
     components: {
     RecordCreate,
     RecordCreate
 },
     methods: {
     },
-    mounted() {
-        //console.log(this.materials[1]);
-        // set current materials equal to materials object of the selected inventory place (default is the first one)
-    },
-    //components: { UserDelete, UserEdit }
 }
 </script>
 

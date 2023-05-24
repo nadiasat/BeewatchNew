@@ -20,7 +20,17 @@ class InterventionsController extends Controller
         //dd($hive);
         $apiary = Apiary::find($hive->apiary_id);
 
+        //format date of the hive
+        
+
         $interventions = $hive->interventions()->orderBy('created_at', 'desc')->get();
+
+        // format date of interventions
+
+        $interventions->map(function ($intervention) {
+             $intervention->formated_date = $intervention->created_at->format('d/m/Y');
+             return $intervention;
+         });
 
         //foreach intervention store in details field the 
         foreach ($interventions as $intervention) {
@@ -58,9 +68,9 @@ class InterventionsController extends Controller
                 //get the nb varroa of the intervention
                 $nb_varroa = $intervention->intervention_control->nb_varroa;
                 //get the date of the intervention
-                $date = $intervention->created_at->format('d/m/Y');
+                //$date = $intervention->created_at->format('d/m/Y');
                 //add the date and the nb varroa to the array
-                $record_nb_varroa[] = ['date' => $date, 'nb_varroa' => $nb_varroa];
+                $record_nb_varroa[] = ['date' => $intervention->formated_date, 'nb_varroa' => $nb_varroa];
             }
         }
 

@@ -142,7 +142,6 @@ Route::middleware(['auth', 'user.activation_state:' . User::ACTIVATION_STATE_ACT
     ->name('inventoryPlace.destroy');
 
     // Hives --------------------------------------------------------------------------------------------------------------------
-    //Route is appiray/apiary_id/hive
     Route::get('/apiary/{apiary}/hive', [HiveController::class, 'index'])
     ->name('hive');
 
@@ -152,21 +151,15 @@ Route::middleware(['auth', 'user.activation_state:' . User::ACTIVATION_STATE_ACT
     Route::get('/interventionMaterial', [InterventionMaterialController::class, 'store'])
         ->name('interventionMaterial.store');
 
-
-    //delete hive
     Route::delete('/hive/{hive}', [HiveController::class, 'destroy'])
         ->middleware(['can:manage hives'])
         ->name('hive.destroy');
 
-    
-    
     Route::put('/apiary/{apiary}/hive/{hive}/deacivateHive', [HiveController::class, 'deactivateHive'])
         ->name('hive.deactivateHive');
     
     Route::get('/intervetionQueen/deactivate', [InterventionQueenController::class, 'deactivate'])
         ->name('interventionQueen.deactivate');
-
-    
     
     Route::put('/apiary/{apiary}/hive/{hive}/activateHive', [HiveController::class, 'activateHive'])
     ->name('hive.activateHive');

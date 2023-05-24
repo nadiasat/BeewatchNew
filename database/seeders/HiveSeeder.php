@@ -21,7 +21,7 @@ class HiveSeeder extends Seeder
         #APIARY 1 -----------------------------------------------
         Hive::create([
             'name' => 'Ginette',
-            'date_queen' => now()->format('Y-m-d'),
+            'date_queen' => now()->format('d/m/Y'),
             //hex color code red
             'color_queen' => '#EE82EE',
             'rise' => true,
@@ -56,7 +56,7 @@ class HiveSeeder extends Seeder
         #APIARY 2 -----------------------------------------------      
         Hive::create([
             'name' => 'Henri',
-            'date_queen' => now()->format('Y-m-d'),
+            'date_queen' => now()->format('d/m/Y'),
             'color_queen' => '#FF0000',
             'rise' => true,
             'nb_frames' => 4,
@@ -67,7 +67,7 @@ class HiveSeeder extends Seeder
         
         Hive::create([
             'name' => 'Pierre',
-            'date_queen' => now()->format('Y-m-d'),
+            'date_queen' => now()->format('d/m/Y'),
             'color_queen' => '#FFFF00',
             'rise' => false,
             'nb_frames' => 5,
@@ -78,7 +78,7 @@ class HiveSeeder extends Seeder
 
         Hive::create([
             'name' => 'Bertrand',
-            'date_queen' => now()->format('Y-m-d'),
+            'date_queen' => now()->format('d/m/Y'),
             'color_queen' => '#008000',
             'rise' => false,
             'nb_frames' => 9,
@@ -124,7 +124,7 @@ class HiveSeeder extends Seeder
 
         Hive::create([
             'name' => 'Jean',
-            'date_queen' => now()->format('Y-m-d'),
+            'date_queen' => now()->format('d/m/Y'),
             'color_queen' => '#0000FF',
             'rise' => true,
             'nb_frames' => 10,
@@ -146,7 +146,7 @@ class HiveSeeder extends Seeder
 
         Hive::create([
             'name' => 'Jacques',
-            'date_queen' => now()->format('Y-m-d'),
+            'date_queen' => now()->format('d/m/Y'),
             'color_queen' => '#0000FF',
             'rise' => false,
             'nb_frames' => 12,

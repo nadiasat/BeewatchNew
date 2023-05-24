@@ -5,7 +5,7 @@
     w-full justify-between">
       <div class="texts flex flex-col items-start">
         <p class="title self-stretch mb-1 font-semibold text-lg">{{ intervention.type}}</p>
-        <p class="subtitle font-normal self-stretch text-sm"> {{ intervention.created_at }}</p>
+        <p class="subtitle font-normal self-stretch text-sm"> {{ intervention.formated_date }}</p>
       </div>
       <div class="btn-container slef-stretch flex gap-4">
 
@@ -25,7 +25,7 @@
     <Modal v-show="showControlModal" @close="showControlModal = false">
       <form id="control-form" class="mx-8">
           <h4 class="text-center text-2xl font-bold pb-2 text-zinc-900">Résumé du contrôle</h4>
-          <p class="text-center text-base font-semibold pb-8 text-zinc-900">Intervention du : {{ intervention.created_at }}</p>
+          <p class="text-center text-base font-semibold pb-8 text-zinc-900">Intervention du : {{ intervention.formated_date }}</p>
           <BreezeLabel value="Avez-vous aperçu la reine ?" class=" font-bold text-base mt-4 lg:mt-0 text-zinc-900 "/>
           <!-- make 2 radio buttons yes or no -->
           <div class="flex items-center gap-4 mt-1">
@@ -212,7 +212,7 @@
         <form id="material-form" @submit.prevent="updateMaterial()"
         class="mx-8">
             <h4 class="text-center text-2xl font-bold pb-2 text-zinc-900">Résumé de la modification du matériel</h4>
-            <p class="text-center text-base font-semibold pb-8 text-zinc-900">Intervention du : {{ intervention.created_at }}</p>
+            <p class="text-center text-base font-semibold pb-8 text-zinc-900">Intervention du : {{ intervention.formated_date }}</p>
             <BreezeLabel value="Hausse" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
             <!-- make 2 radio buttons yes or no -->
             <div class="flex items-center gap-4 mt-1">
@@ -441,9 +441,9 @@
       }
 
         //parse date to display mm-dd-yyyy hh:mm
-        this.intervention.created_at = new Date(this.intervention.created_at).toLocaleString();
+        //this.intervention.formated_date = new Date(this.intervention.formated_date).toLocaleString();
         // fromat date to display "le dd-mm-yyyy à hh:mm"
-        this.intervention.created_at = this.intervention.created_at.slice(0, 10) + " à " + this.intervention.created_at.slice(11, 16);
+        //this.intervention.formated_date = this.intervention.formated_date.slice(0, 10) + " à " + this.intervention.formated_date.slice(11, 16);
 
         //console.log(this.intervention);
     

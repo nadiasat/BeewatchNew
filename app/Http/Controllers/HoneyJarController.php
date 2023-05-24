@@ -14,7 +14,9 @@ class HoneyJarController extends Controller
 {
     public function index()
     {
-        $honeyjars = HoneyJar::all();
+        //$honeyjars = HoneyJar::all();
+        // GET ALL HONEY JARS EVEN DELETED ONES
+        $honeyjars = HoneyJar::withTrashed()->get();
 
         $records = [];
 
@@ -28,12 +30,16 @@ class HoneyJarController extends Controller
                     'size' => $honeyjar->size,
                     'nb_jar' => $user->pivot->nb_jar,
                     'user_name' => $user->lastname . ' ' . $user->firstname,
-                    'created_at' => $user->pivot->created_at,
+                    'created_at' => $user->pivot->created_at->format('d/m/Y H:i:s'),
                 ];
             }
             
         }
-        
+   
+        //GET ONLY THE NON DELETED ONEs
+        $honeyjars = HoneyJar::all();
+
+
 
         $honeyjars = $honeyjars->map(function ($honeyjar) {
             return [
@@ -74,8 +80,7 @@ class HoneyJarController extends Controller
     {
         $honey_jar = HoneyJar::find($honey_jar_id);
 
-        // delete only honey_jar not honey_jar_user (records)
-
+        // soft delete
         $honey_jar->delete();
 
         return redirect()->route('inventoryHoney');

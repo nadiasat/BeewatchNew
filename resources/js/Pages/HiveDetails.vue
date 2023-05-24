@@ -83,7 +83,7 @@ export default {
         });
         //get the date of each interventions but only keep dd/mm/yyyy
         const labels = props.record_nb_varroa.map((record) => {
-            return record.date.split('T')[0]
+            return record.date
         })
         const data = {
             labels: labels,

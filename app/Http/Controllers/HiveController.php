@@ -22,6 +22,7 @@ class HiveController extends Controller
         //$hives = $apiary->hives()->get();
         $hives = Hive::where('apiary_id', $apiary_id)->get();
 
+        //dd($hives);
         $hives = $hives->map(function ($hive) {
             return [
                 'id' => $hive->id,
@@ -35,6 +36,7 @@ class HiveController extends Controller
                 'apiary_id' => $hive->apiary_id,
             ];
         });
+
 
         return Inertia::render('Hive', [
             'hives' => $hives,
@@ -64,7 +66,7 @@ class HiveController extends Controller
 
         $hive = Hive::create([
             'name' => $request->name,
-            'date_queen' => $request->date_queen,
+            'date_queen' => $request->date_queen->format('d/m/Y'),
             'color_queen' => $request->color_queen,
             'rise' => $request->rise,
             'nb_frames' => $request->nb_frames == null ? 0 : $request->nb_frames,
