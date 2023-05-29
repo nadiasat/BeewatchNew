@@ -12,6 +12,7 @@ class HoneyJar_user extends Model
     protected $fillable = [
         'honey_jar_id',
         'user_id',
+        'other_person',
         'nb_jar'
     ];
 }

@@ -17,17 +17,44 @@
             <form @submit.prevent="submit" class="mx-8">
                 <h4 class="mb-5 text-center text-2xl font-semibold">Nouvelle sortie de pots</h4>
                 
-                <BreezeLabel for="user" value="Personne" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900" />
-                <VueMultiselect 
-                    v-model="createJarForm.user"
-                    :options="users"
-                    :taggable="true"
-                    :multiple="false"
-                    :label="'name'"
-                    :track-by="'id'"
-                    id="user" 
-                    class="mt-1 block w-full">
-                </VueMultiselect>
+                    <!-- make 2 radio buttons yes or no -->
+                    <div class="flex items-center gap-4 mt-1">
+                        <label for="user">
+                            <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
+                            v-model="createJarForm.other_person_checked" 
+                            type="radio" id="user" name="other_person" value="false"
+                            @change="onChange($event)">
+                            Membre
+                        </label>
+                        <label for="other_person">
+                            <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
+                            v-model="createJarForm.other_person_checked" 
+                            type="radio" id="other_person" name="other_person" value="true" 
+                            @change="onChange($event)">
+                            Personne externe
+                        </label>
+                    </div>
+                
+                <div id="other_person_input" :disabled="!createJarForm.other_person_checked">
+                    <BreezeLabel for="other_person" value="Personne externe" class="text-left font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
+                    <BreezeInput v-model="createJarForm.other_person" placeholder="Nom de la personne" id="other_person" type="text"
+                        class="mt-1 block w-full" />
+                </div>
+
+                <div id="membre_input" :disabled="createJarForm.other_person_checked">
+                    <BreezeLabel for="user" value="Personne" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900" />
+                    <VueMultiselect 
+                        v-model="createJarForm.user"
+                        :options="users"
+                        :taggable="true"
+                        :multiple="false"
+                        :label="'name'"
+                        :track-by="'id'"
+                        id="user" 
+                        class="mt-1 block w-full">
+                    </VueMultiselect>
+                </div>
+
 
                 <div class="flex gap-4">
                     <div class="flex-grow">
@@ -80,6 +107,7 @@ import Modal from "@/Components/Modal.vue";
 import { useForm } from "@inertiajs/inertia-vue3";
 import BreezeLabel from "@/Components/InputLabel.vue";
 import BreezeInput from "@/Components/TextInput.vue";
+import BreezeCheckbox from "@/Components/Checkbox.vue";
 import VueMultiselect from 'vue-multiselect';
 import Swal from "sweetalert2";
 import { constrainPoint } from "@fullcalendar/core/internal";
@@ -100,6 +128,7 @@ export default {
         Modal,
         BreezeLabel,
         BreezeInput,
+        BreezeCheckbox,
         VueMultiselect
     },
     data: function (props) {
@@ -126,6 +155,8 @@ export default {
                 nb_jar: null,
                 jar: null,
                 user: null,
+                other_person_checked: false,
+                other_person: null,
             }),
             jars: props.jars,
             
@@ -188,10 +219,26 @@ export default {
                 }
             })
         },
+        //on change
+        onChange(event) {
+            //console.log(event.target.value);
+            console.log(this.createJarForm.other_person_checked);
+            //if other_person_checked is true, set user to null
+
+            if (this.createJarForm.other_person_checked) {
+                this.createJarForm.user = null;
+
+            }
+            //if other_person_checked is false, set other_person to null
+            else {
+                this.createJarForm.other_person = null;
+            }
+        }
     },
     mounted() {
         // console.log(this.jars);
         // console.log(this.users);
+
     }
 }
 </script>
