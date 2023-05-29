@@ -3,8 +3,6 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-
-use App\Models\HoneyJar;
 use Illuminate\Database\Seeder;
 
 
@@ -24,12 +22,6 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RoleSeeder::class,
             UserSeeder::class,
-            ApiarySeeder::class,
-            HiveSeeder::class,
-            EventSeeder::class,
-            InventoryPlaceSeeder::class,
-            MaterialSeeder::class,
-            HoneyJarSeeder::class,
         ]);
 
 
