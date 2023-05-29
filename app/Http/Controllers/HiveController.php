@@ -48,7 +48,7 @@ class HiveController extends Controller
     public function store(Request $request)
     {
         //print $request
-        print_r($request->all());
+        
 
         $request->validate([
             'name' => 'required|string|max:255',
@@ -137,9 +137,14 @@ class HiveController extends Controller
     }
 
 
-    public function activateHive(Request $request, int $hive_id)
+    public function activateHive(Request $request, int $hive_id, int $apiary_id)
     {
+        
+
+        dd($hive_id, $apiary_id, $request->all());
+
         $hive = Hive::find($hive_id);
+
 
         $request->validate([
             'date_queen' => 'required|date',
@@ -147,6 +152,8 @@ class HiveController extends Controller
             'nb_frames' => 'nullable|numeric',
             'rise' => 'nullable|boolean',
         ]);
+
+        //dd($hive);
 
         $hive->is_active = true;
         $hive->date_queen = $request->date_queen;
