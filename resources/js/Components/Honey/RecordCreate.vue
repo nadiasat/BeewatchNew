@@ -22,26 +22,26 @@
                         <label for="user">
                             <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
                             v-model="createJarForm.other_person_checked" 
-                            type="radio" id="user" name="other_person" value="false"
+                            type="radio" id="user" name="other_person_radio" value="false"
                             @change="onChange($event)">
                             Membre
                         </label>
-                        <label for="other_person">
+                        <label for="other_person_yes">
                             <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
                             v-model="createJarForm.other_person_checked" 
-                            type="radio" id="other_person" name="other_person" value="true" 
+                            type="radio" id="other_person" name="other_person_radio" value="true" 
                             @change="onChange($event)">
                             Personne externe
                         </label>
                     </div>
                 
-                <div id="other_person_input" :disabled="!createJarForm.other_person_checked">
-                    <BreezeLabel for="other_person" value="Personne externe" class="text-left font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
-                    <BreezeInput v-model="createJarForm.other_person" placeholder="Nom de la personne" id="other_person" type="text"
+                <div id="other_person_input" v-if="createJarForm.other_person_checked == 'true'">
+                    <BreezeLabel for="other_person_name" value="Personne externe" class="text-left font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
+                    <BreezeInput v-model="createJarForm.other_person" placeholder="Nom de la personne" id="other_person_name" type="text"
                         class="mt-1 block w-full" />
                 </div>
 
-                <div id="membre_input" :disabled="createJarForm.other_person_checked">
+                <div id="membre_input" v-else="createJarForm.other_person_checked">
                     <BreezeLabel for="user" value="Personne" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900" />
                     <VueMultiselect 
                         v-model="createJarForm.user"
@@ -167,9 +167,14 @@ export default {
         submit() {
             //get only id of jar
             this.createJarForm.jar = this.createJarForm.jar.id;
-            //get only id of user
-            this.createJarForm.user = this.createJarForm.user.id;
 
+            //if user is null, set user to 0
+            if (this.createJarForm.user == null) {
+                this.createJarForm.user = 0;
+            }
+            else {
+                this.createJarForm.user = this.createJarForm.user.id;
+            }
             //console.log(this.createJarForm);
             //$honey_jar->nb_jar - $request->nb_jar < 0
             //console.log(this.jars);
@@ -222,17 +227,17 @@ export default {
         //on change
         onChange(event) {
             //console.log(event.target.value);
-            console.log(this.createJarForm.other_person_checked);
+            //console.log(this.createJarForm.other_person_checked);
             //if other_person_checked is true, set user to null
 
-            if (this.createJarForm.other_person_checked) {
+            if (this.createJarForm.other_person_checked == 'true') {
                 this.createJarForm.user = null;
-
             }
-            //if other_person_checked is false, set other_person to null
             else {
                 this.createJarForm.other_person = null;
             }
+
+            console.log(this.createJarForm);
         }
     },
     mounted() {

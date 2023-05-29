@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('honey_jar_id');
             $table->unsignedBigInteger('user_id');
-            $table->string('other_person');
+            $table->string('other_person')->nullable();
             $table->integer('nb_jar');
             $table->timestamps();
         });

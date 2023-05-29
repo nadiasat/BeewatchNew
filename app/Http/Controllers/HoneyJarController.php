@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\HoneyJar;
 use App\Models\User;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\DB;
 use PHPUnit\Runner\Hook;
 use Termwind\Components\Dd;
 
@@ -24,22 +25,43 @@ class HoneyJarController extends Controller
 
         //Foreach honeyjar, get the pivot table to get the number of jars for each user
         foreach ($honeyjars as $honeyjar) {
+            //get the records of honeyjar where other_person is not null
 
             foreach ($honeyjar->users as $user) {
                 $records[] = [
                     'size' => $honeyjar->size,
                     'nb_jar' => $user->pivot->nb_jar,
                     'user_name' => $user->lastname . ' ' . $user->firstname,
-                    'created_at' => $user->pivot->created_at->format('d/m/Y H:i:s'),
+                    'created_at' => $user->pivot->created_at->format('d/m/Y'),
                 ];
             }
             
         }
+
+        //get the records of honeyjar where other_person is not null use DB format date (Y-m-d H:i:s)
+        $other_records = DB::table('honey_jar_user')
+            ->join('honey_jars', 'honey_jars.id', '=', 'honey_jar_user.honey_jar_id')
+            ->select('honey_jars.size', 'honey_jar_user.nb_jar', 'honey_jar_user.other_person', 'honey_jar_user.created_at')
+            ->whereNotNull('honey_jar_user.other_person')
+            ->get();
+
+        //add the other records to the records array
+        foreach ($other_records as $other_record) {
+            $records[] = [
+                'size' => $other_record->size,
+                'nb_jar' => $other_record->nb_jar,
+                'user_name' => $other_record->other_person,
+                'created_at' => date('d/m/Y', strtotime($other_record->created_at)),
+            ];
+        }
+
+        //sort records by date then user_name
+        usort($records, function ($a, $b) {
+            return $a['created_at'] <=> $b['created_at'] ?: $a['user_name'] <=> $b['user_name'];
+        });
    
         //GET ONLY THE NON DELETED ONEs
         $honeyjars = HoneyJar::all();
-
-
 
         $honeyjars = $honeyjars->map(function ($honeyjar) {
             return [
@@ -88,12 +110,10 @@ class HoneyJarController extends Controller
 
     public function createRecord(Request $request) {
         $request->validate([
-            'user' => 'required|numeric',
             'jar' => 'required|numeric',
             'nb_jar' => 'required|numeric',
         ]);
         
-
 
         //get jar
         $honey_jar = HoneyJar::find($request->jar);
@@ -110,7 +130,14 @@ class HoneyJarController extends Controller
             ]);
         }
 
-        $user = User::find($request->user);
+        //if user is not 0, get user
+        if ($request->user != 0) {
+            //get user
+            $user = User::find($request->user);
+        } else {
+            $user = $request->user;
+        }
+        
         //if date is null, set it to now
         if ($request->created_at == null) {
             $request->created_at = now();
@@ -118,8 +145,13 @@ class HoneyJarController extends Controller
 
         //dd($request->all());
 
-        //attach user to honey_jar with nb_jar
-        $honey_jar->users()->attach($user, ['nb_jar' => $request->nb_jar, 'created_at' => $request->created_at]);
+        if ($request->user == 0) {
+            //attach user to honey_jar with nb_jar
+            $honey_jar->users()->attach($user, ['nb_jar' => $request->nb_jar, 'created_at' => $request->created_at, 'other_person' => $request->other_person]);
+        } else {
+            //attach user to honey_jar with nb_jar
+            $honey_jar->users()->attach($user, ['nb_jar' => $request->nb_jar, 'created_at' => $request->created_at, 'other_person' => $request->other_person]);
+        }
 
         return redirect()->route('inventoryHoney');
     }
