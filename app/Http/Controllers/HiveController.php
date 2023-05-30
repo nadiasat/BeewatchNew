@@ -89,6 +89,7 @@ class HiveController extends Controller
 
     public function updateMaterial(Request $request, int $hive_id)
     {
+
         $request->validate([
             //rise boolean default false
             'rise' => 'nullable|boolean',
@@ -108,13 +109,17 @@ class HiveController extends Controller
 
         $hive->save();
 
+        //dd($hive);
+
         $apiary = Apiary::find($hive->apiary_id);
 
         //redirect to create intervention material
         return redirect()->route('interventionMaterial.store', 
-        ['new_nb_frames' => $request->nb_frames,
-        'new_rise' => $request->rise,
-        'hive_id' => $hive_id]);
+        [
+            'new_nb_frames' => $request->nb_frames,
+            'new_rise' => $request->rise,
+            'hive_id' => $hive_id
+        ]);
     }
 
     public function deactivateHive(int $hive_id)
@@ -141,7 +146,7 @@ class HiveController extends Controller
     {
         
 
-        dd($hive_id, $apiary_id, $request->all());
+        
 
         $hive = Hive::find($hive_id);
 
