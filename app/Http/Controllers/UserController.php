@@ -63,7 +63,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         //print $request
-        print_r($request->all());
+        //print_r($request->all());
 
         $request->validate([
             'email' => 'required|string|email|max:255|unique:users',

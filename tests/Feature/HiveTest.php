@@ -81,40 +81,38 @@ class HiveTest extends TestCase
 
     }
 
-    //Test if the hive can be deleted
-    // public function test_hive_can_be_deleted()
-    // {
-    //     $user = User::factory()->create();
 
-    //     //$apiary = Apiary::factory()->create();
+    // Test if the hive can be deleted
+    public function test_hive_can_be_deleted()
+    {
+        $user = User::factory()->create();
 
-    //     $hive = Hive::factory()->create();
+        $hive = Hive::factory()->create();
 
-    //     //spatie permission
-    //     SpatiePermission::create(['name' => 'manage hives']);
+        //spatie permission
+        SpatiePermission::create(['name' => 'manage hives']);
 
-    //     //give the user the permission to manage hives
-    //     $user->givePermissionTo('manage hives');
+        //give the user the permission to manage hives
+        $user->givePermissionTo('manage hives');
+
+        $hive_id = $hive->id;
+        $apiary_id = $hive->apiary_id;
 
         
-    //     //delete the hive and pass apiary as parameter
-    //     $response = $this->actingAs($user)->delete('apiary/'. $hive->apiary_id .  '/hive/' . $hive->id, 
-    //     [
-    //         'hive' => $hive->id,
-    //         'apiary' => $hive->apiary_id,
-    //     ]);
+        //delete the hive and pass apiary as parameter
+        $response = $this->actingAs($user)->delete(route('hive.destroy', [$hive_id]), ['id' => $apiary_id]);
+
+        //assert response status
+        $response->assertStatus(302);
 
 
-    //     $response->assertStatus(302);
+        //assert database has not the hive
+        $this->assertDatabaseMissing('hives', [
+            'id' => $hive_id,
+        ]);
 
 
-    //     //assert database has not the hive
-    //     $this->assertDatabaseMissing('hives', [
-    //         'id' => $hive->id,
-    //     ]);
-
-
-    // }
+    }
 
 
 }

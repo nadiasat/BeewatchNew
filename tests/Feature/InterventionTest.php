@@ -148,4 +148,65 @@ class InterventionTest extends TestCase
             'type' => 'new_queen',
         ]);
     }
+
+    // Test if intervention control can be created
+    public function test_intervention_control_can_be_created(){
+
+        $user = User::factory()->create();
+
+        $hive = Hive::factory()->inactive()->create();
+
+        //spatie permission
+        SpatiePermission::create(['name' => 'manage hives']);
+
+        //give the user the permission to manage hives
+        $user->givePermissionTo('manage hives');
+
+        $hive_id = $hive->id;
+
+        //call the route interventionControl.store
+        $response = $this->actingAs($user)->post(route('interventionControl.store', 
+        [
+            'hive_id' => $hive_id,
+            'glimpse_queen' => true,
+            'queen_laid' => false,
+            'brood' => false,
+            'frames_full' => true,
+            'honey' => null,
+            'honey_rise' => true,
+            'sealed_honey' => false,
+            'male_cells' => true,
+            'eliminate_queen_cells' => false,
+            'clean_plate' => true,
+            'nb_varroa' => 12,
+            'comment' => 'test'
+        ]));
+
+        //assert response status
+        $response->assertStatus(302);
+
+        // assert if intervention has been created
+        $this->assertDatabaseHas('interventions', [
+            'hive_id' => $hive_id,
+            'type' => 'control',
+        ]);
+
+        // assert if intervention control has been created
+        $this->assertDatabaseHas('intervention_controls', [
+            'glimpse_queen' => true,
+            'queen_laid' => false,
+            'brood' => false,
+            'frames_full' => true,
+            'honey' => null,
+            'honey_rise' => true,
+            'sealed_honey' => false,
+            'male_cells' => true,
+            'eliminate_queen_cells' => false,
+            'clean_plate' => true,
+            'nb_varroa' => 12,
+            'comment' => 'test'
+        ]);
+            
+    }
+
 }

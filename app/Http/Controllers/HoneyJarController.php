@@ -83,7 +83,7 @@ class HoneyJarController extends Controller
     public function store(Request $request)
     {
         //print $request
-        print_r($request->all());
+        //print_r($request->all());
 
         $request->validate([
             'size' => 'required|string|max:255',
