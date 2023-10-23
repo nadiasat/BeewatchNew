@@ -154,6 +154,7 @@ class HiveController extends Controller
 
     public function updateMaterial(Request $request, int $hive_id)
     {
+
         $request->validate([
             //rise boolean default false
             'rise' => 'nullable|boolean',
@@ -195,7 +196,6 @@ class HiveController extends Controller
         }
 
         $hive->save();
-
 
 
         $apiary = Apiary::find($hive->apiary_id);

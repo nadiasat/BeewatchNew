@@ -14,7 +14,6 @@ class InterventionMaterialController extends Controller
 
     public function store(Request $request)
     {
-        
         //Create the intervention
         $intervention = Interventions::create([
             'hive_id' => $request->hive_id,
