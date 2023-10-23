@@ -24,6 +24,13 @@
                 <BreezeInput v-model="createApiaryForm.address" placeholder="Adresse du rucher" id="address" type="text"
                     class="mt-1 block w-full" required autocomplete="address"/>
 
+                <BreezeLabel for="inventory_place_id" value="Lieu de stockage" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900" />
+                <select v-model="createApiaryForm.inventory_place_id" id="inventory_place_id" 
+                class="mt-1 block w-full border-zinc-300 focus:border-amber-400 focus:ring-amber-400 rounded-md shadow-sm">
+                    <option :value="null" selected>Pas de lieu de stockage associé</option>
+                    <option v-for="inventory_place in inventory_places" :value="inventory_place.id">{{ inventory_place.address }}</option>
+                </select>
+
                 <button type="submit" :class="{ 'opacity-25': createApiaryForm.processing }"
                     :disabled="createApiaryForm.processing"
                     class="mb-4 mt-8 bg-amber-400 border-amber-400 text-black font-semibold border-4 py-2 w-full hover:bg-amber-300 hover:border-amber-300">
@@ -51,22 +58,38 @@ import Swal from "sweetalert2";
 
 export default {
     name: "ApiaryCreate",
+    props: ['inventory_places'],
     components: {
         Modal,
         BreezeLabel,
         BreezeInput
     },
-    data: function () {
+    data(props) {
+
+        console.log(props);
+        //get inventory places address and id
+        let inventory_places = props.inventory_places.map((inventory_place) => {
+            return {
+                id: inventory_place.id,
+                address: inventory_place.address
+            }
+        })
+
+
         return {
+
+            inventory_places: inventory_places,
             modalCreateApiary: false,
             createApiaryForm: useForm({
                 name: null,
-                address: null
+                address: null,
+                inventory_place_id: null,
             }),
         }
     },
     methods: {
         submit() {
+
             this.createApiaryForm.post(route('apiary.store'), {
                 preserveState: false,
                 onSuccess() {
@@ -84,6 +107,24 @@ export default {
                             toast.addEventListener('mouseleave', Swal.resumeTimer)
                         }
                     })
+                },onError: () => {
+
+                console.log('error');
+                let error = Object.values(this.createApiaryForm.errors)[0];
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Erreur',
+                    text: error,
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3500,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                });
                 }
             })
         }

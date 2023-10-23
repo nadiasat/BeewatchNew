@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\HoneyJar;
+use App\Models\Hive;
+use App\Models\Apiary;
 use App\Models\User;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\DB;
@@ -96,6 +98,29 @@ class HoneyJarController extends Controller
         ]);
 
         return redirect()->route('inventoryHoney');
+    }
+
+    public function harvest(Request $request) {
+        //validate jars array in request
+        $request->validate([
+            'jars' => 'required|array',
+        ]);
+
+        //foreach jar in jars array, get the jar and update nb_jar
+        foreach ($request->jars as $jar) {
+
+            $honey_jar = HoneyJar::find($jar['id']);
+
+            $honey_jar->nb_jar = $honey_jar->nb_jar + $jar['number'];
+
+            $honey_jar->save();
+
+        }
+
+        $apiary = Apiary::find($request->apiary_id);
+
+        // //return to hive page
+        return redirect()->route('hive', ['apiary' => $apiary]);
     }
 
     public function destroy(String $honey_jar_id)

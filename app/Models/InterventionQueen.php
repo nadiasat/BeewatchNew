@@ -13,7 +13,7 @@ class InterventionQueen extends Model
         'date_queen',
         'color_queen',
         'rise',
-        'nb_frames',
+        'frames_slots',
         'interventions_id'
     ];
 

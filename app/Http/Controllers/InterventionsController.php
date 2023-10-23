@@ -30,10 +30,14 @@ class InterventionsController extends Controller
         $interventions->map(function ($intervention) {
              $intervention->formated_date = $intervention->created_at->format('d/m/Y');
              return $intervention;
-         });
+        });
+
 
         //foreach intervention store in details field the 
         foreach ($interventions as $intervention) {
+
+            
+
             switch ($intervention->type) {
                 case 'control':
                     $intervention->details = $intervention->intervention_control;
@@ -53,6 +57,14 @@ class InterventionsController extends Controller
 
                 case 'treatment':
                     $intervention->details = $intervention->intervention_treatment;
+                    break;
+
+                case 'add_food':
+                    $intervention->details = $intervention->intervention_food;
+                    break;
+
+                case 'remove_food':
+                    $intervention->details = $intervention->intervention_food;
                     break;
             }
         }

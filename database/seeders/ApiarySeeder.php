@@ -24,16 +24,12 @@ class ApiarySeeder extends Seeder
         Apiary::create([
             'name' => 'Rucher Drize',
             'address' => 'Route de drize 1, 1227 Carouge',
-        ])->users()->sync($users);
+            'inventory_place_id' => 1,
+        ])->inventory_place()->associate(1)->users()->sync($users);
 
         Apiary::create([
             'name' => 'Rucher Batelle',
             'address' => 'Rue de la Tambourine 17, 1227 Carouge',
         ])->users()->sync($users);
-
-        Apiary::create([
-            'name' => 'Rucher Puplinge',
-            'address' => 'Chemin de la Brenaz 15, 1241 Puplinge',
-        ])->users()->sync(array_slice($users, 1, 2));
     }
 }

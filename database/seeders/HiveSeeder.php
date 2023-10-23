@@ -19,27 +19,34 @@ class HiveSeeder extends Seeder
     {
 
         #APIARY 1 -----------------------------------------------
-        Hive::create([
+        $hive_1 = Hive::create([
             'name' => 'Ginette',
             'date_queen' => now()->format('d/m/Y'),
             //hex color code red
             'color_queen' => '#EE82EE',
             'rise' => true,
-            'nb_frames' => 10,
+            'max_nb_frames' => 10,
+            'frames_slots' => 'e,e,e,c,c,c,c,e,e,e',
             'nb_varroa' => 10,
+            'treatment' => 'varroas',
+            'intensity' => 2,
             'is_active' => true,
             'apiary_id' => 1,
+
         ])->apiary()->associate(1);
+
         
         Hive::create([
             'name' => 'Claude',
             'date_queen' => null,
             'color_queen' => null,
             'rise' => false,
-            'nb_frames' => 0,
+            'max_nb_frames' => 10,
+            'frames_slots' => 'e,e,e,e,e,e,e,e,e,e',
             'nb_varroa' => 0,
             'is_active' => false,
             'apiary_id' => 1,
+
         ])->apiary()->associate(1);
 
         Hive::create([
@@ -47,10 +54,12 @@ class HiveSeeder extends Seeder
             'date_queen' => null,
             'color_queen' => null,
             'rise' => false,
-            'nb_frames' => 0,
+            'max_nb_frames' => 10,
+            'frames_slots' => 'e,e,e,e,e,e,e,e,e,e',
             'nb_varroa' => 0,
             'is_active' => false,
             'apiary_id' => 1,
+
         ])->apiary()->associate(1);
 
         #APIARY 2 -----------------------------------------------      
@@ -59,10 +68,12 @@ class HiveSeeder extends Seeder
             'date_queen' => now()->format('d/m/Y'),
             'color_queen' => '#FF0000',
             'rise' => true,
-            'nb_frames' => 4,
+            'max_nb_frames' => 4,
+            'frames_slots' => 'e,c,c,e',
             'nb_varroa' => 12,
             'is_active' => true,
             'apiary_id' => 2,
+
         ])->apiary()->associate(2);
         
         Hive::create([
@@ -70,10 +81,12 @@ class HiveSeeder extends Seeder
             'date_queen' => now()->format('d/m/Y'),
             'color_queen' => '#FFFF00',
             'rise' => false,
-            'nb_frames' => 5,
+            'max_nb_frames' => 5,
+            'frames_slots' => 'e,e,e,e,e',
             'nb_varroa' => 13,
             'is_active' => true,
             'apiary_id' => 2,
+
         ])->apiary()->associate(2);
 
         Hive::create([
@@ -81,10 +94,12 @@ class HiveSeeder extends Seeder
             'date_queen' => now()->format('d/m/Y'),
             'color_queen' => '#008000',
             'rise' => false,
-            'nb_frames' => 9,
+            'max_nb_frames' => 9,
+            'frames_slots' => 'e,e,e,e,e,e,e,e,e',
             'nb_varroa' => 17,
             'is_active' => true,
             'apiary_id' => 2,
+
         ])->apiary()->associate(2);
 
         Hive::create([
@@ -92,10 +107,12 @@ class HiveSeeder extends Seeder
             'date_queen' => null,
             'color_queen' => null,
             'rise' => false,
-            'nb_frames' => 0,
+            'max_nb_frames' => 10,
+            'frames_slots' => 'e,e,e,e,e,e,e,e,e,e',
             'nb_varroa' => 0,
             'is_active' => false,
             'apiary_id' => 2,
+
         ])->apiary()->associate(2);
 
         Hive::create([
@@ -103,56 +120,12 @@ class HiveSeeder extends Seeder
             'date_queen' => null,
             'color_queen' => null,
             'rise' => false,
-            'nb_frames' => 0,
+            'max_nb_frames' => 10,
+            'frames_slots' => 'e,e,e,e,e,e,e,e,e,e',
             'nb_varroa' => 0,
             'is_active' => false,
             'apiary_id' => 2,
+
         ])->apiary()->associate(2);
-
-
-        #APIARY 3 -----------------------------------------
-        Hive::create([
-            'name' => 'Gaston',
-            'date_queen' => null,
-            'color_queen' => null,
-            'rise' => false,
-            'nb_frames' => 0,
-            'nb_varroa' => 0,
-            'is_active' => false,
-            'apiary_id' => 3,
-        ])->apiary()->associate(3);
-
-        Hive::create([
-            'name' => 'Jean',
-            'date_queen' => now()->format('d/m/Y'),
-            'color_queen' => '#0000FF',
-            'rise' => true,
-            'nb_frames' => 10,
-            'nb_varroa' => 15,
-            'is_active' => true,
-            'apiary_id' => 3,
-        ])->apiary()->associate(3);
-
-        Hive::create([
-            'name' => 'Paul',
-            'date_queen' => null,
-            'color_queen' => null,
-            'rise' => false,
-            'nb_frames' => 0,
-            'nb_varroa' => 0,
-            'is_active' => false,
-            'apiary_id' => 3,
-        ])->apiary()->associate(3);
-
-        Hive::create([
-            'name' => 'Jacques',
-            'date_queen' => now()->format('d/m/Y'),
-            'color_queen' => '#0000FF',
-            'rise' => false,
-            'nb_frames' => 12,
-            'nb_varroa' => 6,
-            'is_active' => true,
-            'apiary_id' => 3,
-        ])->apiary()->associate(3);
     }
 }

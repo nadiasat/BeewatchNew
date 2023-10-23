@@ -7,24 +7,24 @@ use Inertia\Inertia;
 use App\Http\Controllers\Controller;
 use App\Models\Interventions;
 use App\Models\Hive;
-use App\Models\InterventionMaterial;
+use App\Models\InterventionTreatment;
 
-class InterventionMaterialController extends Controller
+class InterventionTreatmentController extends Controller
 {
-
     public function store(Request $request)
     {
-        
-        //Create the intervention
+
         $intervention = Interventions::create([
             'hive_id' => $request->hive_id,
-            'type' => 'material',
+            'type' => 'treatment',
         ]);
 
-        $int_material = InterventionMaterial::create([
+        $int_treatment = InterventionTreatment::create([
             'interventions_id' => $intervention->id,
-            'new_rise' => $request->new_rise,
-            'new_frames_slots' => $request->new_frames_slots,
+            'is_active' => $request->is_active,
+            'type' => $request->type,
+            'intensity' => $request->intensity,
+            
         ])->intervention()->associate($intervention);
 
         $apiary = Hive::find($request->hive_id)->apiary_id;

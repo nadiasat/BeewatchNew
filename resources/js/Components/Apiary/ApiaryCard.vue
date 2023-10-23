@@ -18,7 +18,8 @@
 
     <ApiaryEdit 
     v-if="$page.props.auth.user.permissions.includes('manage apiaries')"
-    :apiary="apiary"></ApiaryEdit>
+    :apiary="apiary"
+    :inventory_places="inventory_places"></ApiaryEdit>
 
     </div>
 </template>
@@ -34,7 +35,7 @@ import ApiaryEdit from "./ApiaryEdit.vue";
 export default {
   name: "ApiaryCard",
 
-  props: ["apiary"],
+  props: ["apiary", "inventory_places"],
   data: function () {
     return {
       apiary_id: null,

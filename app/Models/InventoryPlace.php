@@ -18,4 +18,9 @@ class InventoryPlace extends Model
     {
         return $this->hasMany(Material::class);
     }
+
+    public function hives()
+    {
+        return $this->hasMany(Hive::class);
+    }
 }

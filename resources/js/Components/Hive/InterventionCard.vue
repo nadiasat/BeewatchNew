@@ -7,7 +7,8 @@
         <p class="title self-stretch mb-1 font-semibold text-lg">{{ intervention.type}}</p>
         <p class="subtitle font-normal self-stretch text-sm"> {{ intervention.formated_date }}</p>
       </div>
-      <div class="btn-container slef-stretch flex gap-4">
+      <div v-if="intervention.type == 'Contrôle de la ruche' || intervention.type == 'Modification du matériel' || intervention.type == 'Traitement pour varroas' || intervention.type == 'Traitement pour maladie'"
+      class="btn-container slef-stretch flex gap-4">
 
         <div 
         class="btn-show-details rounded-lg
@@ -20,6 +21,8 @@
       </div>
       
     </div>
+
+    
 
     <!-- MODAL CONTROL-->
     <Modal v-show="showControlModal" @close="showControlModal = false">
@@ -126,13 +129,13 @@
           <BreezeLabel value="Le miel est-t-il operculé ?" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
                     <div class="flex items-center gap-4 mt-1">
                         <label for="yes_sealed_honey">
-                            <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
+                            <input disabled class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
                             v-model="controlForm.sealed_honey" type="radio" id="yes_sealed_honey" name="sealed_honey" value="true" 
                             :checked="controlForm.sealed_honey === 1">
                             Oui
                         </label>
                         <label for="no_sealed_honey">
-                            <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
+                            <input disabled class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
                             v-model="controlForm.sealed_honey" type="radio" id="no_sealed_honey" name="sealed_honey" value="false"
                             :checked="controlForm.sealed_honey === 0">
                             Non
@@ -142,13 +145,13 @@
                     <BreezeLabel value="Y a-t-il beaucoup de cellules males ?" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
                     <div class="flex items-center gap-4 mt-1">
                         <label for="yes_male_cells">
-                            <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
+                            <input disabled class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
                             v-model="controlForm.male_cells" type="radio" id="yes_male_cells" name="male_cells" value="true" 
                             :checked="controlForm.male_cells === 1">
                             Oui
                         </label>
                         <label for="no_male_cells">
-                            <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
+                            <input disabled class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
                             v-model="controlForm.male_cells" type="radio" id="no_male_cells" name="male_cells" value="false"
                             :checked="controlForm.male_cells === 0">
                             Non
@@ -158,13 +161,13 @@
                     <BreezeLabel value="Avez-vous aperçu et éliminé des cellules de futures reines ?" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
                     <div class="flex items-center gap-4 mt-1">
                         <label for="yes_eliminate_queen_cells">
-                            <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
+                            <input disabled class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
                             v-model="controlForm.eliminate_queen_cells" type="radio" id="yes_eliminate_queen_cells" name="eliminate_queen_cells" value="true" 
                             :checked="controlForm.eliminate_queen_cells === 1">
                             Oui
                         </label>
                         <label for="no_eliminate_queen_cells">
-                            <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
+                            <input disabled class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
                             v-model="controlForm.eliminate_queen_cells" type="radio" id="no_eliminate_queen_cells" name="eliminate_queen_cells" value="false"
                             :checked="controlForm.eliminate_queen_cells === 0">
                             Non
@@ -174,13 +177,13 @@
                     <BreezeLabel value="La plaque sous les ruchers a-t-elle été nettoyée ?" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
                     <div class="flex items-center gap-4 mt-1">
                         <label for="yes_clean_plate">
-                            <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
+                            <input disabled class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
                             v-model="controlForm.clean_plate" type="radio" id="yes_clean_plate" name="clean_plate" value="true" 
                             :checked="controlForm.clean_plate === 1">
                             Oui
                         </label>
                         <label for="no_eclean_plate">
-                            <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
+                            <input disabled class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
                             v-model="controlForm.clean_plate" type="radio" id="no_clean_plate" name="clean_plate" value="false"
                             :checked="controlForm.clean_plate === 0">
                             Non
@@ -207,10 +210,10 @@
       </div>
     </Modal>
 
+
     <!-- MATERIAL FORM -->
     <Modal v-show="showMaterialModal" @close="() => {showMaterialModal = false}">
-        <form id="material-form" @submit.prevent="updateMaterial()"
-        class="mx-8">
+        <form id="material-form" class="mx-8">
             <h4 class="text-center text-2xl font-bold pb-2 text-zinc-900">Résumé de la modification du matériel</h4>
             <p class="text-center text-base font-semibold pb-8 text-zinc-900">Intervention du : {{ intervention.formated_date }}</p>
             <BreezeLabel value="Hausse" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
@@ -230,9 +233,26 @@
             </div>
 
 
-            <BreezeLabel for="nb_frames" value="Nombre de cadres" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
-            <BreezeInput readonly v-model="materialForm.nb_frames" placeholder="5" id="nb_frames" type="number" min="0" max="12"
-                class="mt-1 block w-full"/>
+            <BreezeLabel for="nb_frames" value="Placement des cadres" class=" font-bold text-base mt-4 lg:mt-0 text-zinc-900 " />
+            <div class="frames-indicator grow flex items-start justify-between pt-[2px] pb-[2px]" >
+                <div v-for="(value, index) in selectedValues" 
+                :key="index"
+                class="flex flex-col gap-1 justify-center items-center">
+                    <!-- if value if empty text is "-", if frame "c", and if separator "s"-->
+
+                    <div
+                    class="w-4 h-[40px] rounded"
+                    :class="value === 'empty' ? 'bg-[#AFAC99]' : value === 'frame' ? 'bg-amber-400' : 'bg-zinc-900'">
+                    </div>
+
+                    <div class="w-4 h-full rounded-md">
+                        <!-- if value is empty pprint "-", if frame "c", and if separator "s"-->
+                        <p class="text-center text-s font-bold text-zinc-900" :class="value === 'empty' ? 'text-zinc-900' : value === 'frame' ? 'text-white' : 'text-white'">
+                            {{ value === 'empty' ? ' ' : value === 'frame' ? 'c' : 's' }}</p>
+                    </div>
+
+                </div>
+            </div>
 
             
         </form>
@@ -241,59 +261,77 @@
         </div>
     </Modal>
 
-    <!-- QUEEN FORM -->
-    <div id="queen-form-container" 
-    class="pt-[10vh] pb-[10vh] w-[90vw] lg:w-[35vw]"
-    v-show="showQueenForm">
-        <h2 class="text-center text-2xl font-bold pb-8">Relancer la ruche</h2>
-        <form id="queen-form" @submit.prevent="activateHive()">
-            <BreezeLabel for="date_queen" value="Date de la reine" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
-            <BreezeInput v-model="queenForm.date_queen" id="date_queen" type="date"
-                class="mt-1 block w-full" required/>
+    <Modal v-show="showTreatmentModal" @close="() => {showTreatmentModal = false}">
+      <!-- TREATMENT FORM -->
+      <form id="treatment-form" class="mx-8">       
+        <h4 v-if="treatmentForm.is_active == 1" class="text-center text-2xl font-bold pb-2 text-zinc-900">Résumé de nouveau traitement</h4>
+        <h4 v-else class="text-center text-2xl font-bold pb-2 text-zinc-900">Résumé de fin de traitement</h4>
+        <p class="text-center text-base font-semibold pb-8 text-zinc-900">Intervention du : {{ intervention.formated_date }}</p> 
+        <BreezeLabel value="Traitement actif ?" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
+        <!-- make 2 radio buttons yes or no -->
+        <div class="flex items-center gap-4 mt-1">
+            <label for="yes">
+                <input disabled class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
+                v-model="treatmentForm.is_active" type="radio" id="yes" name="rise" value="true" 
+                :checked="treatmentForm.is_active === 1">
+                Oui
+            </label>
+            <label for="no">
+                <input disabled class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
+                v-model="treatmentForm.is_active" type="radio" id="no" name="rise" value="false"
+                :checked="treatmentForm.is_active === 0">
+                Non
+            </label>
+        </div>
 
-            <BreezeLabel for="color_queen" value="Couleur de la reine" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
+        <BreezeLabel v-if="treatmentForm.is_active == 'true' || treatmentForm.is_active == 1" 
+        value="Type de traitement" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
+        <!-- make a select with 2 options : varroas and sickness -->
+        <select v-if="treatmentForm.is_active == 'true' || treatmentForm.is_active == 1"
+        required disabled
+        v-model="treatmentForm.type" class="mt-1 block w-full border-zinc-300
+        focus:border-amber-400 focus:ring-amber-400 rounded-md shadow-sm">
+            <option value="varroas">
+                Varroas
+            </option>
+            <option value="sickness">
+                Maladie
+            </option>
+        </select>
 
-            <select v-model="queenForm.color_queen" 
-            id="color_queen" 
-            class="mt-1 block w-full border-zinc-300 
-            focus:border-amber-400 focus:ring-amber-400 
-            rounded-md shadow-sm" required>
-                <option value="#FF0000">Rouge</option>
-                <option value="#FFFF00">Jaune</option>
-                <option value="#008000">Vert</option>
-                <option value="#0000FF">Bleu</option>
-                <option value="#EE82EE">Violet</option>
-            </select>
-
-            <BreezeLabel value="Hausse" class=" font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
-            
-            <div class="flex items-center gap-4">
-                <label for="yes">
-                    <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
-                    v-model="queenForm.rise" type="radio" id="yes" name="rise" value="true">
-                    Oui
+        <div v-if="treatmentForm.is_active == 'true' || treatmentForm.is_active == 1">
+            <BreezeLabel value="Intensité du traitement" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
+            <!-- make 2 radio buttons yes or no -->
+            <div class="flex items-center gap-4 mt-1">
+                <label for="low">
+                    <input disabled class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
+                    v-model="treatmentForm.intensity" type="radio" id="low" name="intensity" value="1" 
+                    :checked="treatmentForm.intensity === 1">
+                    Basse
                 </label>
-                <label for="no">
-                    <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
-                    v-model="queenForm.rise" type="radio" id="no" name="rise" value="false">
-                    Non
+                <label for="medium">
+                    <input disabled class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
+                    v-model="treatmentForm.intensity" type="radio" id="medium" name="intensity" value="2"
+                    :checked="treatmentForm.intensity === 2">
+                    Moyenne
+                </label>
+
+                <label for="high">
+                    <input disabled class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
+                    v-model="treatmentForm.intensity" type="radio" id="high" name="intensity" value="3"
+                    :checked="treatmentForm.intensity === 3">
+                    Haute
                 </label>
             </div>
+        </div>             
+      </form>
+      <div class="text-center">
+              <button @click="() => {showTreatmentModal = false}" class="text-red-1 font-semibold mt-4">Fermer</button>
+      </div>
+    </Modal>
 
-            <BreezeLabel for="nb_frames" value="Nombre de cadres" class=" font-bold text-base mt-4 lg:mt-0 text-zinc-900 " />
-            <BreezeInput v-model="queenForm.nb_frames" placeholder="5" id="nb_frames" type="number" min="0" max="12"
-                class="mt-1 block w-full"/>
 
-            <button type="submit" :class="{ 'opacity-25': queenForm.processing }"
-            :disabled="queenForm.processing"
-            class="mb-4 mt-8 bg-amber-400 border-amber-400 text-black font-semibold border-4 py-2 w-full hover:bg-amber-300 hover:border-amber-300">
-            Confirmer
-            </button>
-        </form>
-        <div class="text-center">
-            <button @click="() => {showQueenForm = false; showTileContainer = true;}" class="text-red-1 font-semibold">Annuler</button>
-        </div>
-    </div>
+                    
 
   </template>
   
@@ -315,6 +353,8 @@
     },
     data(props) {
 
+      console.log(props.intervention);
+
       let controlForm = useForm({
         hive_id: null,
         glimpse_queen: null,
@@ -334,11 +374,21 @@
       let materialForm = useForm({
         hive_id: null,
         rise: null,
-        nb_frames: null,
+        frames_slots: null,
       });
 
+      let treatmentForm = useForm({
+        hive_id: null,
+        is_active: null,
+        type: null,
+        intensity: null,
+      });
 
-      switch (this.intervention.type) {
+      let frames_slots = null;
+      
+
+
+      switch (props.intervention.type) {
         case "control":
           controlForm =  useForm({
             hive_id: props.intervention.hive_id,
@@ -358,62 +408,65 @@
 
 
           break;
-        case "new_queen":
-          this.intervention.type = "Nouvelle reine";
-          break;
         case "material":
-          
           materialForm =  useForm({
-              rise: props.intervention.details.rise,
-              nb_frames: props.intervention.details.nb_frames,
+              rise: props.intervention.details.new_rise,
+              frames_slots: props.intervention.details.new_frames_slots,
           });
+
+          frames_slots = props.intervention.details.new_frames_slots.split(',');
+
+          //change values to full words
+          frames_slots = frames_slots.map((value) => {
+              if (value === 'e') {
+                  return 'empty';
+              } else if (value === 'c') {
+                  return 'frame';
+              } else {
+                  return 'separator';
+              }
+          });
+
           break;
-        case "remove_queen":
-          this.intervention.type = "Retrait de la reine";
-          break;
-        case "other":
-          this.intervention.type = "Autre";
+        case "treatment":
+          treatmentForm =  useForm({
+            is_active: props.intervention.details.is_active,
+            type: props.intervention.details.type,
+            intensity: props.intervention.details.intensity,
+          });
           break;
       }
 
       return {
         showControlModal: false,
-        showNewQueenModal: false,
         showMaterialModal: false,
-        showRemoveQueenModal: false,
+        showTreatmentModal: false,
+
+        selectedValues: frames_slots,
 
         controlForm,
         materialForm,
-
-        queenForm: useForm({
-            date_queen: null,
-            color_queen: null,
-            rise: false,
-            nb_frames: null,
-        }),
-
+        treatmentForm,
       };
     },
     methods: {
       detailsClick() {
         switch (this.intervention.type) {
-        case "Contrôle de la ruche":
-          this.showControlModal = true;
-          console.log(this.controlForm);
-          break;
-        case "new_queen":
-          this.showNewQueenModal = true;
-          break;
-        case "Modification du matériel":
-          this.showMaterialModal = true;
-          console.log(this.materialForm);
-          break;
-        case "remove_queen":
-          this.intervention.type = "Retrait de la reine";
-          break;
-        case "other":
-          this.intervention.type = "Autre";
-          break;
+          case "Contrôle de la ruche":
+            this.showControlModal = true;
+            console.log(this.controlForm);
+            break;
+          case "Modification du matériel":
+            this.showMaterialModal = true;
+            console.log(this.materialForm);
+            break;
+          case "Traitement pour varroas":
+          case "Traitement pour maladie":
+          case "Fin de traitement":
+            this.showTreatmentModal = true;
+            console.log(this.treatmentForm);
+            break;
+          
         }
         
       },
@@ -421,6 +474,8 @@
     mounted() {
 
       // modify the props to display the right data
+
+      console.log(this.intervention);
 
       switch (this.intervention.type) {
         case "control":
@@ -434,6 +489,20 @@
           break;
         case "remove_queen":
           this.intervention.type = "Retrait de la reine";
+          break;
+        case "treatment":
+          if (this.intervention.details.intensity == 0) {
+            this.intervention.type = "Fin de traitement";
+          } else {
+            this.intervention.type = "Traitement pour " + this.intervention.details.type;
+          }
+          
+          break;
+        case "add_food":
+          this.intervention.type = "Nourrissement";
+          break;
+        case "remove_food":
+          this.intervention.type = "Retrait du nourrissement";
           break;
         case "other":
           this.intervention.type = "Autre";

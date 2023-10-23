@@ -4,7 +4,7 @@
             
         <div class="w-full flex mt-4 lg:mt-0">
             <InventoryPlaceEdit v-if="childNMounted"
-            v-bind="editProps"></InventoryPlaceEdit>
+            v-bind="inventoryPlaceProps"></InventoryPlaceEdit>
             <select @change="changeMaterials()"
             class="w-full rounded-xl border border-gray-300 p-2" name="inventory_place_id" id="inventory_place_id">
                 <option v-for="inventory_place in inventory_places" :value="inventory_place.id">{{ inventory_place.name }}</option>
@@ -15,8 +15,8 @@
     <hr>
     <div class="flex flex-col lg:flex-row items-center my-4 gap-2 lg:gap-4">
         <InventoryPlaceCreate></InventoryPlaceCreate>
-        <MaterialCreate
-        v-bind="createProps"></MaterialCreate>
+        <MaterialCreate v-if="childNMounted"
+        v-bind="inventoryPlaceProps"></MaterialCreate>
     </div>
 
     <hr>
@@ -93,11 +93,9 @@ export default {
 
         const childNMounted = ref(false);
 
-        const createProps = ref({
-            inventory_place_id: 0,
-        });
-        const editProps = ref({
+        const inventoryPlaceProps = ref({
             inventory_place: null,
+            materialsNotDefined: null,
         });
         const currentMaterials = null;
 
@@ -107,24 +105,42 @@ export default {
 
         return {
             childNMounted,
-            createProps,
-            editProps,
+            inventoryPlaceProps,
             currentMaterials,
         };
     },
     methods: {
         changeMaterials() {
-            //get the selected inventory place id
-            this.createProps.inventory_place_id = document.getElementById('inventory_place_id').value;
+            //get the selected inventory place id as number
+            //convert it to number because it is a string by default
+
+            let inventory_place_id = document.getElementById('inventory_place_id').value;
 
             // set current materials equal to materials object of the selected inventory place
-            this.currentMaterials = this.materials[this.createProps.inventory_place_id];
+            this.currentMaterials = this.materials[inventory_place_id];
            
             //set editprops inventory place as the inventory place with same id as the selected one
-            this.editProps.inventory_place = this.inventory_places.find(inventory_place => inventory_place.id == this.createProps.inventory_place_id);
+            this.inventoryPlaceProps.inventory_place = this.inventory_places.find(inventory_place => inventory_place.id == inventory_place_id);
 
-            
-            console.log(this.editProps.inventory_place);
+            //Make array key value of materials types (other, frames, separators, rise, food) called materials_not_defined and then remove each types if they are in matrials props except other
+            this.inventoryPlaceProps.materialsNotDefined = {
+                frames: 'Cadres',
+                separators: 'Séparateurs',
+                rise: 'Hausse',
+                food: 'Nourriture',
+            }
+
+            if(this.currentMaterials != null) {
+                //remove each types if they are in matrials props except other
+                for (const [key, value] of Object.entries(this.inventoryPlaceProps.materialsNotDefined)) {
+                    if (this.currentMaterials.find(material => material.associated_to == key)) {
+                        delete this.inventoryPlaceProps.materialsNotDefined[key];
+                    }
+                }
+            }
+
+            console.log(this.inventoryPlaceProps);
+
         }
     },
     mounted() {
@@ -132,7 +148,7 @@ export default {
         // set current materials equal to materials object of the selected inventory place (default is the first one)
         this.changeMaterials();
 
-        console.log(this.inventory_places);
+        //console.log(this.materialsNotDefined);
     },
     //components: { UserDelete, UserEdit }
 }

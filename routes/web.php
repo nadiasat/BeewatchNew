@@ -7,6 +7,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\HiveController;
 use App\Http\Controllers\InterventionMaterialController;
+use App\Http\Controllers\InterventionFoodController;
 use App\Http\Controllers\InterventionQueenController;
 use App\Http\Controllers\InterventionControlController;
 use App\Http\Controllers\InterventionsController;
@@ -14,6 +15,7 @@ use App\Http\Controllers\InventoryHoneyController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\InventoryPlaceController;
 use App\Http\Controllers\HoneyJarController;
+use App\Http\Controllers\InterventionTreatmentController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -104,7 +106,10 @@ Route::middleware(['auth', 'user.activation_state:' . User::ACTIVATION_STATE_ACT
     // InventoryHoney -----------------------------------------------------------------------------------------------------------
 
     Route::get('/inventoryHoney', [HoneyJarController::class, 'index'])
-    ->name('inventoryHoney');
+        ->name('inventoryHoney');
+
+    Route::post('/inventoryHoney/harvest', [HoneyJarController::class, 'harvest'])
+        ->name('inventoryHoney.harvest');
 
     Route::post('/inventoryHoney', [HoneyJarController::class, 'store'])
         ->name('inventoryHoney.store');
@@ -157,6 +162,22 @@ Route::middleware(['auth', 'user.activation_state:' . User::ACTIVATION_STATE_ACT
 
     Route::put('/apiary/{apiary}/hive/{hive}/deacivateHive', [HiveController::class, 'deactivateHive'])
         ->name('hive.deactivateHive');
+
+    //add food
+    Route::put('/apiary/{apiary}/hive/{hive}/addFood', [HiveController::class, 'addFood'])
+        ->name('hive.addFood');
+
+    //remove food
+    Route::put('/apiary/{apiary}/hive/{hive}/removeFood', [HiveController::class, 'removeFood'])
+        ->name('hive.removeFood');
+
+    //intervention add food
+    Route::get('/interventionFood', [InterventionFoodController::class, 'store'])
+    ->name('interventionFood.store');
+
+    //intervention remove food
+    Route::get('/interventionFood/removeFood', [InterventionFoodController::class, 'removeFood'])
+        ->name('interventionFood.removeFood');
     
     Route::get('/intervetionQueen/deactivate', [InterventionQueenController::class, 'deactivate'])
         ->name('interventionQueen.deactivate');
@@ -164,12 +185,20 @@ Route::middleware(['auth', 'user.activation_state:' . User::ACTIVATION_STATE_ACT
     Route::put('/apiary/{apiary}/hive/{hive}/activateHive', [HiveController::class, 'activateHive'])
     ->name('hive.activateHive');
 
+    //set treatment
+    Route::put('/apiary/{apiary}/hive/{hive}/setTreatment', [HiveController::class, 'setTreatment'])
+    ->name('hive.setTreatment');
+
     Route::get('/interventionQueen', [InterventionQueenController::class, 'store'])
     ->name('interventionQueen.store');
 
 
     Route::post('/interventionControl', [InterventionControlController::class, 'store'])
     ->name('interventionControl.store');
+
+    //intervention treatment store
+    Route::get('/interventionTreatment', [InterventionTreatmentController::class, 'store'])
+    ->name('interventionTreatment.store');
 
 
     Route::get('/apiary/{apiary}/hive/{hive}/details', [InterventionsController::class, 'index'])

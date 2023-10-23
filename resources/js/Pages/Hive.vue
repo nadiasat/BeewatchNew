@@ -9,10 +9,19 @@
                         <back-button :previousRoute="previousRoute"></back-button>
                         <h2 class="text-3xl font-bold mr-6 mb-5 grow ">Gestion des ruches</h2>
                     </div>
-                    <hive-create
-                    v-if="$page.props.auth.user.permissions.includes('manage hives')"
-                    :apiary_id="apiary_id">
-                    </hive-create>
+                    <div class="flex flex-row gap-2">
+                        <harvest-honey
+                        v-if="$page.props.auth.user.permissions.includes('manage hives')"
+                        :honey_jars="honey_jars"
+                        :apiary_id="apiary_id">
+                        </harvest-honey>
+                        <hive-create
+                        v-if="$page.props.auth.user.permissions.includes('manage hives')"
+                        :apiary_id="apiary_id">
+                        </hive-create>
+
+                    </div>
+
                 </div>
             </div>
 
@@ -40,12 +49,15 @@ import {Link} from "@inertiajs/inertia-vue3";
 import BackButton from "@/Components/BackButton.vue";
 import HiveCreate from "@/Components/Hive/HiveCreate.vue"
 import HiveCard from "@/Components/Hive/HiveCard.vue"
-import BreezeValidationErrors from "@/Components/ValidationErrors.vue"
+import HarvestHoney from "@/Components/Hive/HarvestHoney.vue"
+import BreezeValidationErrors from "@/Components/ValidationErrors.vue";
+import { useForm } from "@inertiajs/inertia-vue3";
 
 export default {
     components: {
         HiveCreate,
         HiveCard,
+        HarvestHoney,
         BreezeAuthenticatedLayout,
         Head,
         BreezeButton,
@@ -66,12 +78,14 @@ export default {
         previousRoute: {
             type: String,
             default: '/apiary'
+        },
+        honey_jars: {
+            type: Array,
+            required: true
         }
     },
     mounted() {
-        //console.log(this.hives)
-        //console.log segment of url
-        console.log(this.previousRoute);
+
     }
 }
 </script>

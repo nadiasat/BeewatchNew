@@ -5,15 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class InterventionMaterial extends Model
+class InterventionFood extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'new_rise',
-        'new_frames_slots',
-        //'partitions_full',
-        //'frame_male_cells',
+        'has_food',
         'interventions_id'
     ];
 

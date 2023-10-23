@@ -19,5 +19,10 @@ class InventoryPlaceSeeder extends Seeder
             'name' => 'Tambourine',
             'address' => 'Rue de la Tambourine 17, 1227 Carouge',
         ]);
+
+        InventoryPlace::create([
+            'name' => 'Vernier',
+            'address' => 'Route du Bois-des-Frères 30, 1219 Le Lignon',
+        ]);
     }
 }

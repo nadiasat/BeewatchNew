@@ -16,9 +16,10 @@ class MaterialSeeder extends Seeder
     public function run()
     {
         Material::create([
-            'name' => 'Sirop',
+            'name' => 'Nouriture',
             'inventory_place_id' => 1,
             'max_stock' => 10,
+            'associated_to' => 'food',
             'current_stock' => 10,
         ])->inventory_place()->associate(1);
 
@@ -26,14 +27,33 @@ class MaterialSeeder extends Seeder
             'name' => 'Cadres',
             'inventory_place_id' => 1,
             'max_stock' => 8,
-            'current_stock' => 2,
+            'associated_to' => 'frames',
+            'current_stock' => 4,
+        ])->inventory_place()->associate(1);
+
+        Material::create([
+            'name' => 'Séparateurs',
+            'inventory_place_id' => 1,
+            'max_stock' => 8,
+            'associated_to' => 'separators',
+            'current_stock' => 8,
         ])->inventory_place()->associate(1);
 
         Material::create([
             'name' => 'Hausses',
             'inventory_place_id' => 1,
             'max_stock' => 5,
+            'associated_to' => 'rise',
             'current_stock' => 0,
         ])->inventory_place()->associate(1);
+
+
+        Material::create([
+            'name' => 'Cadres',
+            'inventory_place_id' => 2,
+            'max_stock' => 10,
+            'associated_to' => 'frames',
+            'current_stock' => 10,
+        ])->inventory_place()->associate(2);
     }
 }

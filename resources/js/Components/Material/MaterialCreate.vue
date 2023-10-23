@@ -21,9 +21,22 @@
             <form @submit.prevent="submit" class="mx-8">
                 <h4 class="mb-5 text-center text-2xl font-semibold">Nouveau matériel</h4>
                 
-                <BreezeLabel for="name" value="Nom" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900" />
-                <BreezeInput v-model="createMaterialForm.name" placeholder="Nom matériel" id="name" type="text"
-                class="mt-1 block w-full" required />
+                <!-- select input to associate type of material-->
+                <div class="grow">
+                    <BreezeLabel for="associated_material" value="Type de matériel" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900" />
+                    <select v-model="createMaterialForm.associated_to" id="associated_material"
+                    @change="associated_to_change()"
+                    class="mt-1 block w-full border-zinc-300 focus:border-amber-400 focus:ring-amber-400 rounded-md shadow-sm">
+                        <option :value="null" selected>Autre</option>
+                        <option v-for="(material, key) in materialsNotDefined" :value="key">{{ material }}</option>
+                    </select>
+                </div>
+
+                <div v-if="createMaterialForm.associated_to == null">
+                    <BreezeLabel for="name" value="Nom" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900" />
+                    <BreezeInput v-model="createMaterialForm.name" placeholder="Nom matériel" id="name" type="text"
+                    class="mt-1 block w-full" />
+                </div>
 
                 <div class="flex justify-between gap-4">
                     <div class="grow">
@@ -66,9 +79,11 @@ import Swal from "sweetalert2";
 export default {
     name: "MaterialCreate",
     props: {
-        //make the porp reactive
-        inventory_place_id: {
-            type: Number,
+        inventory_place: {
+            type: Object,
+        }, 
+        materialsNotDefined: {
+            type: Array,
         }
     },
     components: {
@@ -77,20 +92,44 @@ export default {
         BreezeInput
     },
     data: function (props) {
+
+        
         return {
             modalCreateMaterial: false,
             createMaterialForm: useForm({
                 name: null,
                 current_stock: null,
                 max_stock: null,
-                inventory_place_id: props.inventory_place_id,
+                associated_to: null,
+                inventory_place_id: props.inventory_place.id,
             }),
         }
     },
     methods: {
+        associated_to_change() {
+            if (this.createMaterialForm.associated_to != null) {
+                switch (this.createMaterialForm.associated_to) {
+                    case 'frames':
+                        this.createMaterialForm.name = 'Cadres';
+                        break;
+                    case 'separators':
+                        this.createMaterialForm.name = 'Séparateurs';
+                        break;
+                    case 'rise':
+                        this.createMaterialForm.name = 'Hausse';
+                        break;
+                    case 'food':
+                        this.createMaterialForm.name = 'Nourriture';
+                        break;
+                }
+            } else {
+                this.createMaterialForm.name = null;
+            }
+        },
         submit() {
-            console.log(this.createMaterialForm)
-            console.log(this.createMaterialForm.current_stock > this.createMaterialForm.max_stock)
+
+            this.createMaterialForm.inventory_place_id = this.inventory_place.id;
+
             //if current stock is greater than max stock then return error
             if (this.createMaterialForm.current_stock > this.createMaterialForm.max_stock) {
                 Swal.fire({
@@ -135,7 +174,6 @@ export default {
         }
     },
     mounted() {
-        console.log(this.inventory_place_id)
     }
 }
 </script>

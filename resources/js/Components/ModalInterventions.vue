@@ -16,6 +16,9 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
                 </svg>
             </button>
+
+            
+            
             <div id="tile-container" 
             class="pt-[10vh] pb-[10vh] 
             grid grid-cols-2 lg:grid-cols-3
@@ -25,6 +28,7 @@
 
                 <h2 class="text-center text-2xl font-bold col-span-3 pb-8">Nouvelle intervention</h2>
 
+                <!-- QUEEN -->
                 <button v-if="hive.is_active" @click="deactivateHive()" class="items-center justify-center col-span-3 flex flex-row gap-1 text-lg font-medium bg-[#AFAC99] rounded-lg hover:opacity-70">
                     <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-10">
                         <path d="M39.4991 76.7488C36.2005 74.1782 30.9909 68.6304 28.1103 60.936C28.8773 61.076 29.8558 61.2463 30.9475 61.4166C33.522 61.8182 36.7794 62.2289 39.3747 62.2289C41.9701 62.2289 45.2275 61.8182 47.802 61.4166C48.895 61.2461 49.8747 61.0756 50.6421 60.9355C47.7827 68.6416 42.764 74.1864 39.4991 76.7488ZM51.3705 58.7634C51.1803 58.8004 50.9472 58.8449 50.6776 58.8952C49.88 59.0439 48.7645 59.2422 47.4937 59.4405C44.9376 59.8392 41.8074 60.2289 39.3747 60.2289C36.9421 60.2289 33.8119 59.8392 31.2558 59.4405C29.985 59.2422 28.8695 59.0439 28.0719 58.8952C27.8023 58.8449 27.5692 58.8004 27.379 58.7634C26.6042 56.1787 26.0975 53.387 25.9894 50.4148C26.0756 50.4293 26.1658 50.4443 26.2598 50.4598C27.1747 50.6109 28.4538 50.8124 29.9115 51.014C32.8138 51.4153 36.4721 51.8238 39.3747 51.8238C42.2774 51.8238 45.9357 51.4153 48.838 51.014C50.2957 50.8124 51.5748 50.6109 52.4897 50.4598C52.5837 50.4443 52.6739 50.4293 52.7601 50.4148C52.652 53.387 52.1453 56.1787 51.3705 58.7634ZM52.7751 48.384C52.5963 48.4144 52.3915 48.4489 52.1637 48.4865C51.2619 48.6355 50.0006 48.8342 48.5641 49.0329C45.6782 49.4319 42.133 49.8238 39.3747 49.8238C36.6165 49.8238 33.0713 49.4319 30.1854 49.0329C28.7489 48.8342 27.4876 48.6355 26.5858 48.4865C26.3585 48.449 26.1541 48.4146 25.9756 48.3842C26.0325 45.3621 26.3962 42.8495 26.9541 40.7707C27.0909 40.7959 27.2415 40.8234 27.4046 40.8528C28.2452 41.0041 29.4204 41.2059 30.76 41.4077C33.4251 41.8092 36.7931 42.2192 39.4731 42.2192C42.1532 42.2192 45.5212 41.8092 48.1863 41.4077C49.5259 41.2059 50.7011 41.0041 51.5417 40.8528C51.6895 40.8261 51.827 40.8011 51.9532 40.7778C52.4223 42.8603 52.7273 45.3713 52.7751 48.384ZM51.4345 38.8396C51.3558 38.854 51.2733 38.8689 51.1873 38.8844C50.3609 39.0332 49.205 39.2316 47.8884 39.43C45.2411 39.8289 41.996 40.2192 39.4731 40.2192C36.9503 40.2192 33.7052 39.8289 31.0579 39.43C29.7413 39.2316 28.5854 39.0332 27.759 38.8844C27.6926 38.8725 27.6283 38.8608 27.5663 38.8495C29.6554 33.2623 33.2567 31.5778 35.2375 31.4142C36.0374 31.674 36.8902 31.8141 37.774 31.8141H42.5763C43.4567 31.8141 44.3065 31.6751 45.1038 31.4171C46.6447 31.5914 49.6655 33.2067 51.4345 38.8396Z" fill="#F1B60F" stroke="#18181b" stroke-width="2"/>
@@ -51,7 +55,48 @@
                     Relancer la ruche
                 </button>
 
-                <div id="tile-control" 
+                <!-- FOOD -->
+                <div v-if="hive.is_active" class="items-center justify-center col-span-3 flex flex-row">
+                    <!-- Make  button like above but for food-->
+                    <button v-if="hive.food" @click="removeFood()" class="items-center justify-center w-full flex flex-row gap-2 text-lg font-medium bg-[#AFAC99] rounded-lg hover:opacity-70">
+                        <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-9">
+                            <path d="M74.8078 68.5691C74.8078 72.0145 72.0147 74.8076 68.5692 74.8076H11.5308C8.08534 74.8076 5.29224 72.0145 5.29224 68.5691V43.9119L7.07469 42.0061C13.3541 39.6909 18.3793 38.7391 23.3657 38.865C28.6526 38.9986 33.8309 40.3433 40.3247 42.4475L40.3511 42.4561L40.3769 42.4662C46.6935 44.9565 51.5709 46.408 56.5557 46.5291C61.3978 46.6467 66.4207 45.5097 73.0254 42.7076H74.8078V68.5691Z" fill="#F1B60F"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M11.5298 19.7746C9.06877 19.7746 7.07369 21.7696 7.07369 24.2307V42.0062C13.3531 39.691 18.3783 38.7392 23.3647 38.8651C28.6516 38.9986 33.8299 40.3434 40.3237 42.4476L40.3501 42.4561L40.3759 42.4663C46.6925 44.9565 51.5699 46.4081 56.5547 46.5292C61.3968 46.6468 66.4197 45.5098 73.0244 42.7076V24.2307C73.0244 21.7696 71.0293 19.7746 68.5682 19.7746H11.5298Z" fill="white"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M11.5298 17.9921H68.5682C72.0137 17.9921 74.8068 20.7852 74.8068 24.2307V42.7076V68.5691C74.8068 72.0146 72.0137 74.8077 68.5682 74.8077H11.5298C8.08435 74.8077 5.29124 72.0146 5.29124 68.5691V43.9119V24.2307C5.29124 20.7852 8.08434 17.9921 11.5298 17.9921ZM11.5298 19.7746C9.06877 19.7746 7.07369 21.7696 7.07369 24.2307V42.0062C13.3531 39.691 18.3783 38.7392 23.3647 38.8651C28.6516 38.9986 33.8299 40.3434 40.3237 42.4476L40.3501 42.4561L40.3759 42.4663C46.6925 44.9565 51.5699 46.4081 56.5547 46.5292C61.3968 46.6468 66.4197 45.5098 73.0244 42.7076V24.2307C73.0244 21.7696 71.0293 19.7746 68.5682 19.7746H11.5298ZM73.0244 44.6402C66.6097 47.2935 61.5126 48.4326 56.5115 48.3111C51.2106 48.1823 46.1012 46.6381 39.748 44.1347C33.297 42.0453 28.3295 40.7735 23.3197 40.647C18.462 40.5243 13.5031 41.478 7.07369 43.9089V68.5691C7.07369 71.0302 9.06877 73.0252 11.5298 73.0252H68.5682C71.0293 73.0252 73.0244 71.0302 73.0244 68.5691V44.6402Z" fill="#181818"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.46056 7.07461C8.14233 7.07461 7.07369 8.14325 7.07369 9.46148V14.1724C7.07369 16.282 8.78383 17.9921 10.8934 17.9921H69.2047C71.3142 17.9921 73.0244 16.282 73.0244 14.1724V9.46148C73.0244 8.14325 71.9557 7.07461 70.6375 7.07461H9.46056Z" fill="white"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.46056 5.29216H70.6375C72.9401 5.29216 74.8068 7.15883 74.8068 9.46148V14.1724C74.8068 17.2664 72.2986 19.7746 69.2047 19.7746H10.8934C7.79941 19.7746 5.29124 17.2664 5.29124 14.1724V9.46148C5.29124 7.15883 7.15791 5.29216 9.46056 5.29216ZM9.46056 7.07461C8.14233 7.07461 7.07369 8.14325 7.07369 9.46148V14.1724C7.07369 16.282 8.78383 17.9921 10.8934 17.9921H69.2047C71.3142 17.9921 73.0244 16.282 73.0244 14.1724V9.46148C73.0244 8.14325 71.9557 7.07461 70.6375 7.07461H9.46056Z" fill="#181818"/>
+                        </svg>
+                        Retirer la nourriture
+                    </button>
+
+                    <button v-else @click="addFood()" class="items-center justify-center w-full flex flex-row gap-2 text-lg font-medium bg-amber-400 rounded-lg hover:opacity-70">
+                        <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-9">
+                            <path d="M74.8078 68.5691C74.8078 72.0145 72.0147 74.8076 68.5692 74.8076H11.5308C8.08534 74.8076 5.29224 72.0145 5.29224 68.5691V43.9119L7.07469 42.0061C13.3541 39.6909 18.3793 38.7391 23.3657 38.865C28.6526 38.9986 33.8309 40.3433 40.3247 42.4475L40.3511 42.4561L40.3769 42.4662C46.6935 44.9565 51.5709 46.408 56.5557 46.5291C61.3978 46.6467 66.4207 45.5097 73.0254 42.7076H74.8078V68.5691Z" fill="#F1B60F"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M11.5298 19.7746C9.06877 19.7746 7.07369 21.7696 7.07369 24.2307V42.0062C13.3531 39.691 18.3783 38.7392 23.3647 38.8651C28.6516 38.9986 33.8299 40.3434 40.3237 42.4476L40.3501 42.4561L40.3759 42.4663C46.6925 44.9565 51.5699 46.4081 56.5547 46.5292C61.3968 46.6468 66.4197 45.5098 73.0244 42.7076V24.2307C73.0244 21.7696 71.0293 19.7746 68.5682 19.7746H11.5298Z" fill="white"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M11.5298 17.9921H68.5682C72.0137 17.9921 74.8068 20.7852 74.8068 24.2307V42.7076V68.5691C74.8068 72.0146 72.0137 74.8077 68.5682 74.8077H11.5298C8.08435 74.8077 5.29124 72.0146 5.29124 68.5691V43.9119V24.2307C5.29124 20.7852 8.08434 17.9921 11.5298 17.9921ZM11.5298 19.7746C9.06877 19.7746 7.07369 21.7696 7.07369 24.2307V42.0062C13.3531 39.691 18.3783 38.7392 23.3647 38.8651C28.6516 38.9986 33.8299 40.3434 40.3237 42.4476L40.3501 42.4561L40.3759 42.4663C46.6925 44.9565 51.5699 46.4081 56.5547 46.5292C61.3968 46.6468 66.4197 45.5098 73.0244 42.7076V24.2307C73.0244 21.7696 71.0293 19.7746 68.5682 19.7746H11.5298ZM73.0244 44.6402C66.6097 47.2935 61.5126 48.4326 56.5115 48.3111C51.2106 48.1823 46.1012 46.6381 39.748 44.1347C33.297 42.0453 28.3295 40.7735 23.3197 40.647C18.462 40.5243 13.5031 41.478 7.07369 43.9089V68.5691C7.07369 71.0302 9.06877 73.0252 11.5298 73.0252H68.5682C71.0293 73.0252 73.0244 71.0302 73.0244 68.5691V44.6402Z" fill="#181818"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.46056 7.07461C8.14233 7.07461 7.07369 8.14325 7.07369 9.46148V14.1724C7.07369 16.282 8.78383 17.9921 10.8934 17.9921H69.2047C71.3142 17.9921 73.0244 16.282 73.0244 14.1724V9.46148C73.0244 8.14325 71.9557 7.07461 70.6375 7.07461H9.46056Z" fill="white"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.46056 5.29216H70.6375C72.9401 5.29216 74.8068 7.15883 74.8068 9.46148V14.1724C74.8068 17.2664 72.2986 19.7746 69.2047 19.7746H10.8934C7.79941 19.7746 5.29124 17.2664 5.29124 14.1724V9.46148C5.29124 7.15883 7.15791 5.29216 9.46056 5.29216ZM9.46056 7.07461C8.14233 7.07461 7.07369 8.14325 7.07369 9.46148V14.1724C7.07369 16.282 8.78383 17.9921 10.8934 17.9921H69.2047C71.3142 17.9921 73.0244 16.282 73.0244 14.1724V9.46148C73.0244 8.14325 71.9557 7.07461 70.6375 7.07461H9.46056Z" fill="#181818"/>
+                        </svg>
+                        Nourrir la ruche
+                    </button>
+                </div>
+
+                <div v-else class="items-center justify-center col-span-3 flex flex-row">
+                    <button  class="items-center justify-center w-full flex flex-row gap-2 text-lg font-medium bg-[#AFAC99] rounded-lg cursor-default">
+                        <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-9">
+                            <path d="M74.8078 68.5691C74.8078 72.0145 72.0147 74.8076 68.5692 74.8076H11.5308C8.08534 74.8076 5.29224 72.0145 5.29224 68.5691V43.9119L7.07469 42.0061C13.3541 39.6909 18.3793 38.7391 23.3657 38.865C28.6526 38.9986 33.8309 40.3433 40.3247 42.4475L40.3511 42.4561L40.3769 42.4662C46.6935 44.9565 51.5709 46.408 56.5557 46.5291C61.3978 46.6467 66.4207 45.5097 73.0254 42.7076H74.8078V68.5691Z" fill="#F1B60F"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M11.5298 19.7746C9.06877 19.7746 7.07369 21.7696 7.07369 24.2307V42.0062C13.3531 39.691 18.3783 38.7392 23.3647 38.8651C28.6516 38.9986 33.8299 40.3434 40.3237 42.4476L40.3501 42.4561L40.3759 42.4663C46.6925 44.9565 51.5699 46.4081 56.5547 46.5292C61.3968 46.6468 66.4197 45.5098 73.0244 42.7076V24.2307C73.0244 21.7696 71.0293 19.7746 68.5682 19.7746H11.5298Z" fill="white"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M11.5298 17.9921H68.5682C72.0137 17.9921 74.8068 20.7852 74.8068 24.2307V42.7076V68.5691C74.8068 72.0146 72.0137 74.8077 68.5682 74.8077H11.5298C8.08435 74.8077 5.29124 72.0146 5.29124 68.5691V43.9119V24.2307C5.29124 20.7852 8.08434 17.9921 11.5298 17.9921ZM11.5298 19.7746C9.06877 19.7746 7.07369 21.7696 7.07369 24.2307V42.0062C13.3531 39.691 18.3783 38.7392 23.3647 38.8651C28.6516 38.9986 33.8299 40.3434 40.3237 42.4476L40.3501 42.4561L40.3759 42.4663C46.6925 44.9565 51.5699 46.4081 56.5547 46.5292C61.3968 46.6468 66.4197 45.5098 73.0244 42.7076V24.2307C73.0244 21.7696 71.0293 19.7746 68.5682 19.7746H11.5298ZM73.0244 44.6402C66.6097 47.2935 61.5126 48.4326 56.5115 48.3111C51.2106 48.1823 46.1012 46.6381 39.748 44.1347C33.297 42.0453 28.3295 40.7735 23.3197 40.647C18.462 40.5243 13.5031 41.478 7.07369 43.9089V68.5691C7.07369 71.0302 9.06877 73.0252 11.5298 73.0252H68.5682C71.0293 73.0252 73.0244 71.0302 73.0244 68.5691V44.6402Z" fill="#181818"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.46056 7.07461C8.14233 7.07461 7.07369 8.14325 7.07369 9.46148V14.1724C7.07369 16.282 8.78383 17.9921 10.8934 17.9921H69.2047C71.3142 17.9921 73.0244 16.282 73.0244 14.1724V9.46148C73.0244 8.14325 71.9557 7.07461 70.6375 7.07461H9.46056Z" fill="white"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.46056 5.29216H70.6375C72.9401 5.29216 74.8068 7.15883 74.8068 9.46148V14.1724C74.8068 17.2664 72.2986 19.7746 69.2047 19.7746H10.8934C7.79941 19.7746 5.29124 17.2664 5.29124 14.1724V9.46148C5.29124 7.15883 7.15791 5.29216 9.46056 5.29216ZM9.46056 7.07461C8.14233 7.07461 7.07369 8.14325 7.07369 9.46148V14.1724C7.07369 16.282 8.78383 17.9921 10.8934 17.9921H69.2047C71.3142 17.9921 73.0244 16.282 73.0244 14.1724V9.46148C73.0244 8.14325 71.9557 7.07461 70.6375 7.07461H9.46056Z" fill="#181818"/>
+                        </svg>
+                        Retirer la nourriture
+                    </button>
+                </div>
+
+                <!-- CONTROL -->
+                <div v-if="hive.is_active"
+                id="tile-control" 
                 class="tile-intervention 
                 p-6 flex flex-col gap-4 items-center 
                 rounded-xl w-40 h-40 
@@ -69,8 +114,27 @@
 
                     <p>Contrôle</p>
                 </div>
+                <div v-else
+                id="tile-control" 
+                class="tile-intervention 
+                p-6 flex flex-col gap-4 items-center 
+                rounded-xl w-40 h-40 
+                bg-[#AFAC99]">
+                    <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="12" y="6" width="56" height="71" rx="5" fill="white" stroke="black" stroke-width="2"/>
+                        <path d="M22 20L59 20" stroke="black" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M22 32L59 32" stroke="black" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M22 45L59 45" stroke="black" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M59 57L50.1579 66L45 60.75" stroke="#18181b" stroke-width="2" stroke-linecap="round"/>
+                        <rect x="21" y="3" width="38" height="6" rx="2" fill="#F1B60F" stroke="black" stroke-width="2"/>
+                    </svg>
 
-                <div id="tile-material" 
+                    <p>Contrôle</p>
+                </div>
+                
+                <!-- MATERIAL -->
+                <div v-if="hive.is_active"
+                id="tile-material" 
                 class="tile-intervention
                 p-6 flex flex-col gap-4 items-center 
                 rounded-xl w-40 h-40 
@@ -92,6 +156,58 @@
                     </svg>
 
                     <p>Matériel</p>
+                </div>
+                <div v-else
+                id="tile-material" 
+                class="tile-intervention
+                p-6 flex flex-col gap-4 items-center 
+                rounded-xl w-40 h-40 
+                bg-[#AFAC99]">
+                    <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_306_31)">
+                            <path d="M72.9999 78H49.8258H26.6516C23.3379 78 20.6516 75.3137 20.6516 72V56.5361V35.0722H78.9999V56.5361V72C78.9999 75.3137 76.3136 78 72.9999 78Z" fill="white"/>
+                            <path d="M20.6516 56.5361V35.0722H78.9999V56.5361M20.6516 56.5361V72C20.6516 75.3137 23.3379 78 26.6516 78H49.8258H72.9999C76.3136 78 78.9999 75.3137 78.9999 72V56.5361M20.6516 56.5361H78.9999" stroke="#18181b" stroke-width="2"/>
+                            <path d="M63.9178 2.4327L35.3081 3.50968C34.9739 3.52227 34.6483 3.62057 34.3619 3.79537L9.84861 18.7573L14.0637 33.0444L68.1329 16.7199L63.9178 2.4327Z" fill="#F1B60F"/>
+                            <path d="M63.902 2.37905L63.9178 2.4327M63.9178 2.4327L35.3081 3.50968C34.9739 3.52227 34.6483 3.62057 34.3619 3.79537L9.84861 18.7573M63.9178 2.4327L75.4122 2M63.9178 2.4327L68.1329 16.7199L14.0637 33.0444L9.84861 18.7573M9.83279 18.7036L9.84861 18.7573M9.84861 18.7573L0 24.7685" stroke="#18181b" stroke-width="2"/>
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_306_31">
+                                <rect width="80" height="80" fill="white"/>
+                            </clipPath>
+                        </defs>
+                    </svg>
+
+                    <p>Matériel</p>
+                </div>
+
+                <!-- TREATMENT -->
+                <div v-if="hive.is_active"
+                id="tile-treatment" 
+                class="tile-intervention
+                p-6 flex flex-col gap-4 items-center 
+                rounded-xl w-40 h-40 
+                hover:opacity-60  cursor-pointer"
+                :class="[hive.is_active ? 'bg-amber-400' : 'bg-[#AFAC99]']"
+                @click="()=>{showTreatmentForm = true; showTileContainer = false;}">
+                    <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M36 7.3094C38.4752 5.88034 41.5248 5.88034 44 7.3094L66.3109 20.1906C68.7861 21.6197 70.3109 24.2607 70.3109 27.1188V52.8812C70.3109 55.7393 68.7861 58.3803 66.3109 59.8094L44 72.6906C41.5248 74.1197 38.4752 74.1197 36 72.6906L13.6891 59.8094C11.2139 58.3803 9.68911 55.7393 9.68911 52.8812V27.1188C9.68911 24.2607 11.2139 21.6197 13.6891 20.1906L36 7.3094Z" fill="white" stroke="#181818" stroke-width="2"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M33 21.3333C33 20.0447 34.0447 19 35.3333 19H44.6667C45.9553 19 47 20.0447 47 21.3333V33H58.6667C59.9553 33 61 34.0447 61 35.3333V44.6667C61 45.9553 59.9553 47 58.6667 47H47V58.6667C47 59.9553 45.9553 61 44.6667 61H35.3333C34.0447 61 33 59.9553 33 58.6667L33 47L21.3333 47C20.0447 47 19 45.9553 19 44.6667V35.3333C19 34.0447 20.0447 33 21.3333 33L33 33L33 21.3333Z" fill="#F1B60F"/>
+                            <path d="M34.1667 34.3667H34.3667V34.1667L34.3667 21.3333C34.3667 20.7995 34.7995 20.3667 35.3333 20.3667H44.6667C45.2005 20.3667 45.6333 20.7995 45.6333 21.3333V34.1667V34.3667H45.8333H58.6667C59.2005 34.3667 59.6333 34.7995 59.6333 35.3333V44.6667C59.6333 45.2005 59.2005 45.6333 58.6667 45.6333H45.8333H45.6333V45.8333V58.6667C45.6333 59.2005 45.2005 59.6333 44.6667 59.6333H35.3333C34.7995 59.6333 34.3667 59.2005 34.3667 58.6667L34.3667 45.8333V45.6333H34.1667L21.3333 45.6333C20.7995 45.6333 20.3667 45.2005 20.3667 44.6667V35.3333C20.3667 34.7995 20.7995 34.3667 21.3333 34.3667L34.1667 34.3667ZM35.3333 18.8C33.9342 18.8 32.8 19.9342 32.8 21.3333L32.8 32.8L21.3333 32.8C19.9342 32.8 18.8 33.9342 18.8 35.3333V44.6667C18.8 46.0658 19.9342 47.2 21.3333 47.2L32.8 47.2L32.8 58.6667C32.8 60.0658 33.9342 61.2 35.3333 61.2H44.6667C46.0658 61.2 47.2 60.0658 47.2 58.6667V47.2H58.6667C60.0658 47.2 61.2 46.0658 61.2 44.6667V35.3333C61.2 33.9342 60.0658 32.8 58.6667 32.8H47.2V21.3333C47.2 19.9342 46.0658 18.8 44.6667 18.8H35.3333Z" fill="#181818" stroke="#181818" stroke-width="0.4"/>
+                    </svg>
+                    <p>Traitement</p>
+                </div>
+                <div v-else
+                id="tile-treatment" 
+                class="tile-intervention
+                p-6 flex flex-col gap-4 items-center 
+                rounded-xl w-40 h-40 
+                bg-[#AFAC99]">
+                    <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M36 7.3094C38.4752 5.88034 41.5248 5.88034 44 7.3094L66.3109 20.1906C68.7861 21.6197 70.3109 24.2607 70.3109 27.1188V52.8812C70.3109 55.7393 68.7861 58.3803 66.3109 59.8094L44 72.6906C41.5248 74.1197 38.4752 74.1197 36 72.6906L13.6891 59.8094C11.2139 58.3803 9.68911 55.7393 9.68911 52.8812V27.1188C9.68911 24.2607 11.2139 21.6197 13.6891 20.1906L36 7.3094Z" fill="white" stroke="#181818" stroke-width="2"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M33 21.3333C33 20.0447 34.0447 19 35.3333 19H44.6667C45.9553 19 47 20.0447 47 21.3333V33H58.6667C59.9553 33 61 34.0447 61 35.3333V44.6667C61 45.9553 59.9553 47 58.6667 47H47V58.6667C47 59.9553 45.9553 61 44.6667 61H35.3333C34.0447 61 33 59.9553 33 58.6667L33 47L21.3333 47C20.0447 47 19 45.9553 19 44.6667V35.3333C19 34.0447 20.0447 33 21.3333 33L33 33L33 21.3333Z" fill="#F1B60F"/>
+                            <path d="M34.1667 34.3667H34.3667V34.1667L34.3667 21.3333C34.3667 20.7995 34.7995 20.3667 35.3333 20.3667H44.6667C45.2005 20.3667 45.6333 20.7995 45.6333 21.3333V34.1667V34.3667H45.8333H58.6667C59.2005 34.3667 59.6333 34.7995 59.6333 35.3333V44.6667C59.6333 45.2005 59.2005 45.6333 58.6667 45.6333H45.8333H45.6333V45.8333V58.6667C45.6333 59.2005 45.2005 59.6333 44.6667 59.6333H35.3333C34.7995 59.6333 34.3667 59.2005 34.3667 58.6667L34.3667 45.8333V45.6333H34.1667L21.3333 45.6333C20.7995 45.6333 20.3667 45.2005 20.3667 44.6667V35.3333C20.3667 34.7995 20.7995 34.3667 21.3333 34.3667L34.1667 34.3667ZM35.3333 18.8C33.9342 18.8 32.8 19.9342 32.8 21.3333L32.8 32.8L21.3333 32.8C19.9342 32.8 18.8 33.9342 18.8 35.3333V44.6667C18.8 46.0658 19.9342 47.2 21.3333 47.2L32.8 47.2L32.8 58.6667C32.8 60.0658 33.9342 61.2 35.3333 61.2H44.6667C46.0658 61.2 47.2 60.0658 47.2 58.6667V47.2H58.6667C60.0658 47.2 61.2 46.0658 61.2 44.6667V35.3333C61.2 33.9342 60.0658 32.8 58.6667 32.8H47.2V21.3333C47.2 19.9342 46.0658 18.8 44.6667 18.8H35.3333Z" fill="#181818" stroke="#181818" stroke-width="0.4"/>
+                    </svg>
+                    <p>Traitement</p>
                 </div>
 
             
@@ -294,10 +410,27 @@
                         </label>
                     </div>
 
+                    <BreezeLabel for="nb_frames" value="Placement des cadres" class=" font-bold text-base mt-4 lg:mt-0 text-zinc-900 " />
+                    <div class="frames-indicator grow flex items-start justify-between pt-[2px] pb-[2px]" >
+                        <div v-for="(value, index) in selectedValues" 
+                        :key="index"
+                        @click="toggleColor(index)"
+                        class="flex flex-col gap-1 justify-center items-center">
+                            <!-- if value if empty text is "-", if frame "c", and if separator "s"-->
 
-                    <BreezeLabel for="nb_frames" value="Nombre de cadres" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
-                    <BreezeInput v-model="updateMaterialForm.nb_frames" placeholder="5" id="nb_frames" type="number" min="0" max="12"
-                        class="mt-1 block w-full"/>
+                            <div
+                            class="w-4 h-[40px] rounded cursor-pointer"
+                            :class="value === 'empty' ? 'bg-[#AFAC99]' : value === 'frame' ? 'bg-amber-400' : 'bg-zinc-900'">
+                            </div>
+
+                            <div class="w-4 h-full rounded-md">
+                                <!-- if value is empty pprint "-", if frame "c", and if separator "s"-->
+                                <p class="text-center text-s font-bold text-zinc-900" :class="value === 'empty' ? 'text-zinc-900' : value === 'frame' ? 'text-white' : 'text-white'">
+                                    {{ value === 'empty' ? ' ' : value === 'frame' ? 'c' : 's' }}</p>
+                            </div>
+
+                        </div>
+                    </div>
 
                     <button type="submit" :class="{ 'opacity-25': updateMaterialForm.processing }"
                     :disabled="updateMaterialForm.processing"
@@ -323,18 +456,20 @@
                         class="mt-1 block w-full" required/>
 
                     <BreezeLabel for="color_queen" value="Couleur de la reine" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
+                    <!-- Color picker input-->
+                    <div class="color-input-container flex flex-row gap-2 items-center">
+                        <input v-model="updateQueenForm.color_queen" 
+                        class="mt-1 w-10 h-10 border-zinc-300 
+                        focus:border-amber-400 focus:ring-amber-400 
+                        rounded-md shadow-sm"
+                        type="color" name="color_picker" id="color_queen">
+                        
+                        <!-- if color queen is not white print value if not print "pas de couleur" in ternary condition-->
+                        <p v-if="updateQueenForm.color_queen != '#ffffff'" >Couleur actuelle : {{ updateQueenForm.color_queen }}</p>
+                        <p v-else>Aucune couleur</p>
 
-                    <select v-model="updateQueenForm.color_queen" 
-                    id="color_queen" 
-                    class="mt-1 block w-full border-zinc-300 
-                    focus:border-amber-400 focus:ring-amber-400 
-                    rounded-md shadow-sm" required>
-                        <option value="#FF0000">Rouge</option>
-                        <option value="#FFFF00">Jaune</option>
-                        <option value="#008000">Vert</option>
-                        <option value="#0000FF">Bleu</option>
-                        <option value="#EE82EE">Violet</option>
-                    </select>
+
+                    </div>
 
                     <BreezeLabel value="Hausse" class=" font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
                     
@@ -351,9 +486,27 @@
                         </label>
                     </div>
 
-                    <BreezeLabel for="nb_frames" value="Nombre de cadres" class=" font-bold text-base mt-4 lg:mt-0 text-zinc-900 " />
-                    <BreezeInput v-model="updateQueenForm.nb_frames" placeholder="5" id="nb_frames" type="number" min="0" max="12"
-                        class="mt-1 block w-full"/>
+                    <BreezeLabel for="nb_frames" value="Placement des cadres" class=" font-bold text-base mt-4 lg:mt-0 text-zinc-900 " />
+                    <div class="frames-indicator grow flex items-start justify-between pt-[2px] pb-[2px]" >
+                        <div v-for="(value, index) in selectedValues" 
+                        :key="index"
+                        @click="toggleColor(index)"
+                        class="flex flex-col gap-1 justify-center items-center">
+                            <!-- if value if empty text is "-", if frame "c", and if separator "s"-->
+
+                            <div
+                            class="w-4 h-[40px] rounded cursor-pointer"
+                            :class="value === 'empty' ? 'bg-[#AFAC99]' : value === 'frame' ? 'bg-amber-400' : 'bg-zinc-900'">
+                            </div>
+
+                            <div class="w-4 h-full rounded-md">
+                                <!-- if value is empty pprint "-", if frame "c", and if separator "s"-->
+                                <p class="text-center text-s font-bold text-zinc-900" :class="value === 'empty' ? 'text-zinc-900' : value === 'frame' ? 'text-white' : 'text-white'">
+                                    {{ value === 'empty' ? ' ' : value === 'frame' ? 'c' : 's' }}</p>
+                            </div>
+
+                        </div>
+                    </div>
 
                     <button type="submit" :class="{ 'opacity-25': updateQueenForm.processing }"
                     :disabled="updateQueenForm.processing"
@@ -365,6 +518,88 @@
                     <button @click="() => {showQueenForm = false; showTileContainer = true;}" class="text-red-1 font-semibold">Annuler</button>
                 </div>
             </div>
+
+            <!-- TREATMENT FORM -->
+            <div id="treatment-form-container"
+            class="pt-[10vh] pb-[10vh] w-[90vw] lg:w-[35vw]"
+            v-show="showTreatmentForm">
+
+                <h2 class="text-center text-2xl font-bold pb-8">Modification du traitement</h2>
+                <form id="material-form" @submit.prevent="setTreatment()">
+                    
+                    <BreezeLabel value="Traitement actif ?" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
+                    <!-- make 2 radio buttons yes or no -->
+                    <div class="flex items-center gap-4 mt-1">
+                        <label for="yes">
+                            <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
+                            v-model="setTreatmentForm.is_active" type="radio" id="yes" name="rise" value="true" 
+                            :checked="setTreatmentForm.is_active === 1">
+                            Oui
+                        </label>
+                        <label for="no">
+                            <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
+                            v-model="setTreatmentForm.is_active" type="radio" id="no" name="rise" value="false"
+                            :checked="setTreatmentForm.is_active === 0">
+                            Non
+                        </label>
+                    </div>
+
+                    <BreezeLabel v-if="setTreatmentForm.is_active == 'true' || setTreatmentForm.is_active == 1" 
+                    value="Type de traitement" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
+                    <!-- make a select with 2 options : varroas and sickness -->
+                    <select v-if="setTreatmentForm.is_active == 'true' || setTreatmentForm.is_active == 1"
+                    required
+                    v-model="setTreatmentForm.type" class="mt-1 block w-full border-zinc-300
+                    focus:border-amber-400 focus:ring-amber-400 rounded-md shadow-sm">
+                        <option value="varroas">
+                            Varroas
+                        </option>
+                        <option value="sickness">
+                            Maladie
+                        </option>
+                    </select>
+
+                    <div v-if="setTreatmentForm.is_active == 'true' || setTreatmentForm.is_active == 1">
+                        <BreezeLabel value="Intensité du traitement" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
+                        <!-- make 2 radio buttons yes or no -->
+                        <div class="flex items-center gap-4 mt-1">
+                            <label for="low">
+                                <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
+                                v-model="setTreatmentForm.intensity" type="radio" id="low" name="intensity" value="1" 
+                                :checked="setTreatmentForm.intensity === 1">
+                                Basse
+                            </label>
+                            <label for="medium">
+                                <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
+                                v-model="setTreatmentForm.intensity" type="radio" id="medium" name="intensity" value="2"
+                                :checked="setTreatmentForm.intensity === 2">
+                                Moyenne
+                            </label>
+
+                            <label for="high">
+                                <input class="border-zinc-300 checked:bg-amber-400 checked:hover:bg-amber-400 focus:bg-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 checked:focus:bg-amber-400 checked:active:bg-amber-400 shadow-sm mr-1" 
+                                v-model="setTreatmentForm.intensity" type="radio" id="high" name="intensity" value="3"
+                                :checked="setTreatmentForm.intensity === 3">
+                                Haute
+                            </label>
+                        </div>
+                    </div>
+
+                    <button type="submit" :class="{ 'opacity-25': setTreatmentForm.processing }"
+                    :disabled="setTreatmentForm.processing"
+                    class="mb-4 mt-8 bg-amber-400 border-amber-400 text-black font-semibold border-4 py-2 w-full hover:bg-amber-300 hover:border-amber-300">
+                    Confirmer
+                    </button>
+
+                    
+                </form>
+                <div class="text-center">
+                        <button @click="() => {showTreatmentForm = false; showTileContainer = true;}" class="text-red-1 font-semibold">Annuler</button>
+                </div>
+
+
+            </div>
+
           </div>
         </div>
       </div>
@@ -380,13 +615,54 @@
   
     export default {
         emits: ['close'],
-        props: ['hive'],
+        props: ['hive', 'error'],
+        //load
         data(props) {
+
+            //console.log(props.hive);
+
+            //make array out of hive.frames_slots to store in selectedValues
+            let frames_slots = props.hive.frames_slots.split(',');
+            //change values to full words
+            frames_slots = frames_slots.map((value) => {
+                if (value === 'e') {
+                    return 'empty';
+                } else if (value === 'c') {
+                    return 'frame';
+                } else {
+                    return 'separator';
+                }
+            });
+
+            //create variable setTreatmentForm
+            let setTreatmentForm = useForm({
+                is_active: false,
+                type: props.hive.treatment,
+                intensity: null,
+            });
+
+
+            //if hive.treatment is 0 then setTreatmentForm.is_active = false
+            if (props.hive.treatment === 0 || props.hive.treatment === 'none') {
+                setTreatmentForm.is_active = 0;
+                setTreatmentForm.intensity = null;
+            } else {
+                setTreatmentForm.is_active = 1;
+                setTreatmentForm.intensity = props.hive.intensity;
+            }
+
+            
+            //if hive.treatment is 1 then setTreatmentForm.intensity = hive.treatment
+
             return {
+
+                selectedValues: frames_slots,
+
                 showTileContainer: true,
                 showControlForm: false,
                 showMaterialForm: false,
                 showQueenForm: false,
+                showTreatmentForm: false,
                 
                 createControlForm: useForm({
                     hive_id: props.hive.id,
@@ -406,36 +682,120 @@
 
                 updateMaterialForm: useForm({
                     rise: props.hive.rise,
-                    nb_frames: props.hive.nb_frames,
+                    frames_slots: frames_slots,
                 }),
 
                 updateQueenForm: useForm({
                     date_queen: null,
-                    color_queen: null,
+                    color_queen: "#ffffff",
                     rise: false,
-                    nb_frames: null,
+                    frames_slots: frames_slots,
                 }),
+
+                setTreatmentForm: setTreatmentForm,
+                //set treatment is useform where is active is true if props.hive.treatment is not 0 and set intensity to hive.treatment if not 0
+                // setTreatmentForm: useForm({
+                //     is_active: false,
+                //     intensity: null,
+                // }),
+
             }
         },
         methods: {
+
             close() {
                 this.$emit('close');
                 this.showTileContainer = true;
                 this.showControlForm = false;
                 this.showMaterialForm = false;
                 this.showQueenForm = false;
+                this.showTreatmentForm = false;
 
                 this.createControlForm.reset();
                 this.updateQueenForm.reset();
 
+                this.updateMaterialForm.rise = this.hive.rise;
+
+                let frames_slots = this.hive.frames_slots.split(',');
+                //change values to full words
+                frames_slots = frames_slots.map((value) => {
+                    if (value === 'e') {
+                        return 'empty';
+                    } else if (value === 'c') {
+                        return 'frame';
+                    } else {
+                        return 'separator';
+                    }
+                });
+
+                this.selectedValues = frames_slots;
+
+
+                this.setTreatmentForm.is_active = this.hive.treatment === 'none' ? 0 : 1;
+                this.setTreatmentForm.type = this.hive.treatment;
+                this.setTreatmentForm.intensity = this.hive.intensity;
+
+            },
+            toggleColor(index) {
+                const value = this.selectedValues[index];  
+
+                if (value === 'empty') {
+                    this.selectedValues[index] = 'frame';
+                } else if (value === 'frame') {
+                    this.selectedValues[index] = 'separator';
+                } else {
+                    this.selectedValues[index] = 'empty';
+                }
+
+                //Recréer le if au dessus pour gérer le fait que si on clique et passe un input en séparateur, alors les input à sa gauche ou à sa droite dépendament de si le séparateur est sur la première ou la deuxième moitié de la liste repassent en mode empty
+                if (this.selectedValues[index] === 'separator') {
+                    if (index < this.selectedValues.length / 2) {
+                        // if separator is in first half of the list, set all values to empty before the separator
+                        for (let i = 0; i < index; i++) {
+                            this.selectedValues[i] = 'empty'
+                        }
+                    } else {
+                        for (let i = index + 1; i < this.selectedValues.length; i++) {
+                            this.selectedValues[i] = 'empty'
+                        }
+                    }
+                }
+
+                // Si on clique pour ajouter une frame dans la première moitié de la liste il faut s'assurer qu'il n'y a pas de plus loins dans la meme moitié de la liste et inversentant dans la deuxième moitié de la liste
+                if (this.selectedValues[index] === 'frame') {
+                    if (index < this.selectedValues.length / 2) {
+                        // if separator is in first half of the list, set all values to empty before the separator
+                        for (let i = index; i < this.selectedValues.length / 2; i++) {
+                            if (this.selectedValues[i] === 'separator') {
+                                this.selectedValues[index] = 'empty'
+                            }
+                        }
+                    } else {
+                        for (let i = index; i > this.selectedValues.length / 2; i--) {
+                            if (this.selectedValues[i] === 'separator') {
+                                this.selectedValues[index] = 'empty'
+                            }
+                        }
+                    }
+                }              
+
             },
 
             updateMaterial() {
-                if (this.updateMaterialForm.rise !== null) {
-                    this.updateMaterialForm.rise = this.updateMaterialForm.rise === 'true' ? 1 : 0;
+
+                if (this.updateMaterialForm.rise == 'true' || this.updateMaterialForm.rise == 1) {
+                    this.updateMaterialForm.rise = 1;
+                } else {
+                    this.updateMaterialForm.rise = 0;
                 }
-                
-                console.log(this.updateMaterialForm.rise);
+
+                    //format selectedValues to string to send to backend
+                if (this.selectedValues != null) {
+                    //format to smaller text, keep only first letter of each word
+                    this.updateMaterialForm.frames_slots = this.selectedValues.join(',').replaceAll('empty', 'e').replaceAll('frame', 'c').replaceAll('separator', 's');
+                }
+
+
                 this.updateMaterialForm.put(route('hive.updateMaterial', [this.hive.id, this.hive.apiary_id]), {
                     preserveScroll: true,
                     preserveState: false,
@@ -457,6 +817,26 @@
                             }
                         });
                     },
+                    onError: () => {
+                        this.showMaterialForm = false;
+                        this.showTileContainer = true;
+                        let error = Object.values(this.updateMaterialForm.errors)[0];
+
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Erreur',
+                            text: error,
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3500,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                        });
+                    }
                 });
             },
             deactivateHive() {
@@ -485,9 +865,88 @@
                     }
                 })
             },
+            removeFood() {
+                Swal.fire({
+                    title: 'Retirer la nourriture ?',
+                    text: "Vous ne pourrez pas revenir en arrière !",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Oui, retirer !'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        this.updateQueenForm.put(route('hive.removeFood', [this.hive.id, this.hive.apiary_id]), {
+                            preserveScroll: true,
+                            preserveState: false,
+                            onSuccess: () => {
+                                Swal.fire(
+                                    'Retiré !',
+                                    'La nourriture a bien été retirée.',
+                                    'success'
+                                );
+                                this.close();
+                            },
+                        });
+                    }
+                })
+            },
+            addFood() {
+                Swal.fire({
+                    title: 'Nourrir la ruche ?',
+                    text: "Vous ne pourrez pas revenir en arrière !",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Oui, ajouter !'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        this.updateQueenForm.put(route('hive.addFood', [this.hive.id, this.hive.apiary_id]), {
+                            preserveScroll: true,
+                            preserveState: false,
+                            onSuccess: () => {
+                                Swal.fire(
+                                    'Ajouté !',
+                                    'La nourriture a bien été ajoutée.',
+                                    'success'
+                                );
+                                this.close();
+                            }, onError: () => {
+                                this.showTileContainer = true;
+                                let error = Object.values(this.updateQueenForm.errors)[0];
+
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Erreur',
+                                    text: error,
+                                    toast: true,
+                                    position: 'top-end',
+                                    showConfirmButton: false,
+                                    timer: 3500,
+                                    timerProgressBar: true,
+                                    didOpen: (toast) => {
+                                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                    }
+                                });
+                            }
+                        });
+                    }
+                })
+            },
             activateHive() {
+
                 this.updateQueenForm.rise = this.updateQueenForm.rise === 'true' ? 1 : 0;
-                console.log(this.updateQueenForm);
+                
+                //format selectedValues to string to send to backend
+                if (this.selectedValues != null) {
+
+                    //format to smaller text, keep only first letter of each word
+                    this.updateQueenForm.frames_slots = this.selectedValues.join(',').replaceAll('empty', 'e').replaceAll('frame', 'c').replaceAll('separator', 's');
+
+                }
+
                 this.updateQueenForm.put(route('hive.activateHive', [this.hive.id, this.hive.apiary_id]), {
                     preserveScroll: true,
                     preserveState: false,
@@ -498,6 +957,69 @@
                             icon: 'success',
                             titel: 'Activé !',
                             text: 'La ruche a bien été activée.',
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3500,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                        });
+                        this.close();
+                    },onError: () => {
+                        this.showQueenForm = false;
+                        this.showTileContainer = true;
+                        let error = Object.values(this.updateQueenForm.errors)[0];
+
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Erreur',
+                            text: error,
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3500,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                        });
+                    }
+                });
+            },
+            setTreatment() {
+
+                //console.log(this.setTreatmentForm);
+                
+                if (this.setTreatmentForm.is_active == 1 || this.setTreatmentForm.is_active == 'true' ) {
+
+                    this.setTreatmentForm.is_active =  1;
+                    this.setTreatmentForm.intensity = parseInt(this.setTreatmentForm.intensity);
+
+                } else {
+
+                    this.setTreatmentForm.is_active = 0;
+                    this.setTreatmentForm.intensity = 0;
+                    this.setTreatmentForm.type = 'none';
+
+                }
+
+                console.log(this.setTreatmentForm);
+
+
+                this.setTreatmentForm.put(route('hive.setTreatment', [this.hive.id, this.hive.apiary_id]), {
+                    preserveScroll: true,
+                    preserveState: false,
+                    onSuccess: () => {
+                        this.showTreatmentForm = false;
+                        this.showTileContainer = true;
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Succès',
+                            text: 'Le traitement a bien été modifié',
                             toast: true,
                             position: 'top-end',
                             showConfirmButton: false,

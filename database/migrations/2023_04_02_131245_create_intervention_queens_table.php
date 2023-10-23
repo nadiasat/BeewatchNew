@@ -18,7 +18,7 @@ return new class extends Migration
             $table->date('date_queen');
             $table->string('color_queen');
             $table->boolean('rise')->default(false);
-            $table->integer('nb_frames')->nullable();   
+            $table->string('frames_slots')->nullable();   
             $table->foreignId('interventions_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });

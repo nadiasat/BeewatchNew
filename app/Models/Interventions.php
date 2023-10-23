@@ -33,4 +33,14 @@ class Interventions extends Model
     {
         return $this->hasOne(InterventionQueen::class);
     }
+
+    public function intervention_treatment()
+    {
+        return $this->hasOne(InterventionTreatment::class);
+    }
+
+    public function intervention_food()
+    {
+        return $this->hasOne(InterventionFood::class);
+    }
 }

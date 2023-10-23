@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('address');
+            $table->foreignId('inventory_place_id')->nullable()->constrained('inventory_places');
             $table->timestamps();
         });
     }

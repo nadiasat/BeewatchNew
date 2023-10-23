@@ -13,11 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('intervention_materials', function (Blueprint $table) {
+        Schema::create('intervention_food', function (Blueprint $table) {
             $table->id();
-            $table->boolean('new_rise')->nullable();
-            //$table->boolean('partitions_full')->nullable();
-            $table->string('new_frames_slots')->nullable();
+            $table->boolean('has_food')->default(false);
             $table->foreignId('interventions_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
@@ -30,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('intervention_materials');
+        Schema::dropIfExists('intervention_food');
     }
 };

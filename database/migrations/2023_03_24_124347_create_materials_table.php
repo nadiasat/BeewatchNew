@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('name');
             $table->integer('current_stock');
             $table->integer('max_stock');
+            //String to know if material is associated to something used for the hives or not (default null)
+            $table->string('associated_to')->nullable();
             $table->foreignId('inventory_place_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });

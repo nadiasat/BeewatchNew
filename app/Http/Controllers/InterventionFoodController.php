@@ -7,26 +7,21 @@ use Inertia\Inertia;
 use App\Http\Controllers\Controller;
 use App\Models\Interventions;
 use App\Models\Hive;
-use App\Models\InterventionQueen;
+use App\Models\InterventionFood;
 
-class InterventionQueenController extends Controller
+class InterventionFoodController extends Controller
 {
-    
     public function store(Request $request)
     {
-        
-        //Create the intervention
+        //print $request
         $intervention = Interventions::create([
             'hive_id' => $request->hive_id,
-            'type' => 'new_queen',
+            'type' => 'add_food',
         ]);
 
-        $int_queen = InterventionQueen::create([
+        $int_food = InterventionFood::create([
             'interventions_id' => $intervention->id,
-            'date_queen' => $request->date_queen,
-            'color_queen' => $request->color_queen,
-            'rise' => $request->rise,
-            'frames_slots' => $request->frames_slots,
+            'has_food' => $request->has_food,
         ])->intervention()->associate($intervention);
 
         $apiary = Hive::find($request->hive_id)->apiary_id;
@@ -34,11 +29,13 @@ class InterventionQueenController extends Controller
         return redirect()->route('hive', ['apiary' => $apiary]);
     }
 
-    public function deactivate(Request $request)
+    //fucntion removeFood
+    public function removeFood(Request $request)
     {
+        //print $request
         $intervention = Interventions::create([
             'hive_id' => $request->hive_id,
-            'type' => 'remove_queen',
+            'type' => 'remove_food',
         ]);
 
         $apiary = Hive::find($request->hive_id)->apiary_id;

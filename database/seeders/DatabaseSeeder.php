@@ -24,11 +24,11 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RoleSeeder::class,
             UserSeeder::class,
+            InventoryPlaceSeeder::class,
+            MaterialSeeder::class,
             ApiarySeeder::class,
             HiveSeeder::class,
             EventSeeder::class,
-            InventoryPlaceSeeder::class,
-            MaterialSeeder::class,
             HoneyJarSeeder::class,
         ]);
 

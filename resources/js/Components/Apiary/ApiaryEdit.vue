@@ -32,6 +32,13 @@
                 <BreezeLabel for="address" value="Adresse" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900"/>
                 <!-- create a textbox with apiary value -->
                 <BreezeInput class="mt-1 w-full" id="address" type="text" v-model="updateApiaryForm.address" required autofocus />
+
+                <BreezeLabel for="inventory_place_id" value="Lieu de stockage" class="font-bold text-base mt-4 lg:mt-0 text-zinc-900" />
+                <select v-model="updateApiaryForm.inventory_place_id" id="inventory_place_id"
+                class="mt-1 block w-full border-zinc-300 focus:border-amber-400 focus:ring-amber-400 rounded-md shadow-sm">
+                    <option :value="null">Pas de lieu de stockage associé</option>
+                    <option v-for="inventory_place in inventory_places" :value="inventory_place.id">{{ inventory_place.address }}</option>
+                </select>
                 <div class="flex mt-8 mb-6 gap-8">
                     <button type="submit" :class="{ 'opacity-25': updateApiaryForm.processing }"
                         :disabled="updateApiaryForm.processing" 
@@ -67,13 +74,23 @@ import Swal from 'sweetalert2';
 
 export default {
     name: "ApiaryEdit",
-    props: ['apiary'],
+    props: ['apiary', 'inventory_places'],
 
     data(props) {
+        let inventory_places = props.inventory_places.map((inventory_place) => {
+            return {
+                id: inventory_place.id,
+                address: inventory_place.address
+            }
+        })
+
+
         return {
+            inventory_places: inventory_places,
             updateApiaryForm: useForm({
                 name: props.apiary.name,
                 address: props.apiary.address,
+                inventory_place_id: props.apiary.inventory_place_id
             }),
             modalUpdateApiary: false,
         }
@@ -88,6 +105,24 @@ export default {
                     Swal.fire({
                         icon: 'success',
                         title: 'Rucher modifié avec succès',
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3500,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    });
+                },onError: () => {
+
+                    let error = Object.values(this.updateApiaryForm.errors)[0];
+
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Erreur',
+                        text: error,
                         toast: true,
                         position: 'top-end',
                         showConfirmButton: false,

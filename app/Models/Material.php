@@ -13,6 +13,7 @@ class Material extends Model
         'name',
         'current_stock',
         'max_stock',
+        'associated_to',
         'inventory_place_id'
     ];
 
